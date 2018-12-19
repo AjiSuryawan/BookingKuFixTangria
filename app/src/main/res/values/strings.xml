@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">BookingKu</string>
+    <string name="timepicker_title">Select Time</string>
+    <string name="datepicker_title">Select Date</string>
+
+    <string name="facebook_app_id">900702433461576</string>
+    <string name="fb_login_protocol_scheme">fb900702433461576</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

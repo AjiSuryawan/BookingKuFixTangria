@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp"
+                tools:context=".Activity.Booking.BookingActivity">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <ImageView
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_perm_contact_calendar_black_24dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel"
+                    android:hint="Booking Date"
+                    app:hintTextAppearance="@color/black">
+
+                <EditText
+                        android:textSize="22sp"
+                        android:id="@+id/txtdateku"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:editable="false"
+                        android:fontFamily="@font/roboto_light"
+                        android:text="Wednesday, 7 Nov 2018"/>
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycle_view_list_time"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/selectedDateAndTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
+
+    </LinearLayout>
+    <Button
+            android:enabled="false"
+            android:id="@+id/bookNowBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="BOOK NOW"/>
+</RelativeLayout>
