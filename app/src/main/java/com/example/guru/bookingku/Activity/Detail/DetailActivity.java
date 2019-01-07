@@ -84,8 +84,9 @@ public class DetailActivity extends AppCompatActivity {
             description_product.setText(product.getDescription());
             price_product.setText("Rp " + price.getHarga());
             if(product.getPrice().getDiskon() != null) {
-                float calculatedPrice = price.getHarga() * price.getDiskon() / 100;
+                float calculatedPrice = price.getHarga() - (price.getHarga() * price.getDiskon() / 100);
                 tvCalculatedPriceProduct.setText("Rp " + calculatedPrice);
+                tvCalculatedPriceProduct.setTextColor(getResources().getColor(android.R.color.holo_red_light));
                 tvDiskonProduct.setText(String.valueOf(price.getDiskon()) + "%");
             } else {
                 tvDiskonProduct.setVisibility(View.GONE);

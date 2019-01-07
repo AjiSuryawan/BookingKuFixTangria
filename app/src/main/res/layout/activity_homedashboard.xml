@@ -51,7 +51,7 @@
                         android:marqueeRepeatLimit="marquee_forever"
                         android:padding="10dp"
                         android:singleLine="true"
-                        android:text="Spa tipe 1"
+                        android:text="Package Treatment"
                         android:textColor="@color/white"
                         tools:targetApi="lollipop" />
 
@@ -103,7 +103,7 @@
                         android:marqueeRepeatLimit="marquee_forever"
                         android:padding="10dp"
                         android:singleLine="true"
-                        android:text="Spa tipe 2"
+                        android:text="Ala Carte Treatment"
                         android:textColor="@color/white"
                         tools:targetApi="lollipop" />
 

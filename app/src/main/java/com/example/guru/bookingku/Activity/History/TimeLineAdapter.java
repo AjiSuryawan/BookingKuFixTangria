@@ -61,7 +61,7 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
         if(historyBooking.getStatus().equals("cancel")){
             timeLineViewHolder.tvStatus.setTextColor(mContext.getResources().getColor(android.R.color.holo_red_light));
         }
-        if (historyBooking.getStatus().equals("done")){
+        if (historyBooking.getStatus().equals("diterima")){
             timeLineViewHolder.tvStatus.setTextColor(mContext.getResources().getColor(android.R.color.holo_green_light));
         }
     }

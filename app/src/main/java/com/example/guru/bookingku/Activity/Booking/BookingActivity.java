@@ -240,17 +240,13 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
 
     private void showTradisionalTreatmentTime(){
         AvailableTime availableTime1 = new AvailableTime();
-        availableTime1.setTime("10:10:00");
+        availableTime1.setTime("11:00:00");
         availableTime1.setAvailable(true);
         AvailableTime availableTime2 = new AvailableTime();
-        availableTime2.setTime("13:30:00");
+        availableTime2.setTime("14:00:00");
         availableTime2.setAvailable(true);
-        AvailableTime availableTime3 = new AvailableTime();
-        availableTime3.setTime("17:30:00");
-        availableTime3.setAvailable(true);
         availableTimeList.add(availableTime1);
         availableTimeList.add(availableTime2);
-        availableTimeList.add(availableTime3);
         adapter.notifyDataSetChanged();
     }
 }

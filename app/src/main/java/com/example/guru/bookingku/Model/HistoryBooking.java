@@ -22,57 +22,29 @@ public class HistoryBooking implements Parcelable {
     @SerializedName("status")
     @Expose
     private String status;
+    @Expose
+    private String code;
 
-    public HistoryBooking(String order, String orderImg, String orderDesc, String date, String status) {
+    public HistoryBooking(String order, String orderImg, String orderDesc, String date, String status, String code) {
         this.order = order;
         this.orderImg = orderImg;
         this.orderDesc = orderDesc;
         this.date = date;
         this.status = status;
+        this.code = code;
     }
 
-    protected HistoryBooking(Parcel in) {
-        order = in.readString();
-        orderImg = in.readString();
-        orderDesc = in.readString();
-        date = in.readString();
-        status = in.readString();
-    }
+    public String getOrder() { return order; }
 
-    public static final Creator<HistoryBooking> CREATOR = new Creator<HistoryBooking>() {
-        @Override
-        public HistoryBooking createFromParcel(Parcel in) {
-            return new HistoryBooking(in);
-        }
+    public String getOrderImg() { return orderImg; }
 
-        @Override
-        public HistoryBooking[] newArray(int size) {
-            return new HistoryBooking[size];
-        }
-    };
+    public String getOrderDesc() { return orderDesc; }
 
-    @SerializedName("created_at")
+    public String getDate() { return date; }
 
+    public String getStatus() { return status; }
 
-    public String getOrder() {
-        return order;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public String getOrderImg() {
-        return orderImg;
-    }
-
-    public String getOrderDesc() {
-        return orderDesc;
-    }
+    public String getCode() { return code; }
 
     @Override
     public int describeContents() {
@@ -81,10 +53,35 @@ public class HistoryBooking implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(order);
-        dest.writeString(orderImg);
-        dest.writeString(orderDesc);
-        dest.writeString(date);
-        dest.writeString(status);
+        dest.writeString(this.order);
+        dest.writeString(this.orderImg);
+        dest.writeString(this.orderDesc);
+        dest.writeString(this.date);
+        dest.writeString(this.status);
+        dest.writeString(this.code);
     }
+
+    public HistoryBooking() {
+    }
+
+    protected HistoryBooking(Parcel in) {
+        this.order = in.readString();
+        this.orderImg = in.readString();
+        this.orderDesc = in.readString();
+        this.date = in.readString();
+        this.status = in.readString();
+        this.code = in.readString();
+    }
+
+    public static final Creator<HistoryBooking> CREATOR = new Creator<HistoryBooking>() {
+        @Override
+        public HistoryBooking createFromParcel(Parcel source) {
+            return new HistoryBooking(source);
+        }
+
+        @Override
+        public HistoryBooking[] newArray(int size) {
+            return new HistoryBooking[size];
+        }
+    };
 }

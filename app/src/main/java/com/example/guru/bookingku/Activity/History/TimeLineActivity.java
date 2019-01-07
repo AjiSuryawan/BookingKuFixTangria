@@ -101,7 +101,9 @@ public class TimeLineActivity extends AppCompatActivity implements onItemClickLi
         String productDesc = data.getOrderDesc();
         String date = data.getDate();
         String status = data.getStatus();
-        HistoryBooking historyBooking = new HistoryBooking(product, productImg, productDesc, date, status);
+        String code = data.getCode();
+        Log.d("halo_kang", "onItemClick: " + code);
+        HistoryBooking historyBooking = new HistoryBooking(product, productImg, productDesc, date, status, code);
         Intent intent = new Intent(this, DetailHistory.class);
         intent.putExtra("history", historyBooking);
         startActivity(intent);
