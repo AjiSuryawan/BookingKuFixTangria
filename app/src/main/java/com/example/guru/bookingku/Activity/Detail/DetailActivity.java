@@ -89,7 +89,7 @@ public class DetailActivity extends AppCompatActivity {
             if(product.getPrice().getDiskon() != null) {
                 float calculatedPrice = price.getHarga() - (price.getHarga() * price.getDiskon() / 100);
                 tvCalculatedPriceProduct.setText("Rp " + calculatedPrice);
-                tvCalculatedPriceProduct.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+//                tvCalculatedPriceProduct.setTextColor(getResources().getColor(android.R.color.holo_red_light));
                 tvDiskonProduct.setText(String.valueOf(price.getDiskon()) + "%");
             } else {
                 tvDiskonProduct.setVisibility(View.GONE);
@@ -100,8 +100,9 @@ public class DetailActivity extends AppCompatActivity {
             available_product.setText(String.valueOf(getAvailable));
             if(!getAvailable){
                bookNowBtn.setEnabled(false);
-                bookNowBtn.setText("TIDAK TERSEDIA");
-                bookNowBtn.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+                bookNowBtn.setText("NOT AVAILABLE");
+                bookNowBtn.setTextColor(getResources().getColor(android.R.color.black));
+                bookNowBtn.setBackgroundColor(getResources().getColor(R.color.not_available_color));
             }
         }
         bookNowBtn.setOnClickListener(new View.OnClickListener() {

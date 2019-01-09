@@ -43,9 +43,9 @@
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:paddingTop="10dp"
+            android:background="#148F94"
             android:paddingBottom="10dp"
+            android:paddingTop="10dp"
             android:theme="@style/AppTheme.AppBarOverlay">
 
             <FrameLayout
@@ -110,8 +110,8 @@
             android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/app_bar"
             android:layout_alignParentStart="true"
+            android:layout_below="@+id/app_bar"
             android:alpha="1"
             android:fillViewport="true"
             android:padding="5dp"
@@ -122,13 +122,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:translationZ="0dp">
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:cardCornerRadius="0dp"
-                    app:cardElevation="2dp"
-                    app:cardUseCompatPadding="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -147,22 +140,14 @@
                             android:textStyle="bold" />
 
                         <TextView
+                                android:text="makan"
+                            android:textColor="@color/colorPrimary"
                             android:id="@+id/telpuser"
                             style="@style/TextAppearance.AppCompat.Small"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:text="makan"
-                            android:textColor="@color/colorPrimary" />
+                            android:padding="10dp"/>
                     </LinearLayout>
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="0dp"
-                    app:cardElevation="2dp"
-                    app:cardUseCompatPadding="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -214,50 +199,42 @@
                                     android:text="Pekerjaan" />
 
                                 <TextView
+                                        android:textSize="15dp"
+                                    android:textStyle="bold"
                                     android:id="@+id/profileProfesi"
                                     style="@style/TextAppearance.AppCompat.Small"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Click to details"
-                                    android:textSize="15dp"
-                                    android:textStyle="bold" />
+                                    android:text="Click to details" />
                             </LinearLayout>
                         </LinearLayout>
 
                     </LinearLayout>
-                </android.support.v7.widget.CardView>
 
 
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:cardCornerRadius="0dp"
-                    app:cardElevation="2dp"
-                    app:cardUseCompatPadding="true">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:translationY="0dp">
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_margin="10dp"
-                            android:src="@drawable/logout" />
-
-                        <TextView
-                            android:id="@+id/tvlogout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="Log out"
-                            android:textSize="17sp"
-                            android:textStyle="bold" />
+                            android:orientation="horizontal"
+                            android:translationY="0dp">
+
+                        <ImageView
+                                android:layout_margin="10dp"
+                                android:layout_width="30dp"
+                                android:src="@drawable/logout"
+                                android:layout_height="30dp"/>
+
+                        <TextView
+                                android:textStyle="bold"
+                                android:id="@+id/tvlogout"
+                                android:layout_gravity="center"
+                                android:text="Log out"
+                                android:textSize="17sp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
 
                     </LinearLayout>
-                </android.support.v7.widget.CardView>
 
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>

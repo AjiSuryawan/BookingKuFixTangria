@@ -9,6 +9,7 @@
     <color name="grey">#ededed</color>
     <color name="grey2">#c7c7c7</color>
     <color name="greendark">#149092</color>
+    <color name="not_available_color">#909090</color>
 
     <color name="white">@android:color/white</color>
     <color name="darkGray">@android:color/darker_gray</color>

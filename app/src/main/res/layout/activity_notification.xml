@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".Activity.Notification.NotificationActivity">
+    tools:context=".Activity.Notification.NotificationActivity"
+    android:background="@drawable/all_bg">
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardView"
