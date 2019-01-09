@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,6 +41,9 @@ public class DetailActivity extends AppCompatActivity {
     TextView tvCalculatedPriceProduct;
     @BindView(R.id.diskon_product)
     TextView tvDiskonProduct;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.tv_title) TextView tvTitleToolbar;
 
     Bundle extras;
     private boolean getAvailable;
@@ -62,12 +66,11 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        setTitle("Detail produk");
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        tvTitleToolbar.setText("PRODUCT DETAIL");
 
         Intent intent = getIntent();
         extras = intent.getExtras();

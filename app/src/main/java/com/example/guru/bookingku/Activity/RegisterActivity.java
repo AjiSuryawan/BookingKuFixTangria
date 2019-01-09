@@ -37,10 +37,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
-    SignInButton googleSignButton;
-    GoogleSignInClient mGoogleSignInClient;
-    GoogleSignInOptions signInOptions;
-    CallbackManager callbackManager;
+//    SignInButton googleSignButton;
+//    GoogleSignInOptions signInOptions;
+//    GoogleSignInClient mGoogleSignInClient;
+//    CallbackManager callbackManager;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     EditText inputUsername, inputEmail, inputPassword, inputConfirmPassword, noTelp;
@@ -144,23 +144,22 @@ public class RegisterActivity extends AppCompatActivity {
 
         inputConfirmPassword = findViewById(R.id.txtCPassword);
         pref = getSharedPreferences("login", MODE_PRIVATE);
-        callbackManager = CallbackManager.Factory.create();
-        signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail().build();
-        mGoogleSignInClient = GoogleSignIn.getClient(RegisterActivity.this, signInOptions);
-        googleSignButton = findViewById(R.id.sign_in_button);
-        googleSignButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = mGoogleSignInClient.getSignInIntent();
-                startActivityForResult(intent, 997);
-            }
-        });
+//        callbackManager = CallbackManager.Factory.create();
+//        signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestEmail().build();
+//        mGoogleSignInClient = GoogleSignIn.getClient(RegisterActivity.this, signInOptions);
+//        googleSignButton = findViewById(R.id.sign_in_button);
+//        googleSignButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = mGoogleSignInClient.getSignInIntent();
+//                startActivityForResult(intent, 997);
+//            }
+//        });
         registerBtn = findViewById(R.id.btnDaftar);
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                 builder.setTitle("Confirm register");
                 builder.setMessage("Are you sure want to register?");
@@ -224,12 +223,13 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+//        callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 997) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
-        } else if (requestCode == 1) {
+//        if (requestCode == 997) {
+//            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+//            handleSignInResult(task);
+//        } else
+        if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK) {
                 getContactInfo(data);
 
@@ -237,34 +237,34 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-        try {
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            String realName = account.getDisplayName();
-            String username = account.getGivenName() + account.getId();
-            String email = account.getEmail();
-            String userId = account.getId();
-            String avatar;
-            if (account.getPhotoUrl() != null) {
-                avatar = account.getPhotoUrl().toString();
-            } else {
-                avatar = null;
-            }
-
-            //intent
-            Toast.makeText(getApplicationContext(), realName + " , " + username, Toast.LENGTH_LONG).show();
-            editor = pref.edit();
-            editor.putString("user", userId);
-            editor.putString("name", realName);
-            editor.putString("username", username);
-            editor.putString("email", email);
-            editor.putString("avatar", avatar);
-            editor.commit();
-
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        } catch (ApiException ignored) {
-        }
-    }
+//    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+//        try {
+//            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+//            String realName = account.getDisplayName();
+//            String username = account.getGivenName() + account.getId();
+//            String email = account.getEmail();
+//            String userId = account.getId();
+//            String avatar;
+//            if (account.getPhotoUrl() != null) {
+//                avatar = account.getPhotoUrl().toString();
+//            } else {
+//                avatar = null;
+//            }
+//
+//            //intent
+//            Toast.makeText(getApplicationContext(), realName + " , " + username, Toast.LENGTH_LONG).show();
+//            editor = pref.edit();
+//            editor.putString("user", userId);
+//            editor.putString("name", realName);
+//            editor.putString("username", username);
+//            editor.putString("email", email);
+//            editor.putString("avatar", avatar);
+//            editor.commit();
+//
+//            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//            startActivity(intent);
+//        } catch (ApiException ignored) {
+//        }
+//    }
 }

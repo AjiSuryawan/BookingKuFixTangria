@@ -7,10 +7,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.guru.bookingku.Fragment.Home.adapter_list_item_spa;
 import com.example.guru.bookingku.Fragment.Home.data_item_spa;
@@ -18,6 +20,9 @@ import com.example.guru.bookingku.Network.BookingClient;
 import com.example.guru.bookingku.Network.BookingService;
 import com.example.guru.bookingku.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
+
+import org.w3c.dom.Text;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,6 +37,8 @@ public class Massage extends AppCompatActivity {
     private ShimmerFrameLayout mShimmerViewContainer;
     private SwipeRefreshLayout swipeRefreshLayout;
     private adapter_list_item_spa adapter;
+    private Toolbar toolbar;
+    private TextView tvTitleToolbar;
     Call<List<data_item_spa>> call;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -54,7 +61,14 @@ public class Massage extends AppCompatActivity {
             data = extras.getString("category");
         }
 
-        setTitle(data);
+        toolbar = findViewById(R.id.toolbar);
+        tvTitleToolbar = findViewById(R.id.tv_title);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        tvTitleToolbar.setText(data);
+
         mShimmerViewContainer = (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
         mShimmerViewContainer.startShimmerAnimation();
         ActionBar actionBar = getSupportActionBar();

@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.MenuItem;
@@ -47,13 +48,15 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
     private adapter_time_booking adapter;
     private Button bookNowBtn;
     private SharedPreferences sharedPreferences;
-    private TextView tvSelectedDateAndTime;
+//    private TextView tvSelectedDateAndTime;
     private TextView txtavailable;
     private AlarmConfig alarmConfig;
     EditText txtdateku;
     Bundle bundlee;
     int orderid;
     private int year, month, date, hour, minute;
+    private Toolbar toolbar;
+    private TextView tvTitleToolbar;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -71,9 +74,13 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        toolbar = findViewById(R.id.toolbar);
+        tvTitleToolbar = findViewById(R.id.tv_title);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        tvTitleToolbar.setText("BOOKING DATE");
 
         alarmConfig = new AlarmConfig(this);
         Intent intent = getIntent();
@@ -82,7 +89,7 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
             orderid = bundlee.getInt("orderid");
         }
 
-        tvSelectedDateAndTime = findViewById(R.id.selectedDateAndTime);
+//        tvSelectedDateAndTime = findViewById(R.id.selectedDateAndTime);
         txtavailable = findViewById(R.id.txtavailable);
         bookNowBtn = findViewById(R.id.bookNowBtn);
         recyclerView = (RecyclerView) findViewById(R.id.recycle_view_list_time);
@@ -151,8 +158,8 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
     public void processDatePickerResult(int year, int month, int day) {
         adapter.row_index = -1;
         bookNowBtn.setEnabled(false);
-        tvSelectedDateAndTime.setEnabled(false);
-        tvSelectedDateAndTime.setText("");
+//        tvSelectedDateAndTime.setEnabled(false);
+//        tvSelectedDateAndTime.setText("");
         availableTimeList.clear();
         adapter.notifyDataSetChanged();
         Toast.makeText(this, "Fetching Available Time", Toast.LENGTH_SHORT).show();
@@ -212,14 +219,14 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
 
     @Override
     public void onItemClick(int position) {
-        tvSelectedDateAndTime.setEnabled(true);
+//        tvSelectedDateAndTime.setEnabled(true);
         selectedAvailableTime = availableTimeList.get(position).getTime();
         String[] splitTime = selectedAvailableTime.split(":");
         hour = Integer.parseInt(splitTime[0]);
         minute = Integer.parseInt(splitTime[1]);
         bookNowBtn.setEnabled(true);
         Toast.makeText(this, selectedAvailableTime, Toast.LENGTH_SHORT).show();
-        tvSelectedDateAndTime.setText(selectedDate + " " + selectedAvailableTime);
+//        tvSelectedDateAndTime.setText(selectedDate + " " + selectedAvailableTime);
     }
 
     private void showJavanesseTreatmentTime(){

@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.guru.bookingku.Network.BookingClient;
@@ -26,6 +28,10 @@ public class NotificationActivity extends AppCompatActivity {
     private NotificationAdapter adapter;
     @BindView(R.id.recycler_view_notification)
     RecyclerView recyclerView;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.tv_title)
+    TextView tvTitleToolbar;
 
     private SharedPreferences preferences;
 
@@ -34,6 +40,11 @@ public class NotificationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
         ButterKnife.bind(this);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        tvTitleToolbar.setText("NOTIFICATION");
 
         preferences = getSharedPreferences("login", MODE_PRIVATE);
         int userId = preferences.getInt("userid", 0);

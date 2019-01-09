@@ -1,59 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="vertical"
-        android:padding="10dp"
-        android:background="#fcfcfc"
-        android:gravity="center"
-        android:id="@+id/ll">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp">
 
     <android.support.v7.widget.CardView
-            android:id="@+id/cardkuspa1"
-            android:layout_margin="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_marginBottom="1dp">
+        android:id="@+id/cardkuspa1"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_margin="20dp"
+        android:layout_marginBottom="1dp"
+        >
 
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <ImageView
-                        android:src="@drawable/spa1"
-                        android:id="@+id/articleImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="250dp"
-                        android:adjustViewBounds="false"
-                        android:background="@color/darkGray"
-                        android:cropToPadding="true"
-                        android:padding="0dp"
-                        android:paddingBottom="0dp"
-                        android:scaleType="centerCrop" />
+                    android:id="@+id/articleImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:adjustViewBounds="false"
+                    android:background="@color/darkGray"
+                    android:cropToPadding="true"
+                    android:padding="0dp"
+                    android:paddingBottom="0dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/spa1" />
 
                 <TextView
-                        android:id="@+id/articleName"
-                        style="@android:style/TextAppearance.Medium"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/articleImage"
-                        android:layout_alignParentStart="true"
-                        android:background="@drawable/gradient_title"
-                        android:elevation="3dp"
-                        android:ellipsize="marquee"
-                        android:focusable="true"
-                        android:marqueeRepeatLimit="marquee_forever"
-                        android:padding="10dp"
-                        android:singleLine="true"
-                        android:text="Package Treatment"
-                        android:textColor="@color/white"
-                        tools:targetApi="lollipop" />
+                    android:id="@+id/articleName"
+                    style="@android:style/TextAppearance.Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/articleImage"
+                    android:layout_alignParentStart="true"
+                    android:background="@drawable/gradient_title"
+                    android:elevation="3dp"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:text="Package Treatment"
+                    android:textColor="@color/white"
+                    tools:targetApi="lollipop" />
 
             </RelativeLayout>
 
@@ -62,50 +63,50 @@
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
-            android:id="@+id/cardku2"
-            android:layout_margin="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_marginBottom="1dp">
+        android:id="@+id/cardku2"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_margin="20dp"
+        android:layout_marginBottom="1dp">
 
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <ImageView
-                        android:src="@drawable/spa1"
-                        android:id="@+id/articleImage2"
-                        android:layout_width="match_parent"
-                        android:layout_height="250dp"
-                        android:adjustViewBounds="false"
-                        android:background="@color/darkGray"
-                        android:cropToPadding="true"
-                        android:padding="0dp"
-                        android:paddingBottom="0dp"
-                        android:scaleType="centerCrop" />
+                    android:id="@+id/articleImage2"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:adjustViewBounds="false"
+                    android:background="@color/darkGray"
+                    android:cropToPadding="true"
+                    android:padding="0dp"
+                    android:paddingBottom="0dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/spa1" />
 
                 <TextView
-                        android:id="@+id/articleName2"
-                        style="@android:style/TextAppearance.Medium"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/articleImage2"
-                        android:layout_alignParentStart="true"
-                        android:background="@drawable/gradient_title"
-                        android:elevation="3dp"
-                        android:ellipsize="marquee"
-                        android:focusable="true"
-                        android:marqueeRepeatLimit="marquee_forever"
-                        android:padding="10dp"
-                        android:singleLine="true"
-                        android:text="Ala Carte Treatment"
-                        android:textColor="@color/white"
-                        tools:targetApi="lollipop" />
+                    android:id="@+id/articleName2"
+                    style="@android:style/TextAppearance.Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/articleImage2"
+                    android:layout_alignParentStart="true"
+                    android:background="@drawable/gradient_title"
+                    android:elevation="3dp"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:text="Ala Carte Treatment"
+                    android:textColor="@color/white"
+                    tools:targetApi="lollipop" />
 
             </RelativeLayout>
 

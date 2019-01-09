@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.guru.bookingku.Activity.Detail.DetailHistory;
 import com.example.guru.bookingku.Model.BookingResponse;
 import com.example.guru.bookingku.Model.HistoryBooking;
@@ -18,6 +21,9 @@ import com.example.guru.bookingku.Network.BookingService;
 import com.example.guru.bookingku.R;
 import com.example.guru.bookingku.Util.onItemClickListener;
 import com.facebook.shimmer.ShimmerFrameLayout;
+
+import org.w3c.dom.Text;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,17 +37,26 @@ public class TimeLineActivity extends AppCompatActivity implements onItemClickLi
     private TimeLineAdapter mTimeLineAdapter;
     private List<HistoryBooking> mDataList = new ArrayList<>();
     private SharedPreferences preferences;
+    private Toolbar toolbar;
+    private TextView tvTitleToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getSupportActionBar().setTitle("History");
         Toast.makeText(this, "fetching data", Toast.LENGTH_SHORT).show();
         preferences = getSharedPreferences("login", MODE_PRIVATE);
         setContentView(R.layout.activity_timeline);
         if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar = findViewById(R.id.toolbar);
+        tvTitleToolbar = findViewById(R.id.tv_title);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        tvTitleToolbar.setText("HISTORY");
 
         mShimmerViewContainer = (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
         mShimmerViewContainer.startShimmerAnimation();

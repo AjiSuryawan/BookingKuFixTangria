@@ -1,6 +1,7 @@
 package com.example.guru.bookingku.Activity.Booking;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -50,8 +51,10 @@ public class adapter_time_booking extends RecyclerView.Adapter<adapter_time_book
             holder.tvTime.setEnabled(true);
             if (row_index == i) {
                 holder.tvTime.setBackground(context.getResources().getDrawable(R.drawable.available_time_active_state));
+                holder.tvTime.setTextColor(context.getResources().getColor(R.color.white));
             } else {
                 holder.tvTime.setBackground(context.getResources().getDrawable(R.drawable.available_time_default_state));
+                holder.tvTime.setTextColor(context.getResources().getColor(R.color.greendark));
             }
         }
 
