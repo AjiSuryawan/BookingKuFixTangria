@@ -89,6 +89,7 @@ public class Massage extends AppCompatActivity {
     }
 
     private void load_data() {
+        mShimmerViewContainer.setVisibility(View.GONE);
         BookingService bookingService = BookingClient.getRetrofit().create(BookingService.class);
         Log.e("Massage", "load_data: " + data );
         if (data.equalsIgnoreCase("package_treatment")){
