@@ -16,8 +16,6 @@
         <activity android:name=".Activity.Detail.DetailActivity"></activity>
         <activity android:name=".Activity.Booking.BookingActivity"></activity>
         <activity android:name=".Util.ControlClass">
-
-
         </activity>
         <activity
             android:name=".Activity.LoginActivity"
@@ -55,19 +53,14 @@
         <activity
             android:name=".Activity.Main.MainActivity"
             android:launchMode="singleTask">
-
-
         </activity>
         <activity
             android:name=".SplashScreen"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".Activity.InputPhone"></activity>
         <activity
