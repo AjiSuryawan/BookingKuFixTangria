@@ -34,6 +34,7 @@ public class DetailHistory extends AppCompatActivity {
     TextView tvProductDesc;
     @BindView(R.id.tvStatus)
     TextView tvStatus;
+    TextView tvkodebooking;
     private ImageView imageViewBitmap;
     private String productName;
     private String productDesc;
@@ -45,9 +46,8 @@ public class DetailHistory extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_history);
         imageViewBitmap=(ImageView)findViewById(R.id.imageViewBitmap);
+        tvkodebooking=(TextView)findViewById(R.id.tvkodebooking);
         ButterKnife.bind(this);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             HistoryBooking detailBooking = extras.getParcelable("history");
@@ -68,6 +68,7 @@ public class DetailHistory extends AppCompatActivity {
             if (status.equals("diterima")) {
                 tvStatus.setTextColor(getResources().getColor(android.R.color.holo_green_light));
                 code = detailBooking.getCode();
+                tvkodebooking.setText(code);
                 int width =300;
                 int height = 300;
                 int smallestDimension = width < height ? width : height;
