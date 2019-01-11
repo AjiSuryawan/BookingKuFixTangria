@@ -68,7 +68,7 @@ public class DetailHistory extends AppCompatActivity {
             if (status.equals("diterima")) {
                 tvStatus.setTextColor(getResources().getColor(android.R.color.holo_green_light));
                 code = detailBooking.getCode();
-                tvkodebooking.setText(code);
+                tvkodebooking.setText("kode booking : "+code);
                 int width =300;
                 int height = 300;
                 int smallestDimension = width < height ? width : height;
