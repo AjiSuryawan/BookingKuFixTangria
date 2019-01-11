@@ -53,7 +53,6 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="60dp"
             android:hint="Username"
-            android:inputType="phone"
             android:textColor="#149092"
             android:textColorHint="#FF1BAFB1"
             android:textStyle="bold|italic"
