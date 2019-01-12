@@ -98,7 +98,6 @@ public interface BookingService {
             @Field("fcm_token") String token
     );
 
-
     @FormUrlEncoded
     @POST("api/inbox")
     Call<ArrayList<NotificationModel>> getListNotification(
