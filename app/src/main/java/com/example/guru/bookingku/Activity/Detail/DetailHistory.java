@@ -47,7 +47,6 @@ public class DetailHistory extends AppCompatActivity {
         imageViewBitmap=(ImageView)findViewById(R.id.imageViewBitmap);
         ButterKnife.bind(this);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             HistoryBooking detailBooking = extras.getParcelable("history");

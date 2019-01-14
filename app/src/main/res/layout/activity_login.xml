@@ -31,7 +31,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
-        android:hint="Username"
+        android:hint="Email"
         android:textStyle="italic|bold"
         android:textColor="#149092"
         android:textColorHint="#FF1BAFB1"

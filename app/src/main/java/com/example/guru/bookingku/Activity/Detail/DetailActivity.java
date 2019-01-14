@@ -78,8 +78,6 @@ public class DetailActivity extends AppCompatActivity {
             product = extras.getParcelable("product");
             idbarang = product.getId();
             Price price = product.getPrice();
-            Log.e("price", "onCreate: " + price.getHarga() );
-            Log.e("price", "onCreate: " + price.getDiskon() );
             Glide.with(getApplicationContext())
                     .load(product.getImage())
                     .into(imageview_product);
