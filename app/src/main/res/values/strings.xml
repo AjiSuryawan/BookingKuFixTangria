@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BookingKu</string>
+    <string name="app_name">TangriaSpa</string>
     <string name="timepicker_title">Select Time</string>
     <string name="datepicker_title">Select Date</string>
 
@@ -8,4 +8,16 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hair">Hair</string>
+    <string name="face">My Spa</string>
+    <string name="massage">Nail</string>
+    <string name="nail">Aromaterapy</string>
+    <string name="welcome">Enjoy our services</string>
+    <string name="description_face">Welcome to spa</string>
+    <string name="description_massage">Place Nail</string>
+    <string name="description_nail">Place Aromatherapy</string>
+    <string name="description_hair">Place Hair</string>
+
+    <string name="empty"></string>
+    <string name="create_new_account">CREATE NEW\nACCOUNT</string>
 </resources>

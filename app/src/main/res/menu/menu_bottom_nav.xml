@@ -5,6 +5,11 @@
         android:icon="@drawable/ic_action_home"
         android:title="Home"/>
     <item
+        android:id="@+id/bottomnav_promo"
+        android:icon="@drawable/info"
+        android:title="Promo"/>
+
+    <item
         android:id="@+id/bottomnav_profile"
         android:icon="@drawable/ic_action_profile"
         android:title="Profile"/>

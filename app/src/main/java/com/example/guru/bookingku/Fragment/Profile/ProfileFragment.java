@@ -1,4 +1,5 @@
 package com.example.guru.bookingku.Fragment.Profile;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,9 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.guru.bookingku.Activity.History.TimeLineActivity;
-import com.example.guru.bookingku.Activity.Main.MainActivity;
 import com.example.guru.bookingku.Fragment.Base.BaseFragment;
 import com.example.guru.bookingku.Model.Profile;
 import com.example.guru.bookingku.Network.BookingClient;
@@ -39,36 +39,54 @@ public class ProfileFragment extends BaseFragment {
     TextView tvlogout;
     TextView telpuser;
     Button btnhistory;
+
     @Override
     protected int getLayout() {
         return R.layout.fragment_profile;
     }
+
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         sharedPreferences = view.getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
-        profileimg=view.findViewById(R.id.profileimg);
-        profileName=view.findViewById(R.id.profileName);
-        btnhistory=view.findViewById(R.id.btnhistory);
+        profileimg = view.findViewById(R.id.profileimg);
+        profileName = view.findViewById(R.id.profileName);
+        btnhistory = view.findViewById(R.id.btnhistory);
         btnhistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(view.getContext(),TimeLineActivity.class));
+                startActivity(new Intent(view.getContext(), TimeLineActivity.class));
             }
         });
-        tvlogout=view.findViewById(R.id.tvlogout);
-        telpuser=view.findViewById(R.id.telpuser);
-        profileUsername=view.findViewById(R.id.profileUsername);
+        tvlogout = view.findViewById(R.id.tvlogout);
+        telpuser = view.findViewById(R.id.telpuser);
+        profileUsername = view.findViewById(R.id.profileUsername);
 
         //
         BookingService bookingService = BookingClient.getRetrofit().create(BookingService.class);
-        Call<Profile> call = bookingService.userprofile(sharedPreferences.getInt("userid",0));
+        Call<Profile> call = bookingService.userprofile(sharedPreferences.getInt("userid", 0));
         call.enqueue(new Callback<Profile>() {
             @Override
             public void onResponse(Call<Profile> call, Response<Profile> response) {
-                profileName.setText(response.body().getEmail());
-                profileUsername.setText(response.body().getName());
+                try {
+                    profileName.setText(response.body().getEmail());
+                    profileUsername.setText(response.body().getName());
+                    Log.d("hpku", "onResponse: " + response.body().getNoHp());
+                    telpuser.setText(response.body().getNoHp());
+
+                    RequestOptions requestOptions = new RequestOptions();
+                    requestOptions.placeholder(R.drawable.user);
+                    requestOptions.error(R.drawable.user);
+
+                    Glide.with(view.getContext())
+                            .setDefaultRequestOptions(requestOptions)
+                            .load(response.body().getAvatar())
+                            .into(profileimg);
+
+                } catch (Exception e) {
+                }
             }
+
             @Override
             public void onFailure(Call<Profile> call, Throwable t) {
                 t.printStackTrace();
@@ -112,6 +130,6 @@ public class ProfileFragment extends BaseFragment {
 //                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
 //                .dontAnimate()
 //                .into(profileimg);
-        Log.e("Fragment", "onViewCreated: profile" );
+        Log.e("Fragment", "onViewCreated: profile");
     }
 }

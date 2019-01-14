@@ -2,7 +2,9 @@ package com.example.guru.bookingku.Activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -17,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.example.guru.bookingku.Activity.History.RegisterRespon;
 import com.example.guru.bookingku.Activity.Main.MainActivity;
 import com.example.guru.bookingku.Network.BookingClient;
 import com.example.guru.bookingku.Network.BookingService;
@@ -34,10 +37,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
-    SignInButton googleSignButton;
-    GoogleSignInClient mGoogleSignInClient;
-    GoogleSignInOptions signInOptions;
-    CallbackManager callbackManager;
+//    SignInButton googleSignButton;
+//    GoogleSignInOptions signInOptions;
+//    GoogleSignInClient mGoogleSignInClient;
+//    CallbackManager callbackManager;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     EditText inputUsername, inputEmail, inputPassword, inputConfirmPassword, noTelp;
@@ -55,7 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
         ContentResolver cr = getContentResolver();
 
 
-        Cursor cursor = managedQuery(data.getData(), null, null, null, null);
+        Cursor cursor = getContentResolver().query(data.getData(), null, null, null, null);
         while (cursor.moveToNext()) {
             String contactId = cursor.getString(cursor
                     .getColumnIndex(ContactsContract.Contacts._ID));
@@ -102,7 +105,7 @@ public class RegisterActivity extends AppCompatActivity {
             Log.d("hasil2", "getContactInfo: " + phoneNo);
             noTelp.setText(phoneNo);
         }
-
+        cursor.close();
     }
 
     @Override
@@ -141,52 +144,78 @@ public class RegisterActivity extends AppCompatActivity {
 
         inputConfirmPassword = findViewById(R.id.txtCPassword);
         pref = getSharedPreferences("login", MODE_PRIVATE);
-        callbackManager = CallbackManager.Factory.create();
-        signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail().build();
-        mGoogleSignInClient = GoogleSignIn.getClient(RegisterActivity.this, signInOptions);
-        googleSignButton = findViewById(R.id.sign_in_button);
-        googleSignButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = mGoogleSignInClient.getSignInIntent();
-                startActivityForResult(intent, 997);
-            }
-        });
+//        callbackManager = CallbackManager.Factory.create();
+//        signInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestEmail().build();
+//        mGoogleSignInClient = GoogleSignIn.getClient(RegisterActivity.this, signInOptions);
+//        googleSignButton = findViewById(R.id.sign_in_button);
+//        googleSignButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = mGoogleSignInClient.getSignInIntent();
+//                startActivityForResult(intent, 997);
+//            }
+//        });
         registerBtn = findViewById(R.id.btnDaftar);
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String email = inputEmail.getText().toString().trim();
-                final String telp = noTelp.getText().toString().trim();
-                final String username = inputUsername.getText().toString().trim();
-                final String password = inputPassword.getText().toString().trim();
-                final String confirmPassword = inputConfirmPassword.getText().toString().trim();
-                if (telp.isEmpty() || email.isEmpty() || username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-                    Toast.makeText(RegisterActivity.this, "please fill my heart first to send a request :(", Toast.LENGTH_SHORT).show();
-                } else {
-                    if (!confirmPassword.equals(password)) {
-                        inputConfirmPassword.setError("password & confirm passsword don't match");
-                    } else {
-                        BookingService bookingService = BookingClient.getRetrofit().create(BookingService.class);
-                        Call<Void> call = bookingService.signup(email, username, password);
-                        call.enqueue(new Callback<Void>() {
-                            @Override
-                            public void onResponse(Call<Void> call, Response<Void> response) {
-                                if (response.isSuccessful()) {
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                }
-                            }
+                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                builder.setTitle("Confirm register");
+                builder.setMessage("Are you sure want to register?");
+                builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        final String email = inputEmail.getText().toString().trim();
+                        final String telp = noTelp.getText().toString().trim();
+                        final String username = inputUsername.getText().toString().trim();
+                        final String password = inputPassword.getText().toString().trim();
+                        final String confirmPassword = inputConfirmPassword.getText().toString().trim();
+                        if (telp.isEmpty() || email.isEmpty() || username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+                            Toast.makeText(RegisterActivity.this, "please fill my heart first to send a request :(", Toast.LENGTH_SHORT).show();
+                        } else {
+                            if (!confirmPassword.equals(password)) {
+                                inputConfirmPassword.setError("password & confirm passsword don't match");
+                            } else {
+                                String token = getSharedPreferences("firebase_token", MODE_PRIVATE).getString("firebase_token", "");
+                                BookingService bookingService = BookingClient.getRetrofit().create(BookingService.class);
+                                Call<RegisterRespon> call = bookingService.signup(email, username, password, telp, token);
+                                call.enqueue(new Callback<RegisterRespon>() {
+                                    @Override
+                                    public void onResponse(Call<RegisterRespon> call, Response<RegisterRespon> response) {
+                                        try {
+                                            if (response.isSuccessful()) {
+                                                editor = pref.edit();
+                                                editor.putInt("userid", response.body().getUserId());
+                                                editor.apply();
+                                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                startActivity(intent);
+                                            }
+                                        } catch (Exception e) {
+                                            e.getMessage();
+                                            Log.e("LoginActivity", "onResponse: "+ e.getMessage());
+                                        }
 
-                            @Override
-                            public void onFailure(Call<Void> call, Throwable t) {
-                                t.printStackTrace();
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<RegisterRespon> call, Throwable t) {
+                                        Log.e("LoginActivity", "onFailure: " + t.getMessage() );
+                                    }
+                                });
                             }
-                        });
+                        }
                     }
-                }
+                });
+                builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
 
             }
         });
@@ -194,12 +223,13 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+//        callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 997) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
-        } else if (requestCode == 1) {
+//        if (requestCode == 997) {
+//            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+//            handleSignInResult(task);
+//        } else
+        if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK) {
                 getContactInfo(data);
 
@@ -207,34 +237,34 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-        try {
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            String realName = account.getDisplayName();
-            String username = account.getGivenName() + account.getId();
-            String email = account.getEmail();
-            String userId = account.getId();
-            String avatar;
-            if (account.getPhotoUrl() != null) {
-                avatar = account.getPhotoUrl().toString();
-            } else {
-                avatar = null;
-            }
-
-            //intent
-            Toast.makeText(getApplicationContext(), realName + " , " + username, Toast.LENGTH_LONG).show();
-            editor = pref.edit();
-            editor.putString("user", userId);
-            editor.putString("name", realName);
-            editor.putString("username", username);
-            editor.putString("email", email);
-            editor.putString("avatar", avatar);
-            editor.commit();
-
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        } catch (ApiException ignored) {
-        }
-    }
+//    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+//        try {
+//            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+//            String realName = account.getDisplayName();
+//            String username = account.getGivenName() + account.getId();
+//            String email = account.getEmail();
+//            String userId = account.getId();
+//            String avatar;
+//            if (account.getPhotoUrl() != null) {
+//                avatar = account.getPhotoUrl().toString();
+//            } else {
+//                avatar = null;
+//            }
+//
+//            //intent
+//            Toast.makeText(getApplicationContext(), realName + " , " + username, Toast.LENGTH_LONG).show();
+//            editor = pref.edit();
+//            editor.putString("user", userId);
+//            editor.putString("name", realName);
+//            editor.putString("username", username);
+//            editor.putString("email", email);
+//            editor.putString("avatar", avatar);
+//            editor.commit();
+//
+//            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//            startActivity(intent);
+//        } catch (ApiException ignored) {
+//        }
+//    }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.guru.bookingku.Activity.Detail.DetailActivity;
+import com.example.guru.bookingku.Activity.Jenisproduk.Price;
 import com.example.guru.bookingku.R;
 
 import java.util.List;
@@ -36,26 +38,31 @@ public class adapter_list_item_spa extends RecyclerView.Adapter<adapter_list_ite
         final data_item_spa data_item = arrayList.get(position);
         holder.textview_item_spa.setText(data_item.getName());
         holder.textview_description_item.setText(data_item.getDescription());
-        holder.textview_cost_item.setText(String.valueOf(data_item.getPrice()));
+        if(data_item.getPrice() != null)
+            holder.textview_cost_item.setText(String.valueOf(data_item.getPrice().getHarga()));
         Glide.with(context)
                 .load(data_item.getImage())
                 .into(holder.imageview_item_spa);
         holder.cardku.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Integer id = data_item.getId();
-                final String name = data_item.getName();
-                final String image = data_item.getImage();
-                final String description = data_item.getDescription();
-                final Integer price = data_item.getPrice();
-                final String available = data_item.getAvailable();
-                Intent intent = new Intent(holder.itemView.getContext(),DetailActivity.class);
-                intent.putExtra("id",id);
-                intent.putExtra("name",name);
-                intent.putExtra("image",image);
-                intent.putExtra("description",description);
-                intent.putExtra("price",price);
-                intent.putExtra("available",available);
+//                final Integer id = data_item.getId();
+////                final String name = data_item.getName();
+////                final String image = data_item.getImage();
+////                final String description = data_item.getDescription();
+////                final Price price = data_item.getPrice();
+////                final boolean available = data_item.getAvailable();
+////                Intent intent = new Intent(holder.itemView.getContext(),DetailActivity.class);
+////                intent.putExtra("id",id);
+////                Log.d("idbarang", "onClick: "+id);
+////                intent.putExtra("name",name);
+////                intent.putExtra("image",image);
+////                intent.putExtra("description",description);
+////                intent.putExtra("price",price.getHarga());
+////                intent.putExtra("available",available);
+                Intent intent = new Intent(context, DetailActivity.class);
+                intent.putExtra("product", data_item);
+
                 holder.itemView.getContext().startActivity(intent);
             }
         });
@@ -63,7 +70,7 @@ public class adapter_list_item_spa extends RecyclerView.Adapter<adapter_list_ite
 
     @Override
     public int getItemCount() {
-        return arrayList.size();
+        return arrayList == null? 0 : arrayList.size();
     }
 
     public class Holder extends RecyclerView.ViewHolder {

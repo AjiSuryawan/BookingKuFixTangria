@@ -12,7 +12,7 @@ public class AvailableTime {
     private Boolean available;
 
     public String getTime() {
-        return time;
+            return String.format("%.5s", time);
     }
 
     public void setTime(String time) {

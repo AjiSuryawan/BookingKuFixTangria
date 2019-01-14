@@ -1,15 +1,16 @@
 package com.example.guru.bookingku.Activity.Booking;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import com.example.guru.bookingku.Model.AvailableTime;
 import com.example.guru.bookingku.R;
+import com.example.guru.bookingku.Util.onItemClickListener;
 
 import java.util.List;
 
@@ -17,7 +18,8 @@ public class adapter_time_booking extends RecyclerView.Adapter<adapter_time_book
 
     Context context;
     List<AvailableTime> availableTimeList;
-    adapter_time_booking.onItemClickListener listener;
+    onItemClickListener listener;
+    protected int row_index = -1;
 
     public adapter_time_booking(Context context, List<AvailableTime> availableTimeList) {
         this.context = context;
@@ -36,10 +38,26 @@ public class adapter_time_booking extends RecyclerView.Adapter<adapter_time_book
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Holder holder, int i) {
+    public void onBindViewHolder(@NonNull Holder holder, final int i) {
         final AvailableTime availableTime = availableTimeList.get(i);
-        holder.tvTime.setText(availableTime.getTime());
-        //holder.rdoTime.setChecked(false);
+
+
+        if (!availableTime.getAvailable()){
+            holder.tvTime.setText(availableTime.getTime());
+            holder.tvTime.setEnabled(false);
+        }
+        else {
+            holder.tvTime.setText(availableTime.getTime());
+            holder.tvTime.setEnabled(true);
+            if (row_index == i) {
+                holder.tvTime.setBackground(context.getResources().getDrawable(R.drawable.available_time_active_state));
+                holder.tvTime.setTextColor(context.getResources().getColor(R.color.white));
+            } else {
+                holder.tvTime.setBackground(context.getResources().getDrawable(R.drawable.available_time_default_state));
+                holder.tvTime.setTextColor(context.getResources().getColor(R.color.greendark));
+            }
+        }
+
     }
 
     @Override
@@ -49,7 +67,6 @@ public class adapter_time_booking extends RecyclerView.Adapter<adapter_time_book
 
     public class Holder extends RecyclerView.ViewHolder {
         private TextView tvTime;
-        private boolean selected = true;
 
         public Holder(@NonNull View itemView) {
             super(itemView);
@@ -57,13 +74,12 @@ public class adapter_time_booking extends RecyclerView.Adapter<adapter_time_book
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    row_index = -1;
                     listener.onItemClick(getAdapterPosition());
+                    row_index = getAdapterPosition();
+                    notifyDataSetChanged();
                 }
             });
         }
-    }
-
-    public interface onItemClickListener{
-        void onItemClick(int position);
     }
 }

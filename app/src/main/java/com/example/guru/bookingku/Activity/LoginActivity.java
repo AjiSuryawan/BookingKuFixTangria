@@ -2,8 +2,12 @@ package com.example.guru.bookingku.Activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +19,7 @@ import com.example.guru.bookingku.Model.BookingResponse;
 import com.example.guru.bookingku.Network.BookingClient;
 import com.example.guru.bookingku.Network.BookingService;
 import com.example.guru.bookingku.R;
+import com.example.guru.bookingku.Service.FirebaseMessagingService;
 import com.facebook.*;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
@@ -26,11 +31,16 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import org.json.JSONException;
 import org.json.JSONObject;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import java.util.Arrays;
 
@@ -48,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        cetakhash();
         TextView tvregister = (TextView) findViewById(R.id.txtregister);
         tvregister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,26 +93,32 @@ public class LoginActivity extends AppCompatActivity {
                 if (username.isEmpty() || password.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "please fill my heart first to send a request :(", Toast.LENGTH_SHORT).show();
                 } else {
+                    String token = getSharedPreferences("firebase_token", MODE_PRIVATE).getString("firebase_token", "");
                     BookingService bookingService = BookingClient.getRetrofit().create(BookingService.class);
-                    Call<BookingResponse> call = bookingService.login(username, password);
+                    Call<BookingResponse> call = bookingService.login(username, password, token);
                     call.enqueue(new Callback<BookingResponse>() {
                         @Override
                         public void onResponse(Call<BookingResponse> call, Response<BookingResponse> response) {
-                            boolean success = response.body().getSuccess();
-                            if (response.isSuccessful()) {
-                                if (success) {
-                                    editor = pref.edit();
-                                    editor.putInt("userid", response.body().getUserId());
-                                    editor.apply();
-                                    Log.d("iduser", "onResponse: " + response.body().getUserId());
-                                    Intent in = new Intent(getApplicationContext(), MainActivity.class);
-                                    startActivity(in);
-                                    finish();
-                                } else {
-                                    Toast.makeText(LoginActivity.this, "Something wrong is happen", Toast.LENGTH_SHORT).show();
+                            try {
+                                boolean success = response.body().getSuccess();
+                                if (response.isSuccessful()) {
+                                    if (success) {
+                                        editor = pref.edit();
+                                        editor.putInt("userid", response.body().getUserId());
+                                        editor.apply();
+                                        Log.d("iduser", "onResponse: " + response.body().getUserId());
+                                        Intent in = new Intent(getApplicationContext(), MainActivity.class);
+                                        startActivity(in);
+                                        finish();
+                                    } else {
+                                        Toast.makeText(LoginActivity.this, "Something wrong is happen", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
+                                Log.e("Tag", "onResponse: " + response.code());
                             }
-                            Log.e("Tag", "onResponse: " + response.code());
+                            catch (Exception e){
+
+                            }
                         }
 
                         @Override
@@ -134,27 +150,41 @@ public class LoginActivity extends AppCompatActivity {
                             String email = jsonObject.optString("email", "");
                             String avatar = "https://graph.facebook.com/" + fbId + "/picture?type=large";
 
-
+                            Log.d("gambar", "onCompleted: "+avatar);
+                            //proses input service
+                            String token = getSharedPreferences("firebase_token", MODE_PRIVATE).getString("firebase_token", "");
                             BookingService service = BookingClient.getRetrofit().create(BookingService.class);
-                            Call<BookingResponse> call = service.loginMedsos(realName, email, "facebook", avatar);
+                            Call<BookingResponse> call = service.loginMedsos(realName, email, "facebook", avatar, token);
                             call.enqueue(new Callback<BookingResponse>() {
                                 @Override
                                 public void onResponse(Call<BookingResponse> call, Response<BookingResponse> response) {
-                                    boolean success = response.body().getSuccess();
-                                    int userId = response.body().getUserId();
-                                    if (response.isSuccessful()) {
-                                        if (success) {
-                                            editor = pref.edit();
-                                            editor.putInt("userid", userId);
-                                            editor.apply();
-
-                                            Intent in = new Intent(getApplicationContext(), MainActivity.class);
-                                            startActivity(in);
-                                            finish();
-                                        } else {
-                                            Toast.makeText(LoginActivity.this, "Something wrong is happen", Toast.LENGTH_SHORT).show();
+                                    try {
+                                        boolean success = response.body().getSuccess();
+                                        boolean isPhoneNull = response.body().getPhoneStatus(); // null = true
+                                        int userId = response.body().getUserId();
+                                        if (response.isSuccessful()) {
+                                            if (success) {
+                                                editor = pref.edit();
+                                                editor.putInt("userid", userId);
+                                                editor.apply();
+                                                Log.e("isPhoneNull", "onResponse: " + isPhoneNull );
+                                                if(!isPhoneNull) {
+                                                    Intent in = new Intent(getApplicationContext(), MainActivity.class);
+                                                    startActivity(in);
+                                                    finish();
+                                                } else {
+                                                    Intent intent = new Intent(LoginActivity.this, InputPhone.class);
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
+                                            } else {
+                                                Toast.makeText(LoginActivity.this, "Something wrong is happen", Toast.LENGTH_SHORT).show();
+                                            }
                                         }
+                                    } catch (Exception e){
+
                                     }
+
                                 }
 
                                 @Override
@@ -206,27 +236,40 @@ public class LoginActivity extends AppCompatActivity {
             } else {
                 avatar = null;
             }
+            Log.d("avatarku", "handleSignInResult: "+avatar);
 
             //intent
+            String token = getSharedPreferences("firebase_token", MODE_PRIVATE).getString("firebase_token", "");
             BookingService service = BookingClient.getRetrofit().create(BookingService.class);
-            Call<BookingResponse> call = service.loginMedsos(realName, email, "gmail", avatar);
+            Call<BookingResponse> call = service.loginMedsos(realName, email, "gmail", avatar, token);
             call.enqueue(new Callback<BookingResponse>() {
                 @Override
                 public void onResponse(Call<BookingResponse> call, Response<BookingResponse> response) {
-                    boolean success = response.body().getSuccess();
-                    int userId = response.body().getUserId();
-                    if (response.isSuccessful()) {
-                        if (success) {
-                            editor = pref.edit();
-                            editor.putInt("userid", userId);
-                            editor.apply();
-
-                            Intent in = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(in);
-                            finish();
-                        } else {
-                            Toast.makeText(LoginActivity.this, "Something wrong is happen", Toast.LENGTH_SHORT).show();
+                    try {
+                        boolean success = response.body().getSuccess();
+                        boolean isPhoneNull = response.body().getPhoneStatus(); // null = true
+                        int userId = response.body().getUserId();
+                        if (response.isSuccessful()) {
+                            if (success) {
+                                editor = pref.edit();
+                                editor.putInt("userid", userId);
+                                editor.apply();
+                                Log.e("isPhoneNull", "onResponse: " + isPhoneNull );
+                                if(!isPhoneNull) {
+                                    Intent in = new Intent(getApplicationContext(), MainActivity.class);
+                                    startActivity(in);
+                                    finish();
+                                } else {
+                                    Intent intent = new Intent(LoginActivity.this, InputPhone.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Something wrong is happen", Toast.LENGTH_SHORT).show();
+                            }
                         }
+                    } catch (Exception e){
+
                     }
                 }
 
@@ -240,7 +283,7 @@ public class LoginActivity extends AppCompatActivity {
             ignored.printStackTrace();
         }
     }
-    /*
+
     public void cetakhash(){
         PackageInfo info;
         try {
@@ -261,5 +304,5 @@ public class LoginActivity extends AppCompatActivity {
             Log.e("exception", e.toString());
         }
     }
-    */
+
 }

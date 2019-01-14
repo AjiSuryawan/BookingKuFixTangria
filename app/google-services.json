@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1076432856819",
+    "firebase_url": "https://bookingku-4d882.firebaseio.com",
+    "project_id": "bookingku-4d882",
+    "storage_bucket": "bookingku-4d882.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076432856819:android:4ca88148f6c16ebf",
+        "android_client_info": {
+          "package_name": "com.example.guru.bookingku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076432856819-ed41qb3p8r1o02lh7nd80j6vqhvvgoom.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.guru.bookingku",
+            "certificate_hash": "6878d944d7c1b29f376e1d53d42acacaf53c0a09"
+          }
+        },
+        {
+          "client_id": "1076432856819-qlq353vud4heks5m5t5f3j2tb9h9ci0o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbdIsLxiQe9ifkerQLlQR9j2AanFAeu2g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076432856819-qlq353vud4heks5m5t5f3j2tb9h9ci0o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,39 +1,97 @@
 package com.example.guru.bookingku.Activity.History;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
-import com.example.guru.bookingku.Activity.History.model.OrderStatus;
-import com.example.guru.bookingku.Activity.History.model.TimeLineModel;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.guru.bookingku.Activity.Detail.DetailHistory;
+import com.example.guru.bookingku.Model.BookingResponse;
+import com.example.guru.bookingku.Model.HistoryBooking;
+import com.example.guru.bookingku.Network.BookingClient;
+import com.example.guru.bookingku.Network.BookingService;
 import com.example.guru.bookingku.R;
+import com.example.guru.bookingku.Util.onItemClickListener;
+import com.facebook.shimmer.ShimmerFrameLayout;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by HP-HP on 05-12-2015.
- */
-public class TimeLineActivity extends AppCompatActivity {
-
+public class TimeLineActivity extends AppCompatActivity implements onItemClickListener {
+    private ShimmerFrameLayout mShimmerViewContainer;
     private RecyclerView mRecyclerView;
     private TimeLineAdapter mTimeLineAdapter;
-    private List<TimeLineModel> mDataList = new ArrayList<>();
-
+    private List<HistoryBooking> mDataList = new ArrayList<>();
+    private SharedPreferences preferences;
+    private Toolbar toolbar;
+    private TextView tvTitleToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Toast.makeText(this, "fetching data", Toast.LENGTH_SHORT).show();
+        preferences = getSharedPreferences("login", MODE_PRIVATE);
         setContentView(R.layout.activity_timeline);
-        if(getSupportActionBar()!=null)
+        if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+        toolbar = findViewById(R.id.toolbar);
+        tvTitleToolbar = findViewById(R.id.tv_title);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        tvTitleToolbar.setText("HISTORY");
+
+        mShimmerViewContainer = (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
+        mShimmerViewContainer.startShimmerAnimation();
+
+        mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(getLinearLayoutManager());
         mRecyclerView.setHasFixedSize(true);
+        mTimeLineAdapter = new TimeLineAdapter(mDataList, TimeLineActivity.this);
+        mTimeLineAdapter.setOnItemClickListener(this);
+        mRecyclerView.setAdapter(mTimeLineAdapter);
 
-        initView();
+        int userId = preferences.getInt("userid", 0);
+        Log.e("userID", "onCreate: " + userId);
+        BookingService service = BookingClient.getRetrofit().create(BookingService.class);
+        Call<BookingResponse> call = service.getHistoryBookingList(userId);
+        call.enqueue(new Callback<BookingResponse>() {
+            @Override
+            public void onResponse(Call<BookingResponse> call, Response<BookingResponse> response) {
+                try {
+                    mDataList.addAll(response.body().getHistoryBookingList());
+                    mTimeLineAdapter.notifyDataSetChanged();
+
+                    mShimmerViewContainer.stopShimmerAnimation();
+                    mShimmerViewContainer.setVisibility(View.GONE);
+                } catch (Exception e) {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BookingResponse> call, Throwable t) {
+                Toast.makeText(TimeLineActivity.this, "Can't connect to server", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private LinearLayoutManager getLinearLayoutManager() {
@@ -41,33 +99,29 @@ public class TimeLineActivity extends AppCompatActivity {
 
     }
 
-    private void initView() {
-        setDataListItems();
-        mTimeLineAdapter = new TimeLineAdapter(mDataList);
-        mRecyclerView.setAdapter(mTimeLineAdapter);
-    }
-
-    private void setDataListItems(){
-        mDataList.add(new TimeLineModel("Item successfully delivered", "", OrderStatus.INACTIVE));
-        mDataList.add(new TimeLineModel("Courier is out to delivery your order", "2017-02-12 08:00", OrderStatus.ACTIVE));
-        mDataList.add(new TimeLineModel("Item has reached courier facility at New Delhi", "2017-02-11 21:00", OrderStatus.COMPLETED));
-        mDataList.add(new TimeLineModel("Item has been given to the courier", "2017-02-11 18:00", OrderStatus.COMPLETED));
-        mDataList.add(new TimeLineModel("Item is packed and will dispatch soon", "2017-02-11 09:30", OrderStatus.COMPLETED));
-        mDataList.add(new TimeLineModel("Order is being readied for dispatch", "2017-02-11 08:00", OrderStatus.COMPLETED));
-        mDataList.add(new TimeLineModel("Order processing initiated", "2017-02-10 15:00", OrderStatus.COMPLETED));
-        mDataList.add(new TimeLineModel("Order confirmed by seller", "2017-02-10 14:30", OrderStatus.COMPLETED));
-        mDataList.add(new TimeLineModel("Order placed successfully", "2017-02-10 14:00", OrderStatus.COMPLETED));
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        //Menu
         switch (item.getItemId()) {
-            //When home is clicked
             case android.R.id.home:
                 onBackPressed();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        HistoryBooking data = mDataList.get(position);
+        String product = data.getOrder();
+        String productImg = data.getOrderImg();
+        String productDesc = data.getOrderDesc();
+        String date = data.getDate();
+        String status = data.getStatus();
+        String code = data.getCode();
+        Log.d("halo_kang", "onItemClick: " + code);
+        HistoryBooking historyBooking = new HistoryBooking(product, productImg, productDesc, date, status, code);
+        Intent intent = new Intent(this, DetailHistory.class);
+        intent.putExtra("history", historyBooking);
+        startActivity(intent);
     }
 }

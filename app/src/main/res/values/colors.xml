@@ -1,13 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="white">#ffffff</color>
+
     <color name="black">#3e3e3e</color>
     <color name="grey">#ededed</color>
     <color name="grey2">#c7c7c7</color>
+    <color name="greendark">#149092</color>
+    <color name="not_available_color">#909090</color>
+
+    <color name="white">@android:color/white</color>
+    <color name="darkGray">@android:color/darker_gray</color>
+    <color name="transparent">#00000000</color>
+    <color name="mediumTransparent">#3c000000</color>
+    <color name="largeTransparent">#71000000</color>
 
     <color name="colorBackground">#eeeeee</color>
+
+
+    <color name="backgroundcolor">#fcfcfc</color>
+    <color name="lightgray">#ededed</color>
+    <color name="deeppurple">#7c4dff</color>
+    <color name="yello">#ffb300</color>
+    <color name="green">#00bfa5</color>
+    <color name="blue">#4a26fd</color>
+    <color name="darkblue">#23283a</color>
+    <color name="pink">#fe104d</color>
+    <color name="transparent_white">#cccccc</color>
+    <color name="black_overlay">#66000000</color>
+
+    <color name="placeholder_bg">#dddddd</color>
+    <color name="item_name">#0c0c0c</color>
+    <color name="description">#1a1a1a</color>
+    <color name="chef">#777</color>
+    <color name="timestamp">#777777</color>
 </resources>

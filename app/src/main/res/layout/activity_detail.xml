@@ -1,51 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Detail.DetailActivity"
+    android:background="@drawable/all_bg">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:cardBackgroundColor="@android:color/transparent"
+        android:layout_alignParentTop="true">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"/>
+    </android.support.v7.widget.CardView>
+
+    <FrameLayout
+        android:id="@+id/relative_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Activity.Detail.DetailActivity">
-    <FrameLayout
-            android:id="@+id/relative_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/bookNowBtn">
+        android:layout_above="@+id/bookNowBtn"
+        android:layout_below="@id/cardView">
+
         <ScrollView
-                android:id="@+id/scrolldown"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            android:id="@+id/scrolldown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <LinearLayout
-                    android:id="@+id/linear_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                android:id="@+id/linear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <ImageView
-                        android:id="@+id/imageview_product"
-                        android:layout_width="match_parent"
-                        android:layout_height="250dp"
-                        android:background="@color/grey"
-                        android:src="@color/black"
-                        android:scaleType="fitXY"/>
+                    android:id="@+id/imageview_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:background="@color/grey"
+                    android:scaleType="fitXY"
+                    android:src="@color/black" />
+
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                    <android.support.v7.widget.CardView
-                            android:layout_margin="10dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:cardCornerRadius="0dp"
-                            app:cardElevation="2dp"
-                            app:cardUseCompatPadding="true">
+                        android:orientation="vertical"
+                        android:paddingTop="10dp">
 
                         <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
-                                android:translationY="0dp">
+                                android:translationY="0dp"
+                                android:padding="10dp">
 
                             <TextView
                                     android:id="@+id/name_product_text"
@@ -67,21 +78,13 @@
                                     android:text="name"/>
 
                         </LinearLayout>
-                    </android.support.v7.widget.CardView>
-
-                    <android.support.v7.widget.CardView
-                            android:layout_margin="10dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:cardCornerRadius="0dp"
-                            app:cardElevation="2dp"
-                            app:cardUseCompatPadding="true">
 
                         <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
-                                android:translationY="0dp">
+                                android:translationY="0dp"
+                            android:padding="10dp">
 
                             <TextView
                                     android:id="@+id/description_product_text"
@@ -100,19 +103,40 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:padding="10dp"
-                                    android:text="description"/>
+                                    android:text="description"
+                                    />
 
                         </LinearLayout>
-                    </android.support.v7.widget.CardView>
-                    <android.support.v7.widget.CardView
-                            android:layout_margin="10dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:cardCornerRadius="0dp"
-                            app:cardElevation="2dp"
-                            app:cardUseCompatPadding="true">
 
+                      <LinearLayout
+                                android:padding="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:translationY="0dp">
+
+                            <TextView
+                                    style="@style/TextAppearance.AppCompat.Small"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_margin="10dp"
+                                    android:text="Note"
+                                    android:textColor="#FF0000"
+                                    android:textStyle="bold"/>
+
+                            <TextView
+                                    android:textStyle="bold"
+                                    android:id="@+id/txtnote"
+                                    style="@style/TextAppearance.AppCompat.Small"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="10dp"
+                                    android:text="makanan ini enak"/>
+
+                        </LinearLayout>
                         <LinearLayout
+                                android:padding="10dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
@@ -129,22 +153,43 @@
                                     android:textColor="#FF0000"
                                     android:textStyle="bold"/>
 
-                            <TextView
-                                    android:id="@+id/price_product"
-                                    style="@style/TextAppearance.AppCompat.Small"
+                            <LinearLayout
+                                    android:padding="10dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:padding="10dp"
-                                    android:text="price"/>
+                                    android:orientation="horizontal">
+                                <TextView
+                                        android:id="@+id/price_product"
+                                        style="@style/TextAppearance.AppCompat.Small"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:padding="10dp"
+                                        android:text="price"/>
+                                <TextView
+                                        android:id="@+id/calculated_price_product"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        style="@style/TextAppearance.AppCompat.Small"
+                                        android:text="calculated price"
+                                        />
 
+                                <TextView
+                                        android:id="@+id/diskon_product"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="right"
+                                        android:paddingEnd="10dp"
+                                        android:textSize="20sp"
+                                        android:text="@string/app_name"
+                                        />
+                            </LinearLayout>
                         </LinearLayout>
-                    </android.support.v7.widget.CardView>
                     <android.support.v7.widget.CardView
                             android:layout_margin="10dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:cardCornerRadius="0dp"
-                            app:cardElevation="2dp"
+                            android:visibility="gone"
                             app:cardUseCompatPadding="true">
 
                         <LinearLayout
@@ -180,11 +225,15 @@
         </ScrollView>
     </FrameLayout>
     <Button
+
+            android:textColor="@color/white"
             android:layout_margin="9dp"
             android:id="@+id/bookNowBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="BOOK NOW"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true"
+            android:background="#148F94"
+    />
 
 </RelativeLayout>

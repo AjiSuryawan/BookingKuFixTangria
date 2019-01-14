@@ -18,7 +18,7 @@ public class Profile {
     private Object avatar;
     @SerializedName("no_hp")
     @Expose
-    private Object noHp;
+    private String no_hp;
 
     public Integer getUserId() {
         return userId;
@@ -52,11 +52,11 @@ public class Profile {
         this.avatar = avatar;
     }
 
-    public Object getNoHp() {
-        return noHp;
+    public String getNoHp() {
+        return no_hp;
     }
 
-    public void setNoHp(Object noHp) {
-        this.noHp = noHp;
+    public void setNoHp(String no_hp) {
+        this.no_hp = no_hp;
     }
 }

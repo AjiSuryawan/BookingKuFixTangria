@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class BookingClient {
 
     private static Retrofit retrofit = null;
-    private static final String BASE_URL = "http://192.168.6.36:8000/";
+    public static final String BASE_URL = "http://tangriaspa.com/";
     private static final HttpLoggingInterceptor logging = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
     private static OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder();
 
