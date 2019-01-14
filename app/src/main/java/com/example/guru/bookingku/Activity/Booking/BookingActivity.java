@@ -172,7 +172,15 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
         String month_string = String.valueOf(month + 1);
         String day_string = String.valueOf(day);
 
+        if( month < 9){
+            month_string = "0" + month_string;
+        }
+        if (date < 10 ){
+            day_string = "0" + date;
+        }
+
         selectedDate = year_string + "-" + month_string + "-" + day_string;
+
         String selectedDate2 = day_string + " " + month_string + " " + year_string;
         SimpleDateFormat formatter = new SimpleDateFormat("dd MM yyyy");
         try{

@@ -41,6 +41,7 @@
         app:layout_constraintTop_toBottomOf="@id/iv_logo" />
 
     <EditText
+            android:inputType="textPassword"
         android:id="@+id/txtpassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

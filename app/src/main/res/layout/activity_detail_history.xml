@@ -51,6 +51,18 @@
             android:text="lorem ipsum dolor sit amet. lae wa rei de visca cipto le vanto re siska"
             android:textAlignment="viewStart"
             android:textStyle="bold"/>
+        
+        
+        <TextView
+                android:textStyle="bold"
+                android:id="@+id/tvkodebooking"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:text="kode booking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
 
         <ImageView
