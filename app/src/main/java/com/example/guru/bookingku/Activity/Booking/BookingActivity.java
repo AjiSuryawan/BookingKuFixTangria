@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -14,13 +12,13 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.guru.bookingku.Activity.Main.MainActivity;
 import com.example.guru.bookingku.Model.AvailableTime;
 import com.example.guru.bookingku.Model.BookingResponse;
@@ -29,31 +27,32 @@ import com.example.guru.bookingku.Network.BookingService;
 import com.example.guru.bookingku.R;
 import com.example.guru.bookingku.Util.AlarmConfig;
 import com.example.guru.bookingku.Util.onItemClickListener;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class BookingActivity extends AppCompatActivity implements onItemClickListener {
 
     private static final String NOTIFICATION_TITLE = "Notifikasi Title";
     List<AvailableTime> availableTimeList = new ArrayList<>();
+    EditText txtdateku;
+    Bundle bundlee;
+    int orderid;
     private String selectedAvailableTime;
     private String selectedDate;
     private RecyclerView recyclerView;
     private adapter_time_booking adapter;
     private Button bookNowBtn;
     private SharedPreferences sharedPreferences;
-//    private TextView tvSelectedDateAndTime;
+    //    private TextView tvSelectedDateAndTime;
     private TextView txtavailable;
     private AlarmConfig alarmConfig;
-    EditText txtdateku;
-    Bundle bundlee;
-    int orderid;
     private int year, month, date, hour, minute;
     private Toolbar toolbar;
     private TextView tvTitleToolbar;
@@ -125,7 +124,7 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
                             @Override
                             public void onResponse(Call<BookingResponse> call, Response<BookingResponse> response) {
                                 boolean success = response.body().getSuccess();
-                                if(success){
+                                if (success) {
                                     alarmConfig.setAlarm(year, month, date, hour, minute);
                                     Intent intent = new Intent(BookingActivity.this, MainActivity.class);
                                     startActivity(intent);
@@ -172,10 +171,10 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
         String month_string = String.valueOf(month + 1);
         String day_string = String.valueOf(day);
 
-        if( month < 9){
+        if (month < 9) {
             month_string = "0" + month_string;
         }
-        if (date < 10 ){
+        if (date < 10) {
             day_string = "0" + date;
         }
 
@@ -183,23 +182,23 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
 
         String selectedDate2 = day_string + " " + month_string + " " + year_string;
         SimpleDateFormat formatter = new SimpleDateFormat("dd MM yyyy");
-        try{
+        try {
             Date formatedDate = formatter.parse(selectedDate2);
             SimpleDateFormat formatter2 = new SimpleDateFormat("E, dd MMMM yyyy");
             String datee = formatter2.format(formatedDate);
-            txtdateku.setText(""+ datee);
-            Log.e("DATEEE", "processDatePickerResult: " + formatedDate );
-        } catch (Exception e){
+            txtdateku.setText("" + datee);
+            Log.e("DATEEE", "processDatePickerResult: " + formatedDate);
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         Toast.makeText(this, "Date Selected is : " + selectedDate, Toast.LENGTH_SHORT).show();
-        int id = getIntent().getExtras().getInt("orderid");
-        Log.e("id", "processDatePickerResult: " + id );
-        if(id == 7){
+        String productName = getIntent().getExtras().getString("name");
+        Log.e("id", "processDatePickerResult: " + productName);
+        if (productName.equalsIgnoreCase("Tradisional Treatment")) {
             showTradisionalTreatmentTime();
             txtavailable.setVisibility(View.VISIBLE);
-        } else if (id == 9){
+        } else if (productName.equalsIgnoreCase("Javanesse Treatment")) {
             showJavanesseTreatmentTime();
             txtavailable.setVisibility(View.VISIBLE);
         } else {
@@ -237,7 +236,7 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
 //        tvSelectedDateAndTime.setText(selectedDate + " " + selectedAvailableTime);
     }
 
-    private void showJavanesseTreatmentTime(){
+    private void showJavanesseTreatmentTime() {
         AvailableTime availableTime1 = new AvailableTime();
         availableTime1.setTime("10:00:00");
         availableTime1.setAvailable(true);
@@ -253,7 +252,7 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
         adapter.notifyDataSetChanged();
     }
 
-    private void showTradisionalTreatmentTime(){
+    private void showTradisionalTreatmentTime() {
         AvailableTime availableTime1 = new AvailableTime();
         availableTime1.setTime("11:00:00");
         availableTime1.setAvailable(true);

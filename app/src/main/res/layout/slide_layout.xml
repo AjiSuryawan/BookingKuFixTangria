@@ -1,40 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/relative_layout_slide"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relative_layout_slide"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    <LinearLayout android:layout_width="match_parent"
-                  android:gravity="center_horizontal"
-                  android:layout_centerInParent="true"
-                  android:layout_height="wrap_content"
-                  android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <ImageView
-                android:id="@+id/image_slide"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:src="@mipmap/ic_launcher"
-                android:layout_centerInParent="true"/>
+            android:id="@+id/image_slide"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/ic_launcher" />
+
         <TextView
-                android:layout_marginTop="20dp"
-                android:textSize="22sp"
-                android:id="@+id/text_view_slide"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Welcome"
-                android:gravity="center"
-                android:textColor="@color/colorPrimaryDark"
-                android:layout_below="@+id/image_slide"/>
+            android:id="@+id/text_view_slide"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image_slide"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="Welcome"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="22sp" />
+
         <TextView
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="15sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Lorem ipsum"
-                android:id="@+id/text_view_description_slide"
-                android:layout_below="@+id/text_view_slide"
-                android:gravity="center"/>
+            android:id="@+id/text_view_description_slide"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_view_slide"
+            android:gravity="center"
+            android:text="Lorem ipsum"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15sp" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -19,6 +19,7 @@ import com.example.guru.bookingku.Activity.Notification.NotificationActivity;
 import com.example.guru.bookingku.Fragment.Base.BaseFragment;
 import com.example.guru.bookingku.R;
 
+import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -32,7 +33,6 @@ public class MainActivity extends AppCompatActivity implements MainView, BottomN
     Toolbar toolbar;
     @BindView(R.id.tv_title)
     TextView tvTitle;
-
     //
     @Override
     public void onBackPressed() {

@@ -5,6 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:background="@drawable/available_time_default_state"
-    android:fontFamily="monospace"
+    android:padding="10dp"
+    android:background="@drawable/radiobtn_selector"
+    android:fontFamily="@font/futuramd"
     android:text="07.00" />
