@@ -2,8 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:shimmer="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@android:color/transparent">
+    android:layout_height="wrap_content">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
