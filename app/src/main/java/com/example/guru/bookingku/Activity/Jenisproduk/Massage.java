@@ -66,7 +66,7 @@ public class Massage extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        tvTitleToolbar.setText(title);
+
 
         mShimmerViewContainer = (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
         mShimmerViewContainer.startShimmerAnimation();
@@ -95,9 +95,11 @@ public class Massage extends AppCompatActivity {
         if (data.equalsIgnoreCase("package_treatment")) {
             call = bookingService.getPackageTreatment();
             title = "Package Treatment";
+            tvTitleToolbar.setText(title);
         } else if (data.equalsIgnoreCase("ala_carte_treatment")) {
             call = bookingService.getAlaCarteTreatment();
             title = "Ala Carte Treatment";
+            tvTitleToolbar.setText(title);
         }
 
         call.enqueue(new Callback<List<data_item_spa>>() {

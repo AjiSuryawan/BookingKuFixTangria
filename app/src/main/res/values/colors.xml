@@ -37,4 +37,10 @@
     <color name="description">#1a1a1a</color>
     <color name="chef">#777</color>
     <color name="timestamp">#777777</color>
+
+    <color name="intro_1">#E6D8CF</color>
+    <color name="intro_2">#DFC6C1</color>
+    <color name="intro_3">#E6D8CF</color>
+    <color name="intro_4">#E0C4C0</color>
+    <color name="intro_5">#E6D8CE</color>
 </resources>

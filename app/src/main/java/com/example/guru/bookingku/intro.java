@@ -27,7 +27,6 @@ public class intro extends AppCompatActivity {
         setContentView(R.layout.activity_intro);
         viewPager = (ViewPager) findViewById(R.id.view_pager_intro);
         linearLayout = (LinearLayout) findViewById(R.id.linear_layout_intro);
-        //linearLayout.setBackgroundColor(ContextCompat.getColor(this,R.color.blue));
         button_back = (Button) findViewById(R.id.button_back);
         button_back.setText("");
         button_next = (Button) findViewById(R.id.button_next);

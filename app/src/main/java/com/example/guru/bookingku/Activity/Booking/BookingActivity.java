@@ -193,7 +193,7 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
         }
 
         Toast.makeText(this, "Date Selected is : " + selectedDate, Toast.LENGTH_SHORT).show();
-        String productName = getIntent().getExtras().getString("name");
+        String productName = getIntent().getExtras().getString("order_nama");
         Log.e("id", "processDatePickerResult: " + productName);
         if (productName.equalsIgnoreCase("Tradisional Treatment")) {
             showTradisionalTreatmentTime();

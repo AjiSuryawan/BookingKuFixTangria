@@ -61,7 +61,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center|center_horizontal"
-                        android:src="@drawable/user" />
+                        android:src="@drawable/avatar" />
                 </FrameLayout>
 
                 <ImageView
@@ -142,6 +142,7 @@
                             android:layout_alignParentTop="true"
                             android:layout_margin="10dp"
                             android:text="Tentang"
+                            android:textColor="@color/ungu"
                             android:textStyle="bold" />
 
                         <TextView
@@ -150,7 +151,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="10dp"
-                            android:textColor="@color/colorPrimary" />
+                            android:textColor="@color/ungu" />
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
 
@@ -176,7 +177,8 @@
                             android:layout_alignParentTop="true"
                             android:layout_margin="10dp"
                             android:text="Booking History"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:textColor="@color/ungu"/>
 
                         <Button
                             android:id="@+id/btnhistory"
@@ -184,7 +186,7 @@
                             android:layout_height="wrap_content"
                             android:background="@android:color/transparent"
                             android:text="Booking History"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/ungu"
                             android:textStyle="bold" />
 
                         <LinearLayout
@@ -209,7 +211,8 @@
                                     style="@style/TextAppearance.AppCompat.Small"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Pekerjaan" />
+                                    android:text="Pekerjaan"
+                                    android:textColor="@color/ungu"/>
 
                                 <TextView
                                     android:id="@+id/profileProfesi"
@@ -218,7 +221,8 @@
                                     android:layout_height="wrap_content"
                                     android:text="Click to details"
                                     android:textSize="15dp"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:textColor="@color/ungu"/>
                             </LinearLayout>
                         </LinearLayout>
 
@@ -255,7 +259,7 @@
                             android:text="Log out"
                             android:textSize="17sp"
                             android:textStyle="bold"
-                            android:textColor="@android:color/holo_red_dark"/>
+                            android:textColor="@color/ungu"/>
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
             </LinearLayout>
