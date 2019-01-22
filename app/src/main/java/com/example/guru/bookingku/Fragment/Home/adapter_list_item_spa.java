@@ -38,7 +38,8 @@ public class adapter_list_item_spa extends RecyclerView.Adapter<adapter_list_ite
         final data_item_spa data_item = arrayList.get(position);
         holder.textview_item_spa.setText(data_item.getName());
         holder.textview_description_item.setText(data_item.getDescription());
-        holder.textview_cost_item.setText(String.valueOf(data_item.getPrice().getHarga()));
+        if(data_item.getPrice() != null)
+            holder.textview_cost_item.setText(String.valueOf(data_item.getPrice().getHarga()));
         Glide.with(context)
                 .load(data_item.getImage())
                 .into(holder.imageview_item_spa);

@@ -1,6 +1,5 @@
 package com.example.guru.bookingku.Activity.Jenisproduk;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
@@ -11,9 +10,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.guru.bookingku.Fragment.Home.adapter_list_item_spa;
 import com.example.guru.bookingku.Fragment.Home.data_item_spa;
 import com.example.guru.bookingku.Network.BookingClient;
@@ -21,25 +20,25 @@ import com.example.guru.bookingku.Network.BookingService;
 import com.example.guru.bookingku.R;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
-import org.w3c.dom.Text;
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Massage extends AppCompatActivity {
-    String data;
     public List<data_item_spa> arrayList = new ArrayList<>();
+    String data;
+    Call<List<data_item_spa>> call;
     private RecyclerView recyclerView;
     private ShimmerFrameLayout mShimmerViewContainer;
     private SwipeRefreshLayout swipeRefreshLayout;
     private adapter_list_item_spa adapter;
     private Toolbar toolbar;
     private TextView tvTitleToolbar;
-    Call<List<data_item_spa>> call;
+    private String title;
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -57,7 +56,7 @@ public class Massage extends AppCompatActivity {
         setContentView(R.layout.fragment_home);
 
         Bundle extras = getIntent().getExtras();
-        if(extras != null){
+        if (extras != null) {
             data = extras.getString("category");
         }
 
@@ -67,7 +66,7 @@ public class Massage extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        tvTitleToolbar.setText(data);
+
 
         mShimmerViewContainer = (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
         mShimmerViewContainer.startShimmerAnimation();
@@ -92,11 +91,15 @@ public class Massage extends AppCompatActivity {
         swipeRefreshLayout.setVisibility(View.VISIBLE);
         mShimmerViewContainer.setVisibility(View.GONE);
         BookingService bookingService = BookingClient.getRetrofit().create(BookingService.class);
-        Log.e("Massage", "load_data: " + data );
-        if (data.equalsIgnoreCase("package_treatment")){
+        Log.e("Massage", "load_data: " + data);
+        if (data.equalsIgnoreCase("package_treatment")) {
             call = bookingService.getPackageTreatment();
-        }else if (data.equalsIgnoreCase("ala_carte_treatment")) {
+            title = "Package Treatment";
+            tvTitleToolbar.setText(title);
+        } else if (data.equalsIgnoreCase("ala_carte_treatment")) {
             call = bookingService.getAlaCarteTreatment();
+            title = "Ala Carte Treatment";
+            tvTitleToolbar.setText(title);
         }
 
         call.enqueue(new Callback<List<data_item_spa>>() {

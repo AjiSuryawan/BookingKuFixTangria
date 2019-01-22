@@ -17,13 +17,10 @@ public class TimeLineViewHolder extends RecyclerView.ViewHolder {
     TextView mDate;
     @BindView(R.id.text_timeline_title)
     TextView mMessage;
-    @BindView(R.id.time_marker)
-    TimelineView mTimelineView;
 
     public TimeLineViewHolder(View itemView, int viewType) {
         super(itemView);
 
         ButterKnife.bind(this, itemView);
-        mTimelineView.initLine(viewType);
     }
 }

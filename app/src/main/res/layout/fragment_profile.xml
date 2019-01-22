@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@android:color/transparent">
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/profile_reload_view"
@@ -43,9 +42,9 @@
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#148F94"
-            android:paddingBottom="10dp"
+            android:background="#10a49b"
             android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:theme="@style/AppTheme.AppBarOverlay">
 
             <FrameLayout
@@ -62,7 +61,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center|center_horizontal"
-                        android:src="@drawable/user" />
+                        android:src="@drawable/avatar" />
                 </FrameLayout>
 
                 <ImageView
@@ -80,7 +79,8 @@
                 style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
                 android:text="Memuat..."
                 android:textColor="@android:color/white" />
 
@@ -110,24 +110,29 @@
             android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_below="@+id/app_bar"
-            android:alpha="1"
-            android:fillViewport="true"
-            android:padding="5dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:translationZ="0dp">
 
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="3dp">
+
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:translationY="0dp">
+                        android:translationY="0dp"
+                        android:padding="5dp">
 
                         <TextView
                             android:id="@+id/quote"
@@ -137,17 +142,26 @@
                             android:layout_alignParentTop="true"
                             android:layout_margin="10dp"
                             android:text="Tentang"
+                            android:textColor="@color/ungu"
                             android:textStyle="bold" />
 
                         <TextView
-                                android:text="makan"
-                            android:textColor="@color/colorPrimary"
                             android:id="@+id/telpuser"
                             style="@style/TextAppearance.AppCompat.Small"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="10dp"/>
+                            android:padding="10dp"
+                            android:textColor="@color/ungu" />
                     </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="3dp"
+                    app:contentPadding="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -163,7 +177,8 @@
                             android:layout_alignParentTop="true"
                             android:layout_margin="10dp"
                             android:text="Booking History"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:textColor="@color/ungu"/>
 
                         <Button
                             android:id="@+id/btnhistory"
@@ -171,7 +186,7 @@
                             android:layout_height="wrap_content"
                             android:background="@android:color/transparent"
                             android:text="Booking History"
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/ungu"
                             android:textStyle="bold" />
 
                         <LinearLayout
@@ -196,46 +211,57 @@
                                     style="@style/TextAppearance.AppCompat.Small"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Pekerjaan" />
+                                    android:text="Pekerjaan"
+                                    android:textColor="@color/ungu"/>
 
                                 <TextView
-                                        android:textSize="15dp"
-                                    android:textStyle="bold"
                                     android:id="@+id/profileProfesi"
                                     style="@style/TextAppearance.AppCompat.Small"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Click to details" />
+                                    android:text="Click to details"
+                                    android:textSize="15dp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/ungu"/>
                             </LinearLayout>
                         </LinearLayout>
 
                     </LinearLayout>
+                </android.support.v7.widget.CardView>
 
-
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="3dp"
+                    app:contentPadding="5dp">
 
                     <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:translationY="0dp">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?selectableItemBackground">
 
                         <ImageView
-                                android:layout_margin="10dp"
-                                android:layout_width="30dp"
-                                android:src="@drawable/logout"
-                                android:layout_height="30dp"/>
-
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_margin="10dp"
+                            android:src="@drawable/signout"/>
                         <TextView
-                                android:textStyle="bold"
-                                android:id="@+id/tvlogout"
-                                android:layout_gravity="center"
-                                android:text="Log out"
-                                android:textSize="17sp"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
-
+                            android:id="@+id/tvlogout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Log out"
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/ungu"/>
                     </LinearLayout>
-
+                </android.support.v7.widget.CardView>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
     </LinearLayout>

@@ -64,14 +64,12 @@ public class SectionListDataAdapter extends RecyclerView.Adapter<SectionListData
     public class SingleItemRowHolder extends RecyclerView.ViewHolder {
 
         private TextView tvTitle;
-        private ImageView ivposter;
         private TextView release_date;
         private CardView cardku;
 
         private SingleItemRowHolder(final View view) {
             super(view);
             this.tvTitle = (TextView)view.findViewById(R.id.tvjudul);
-            this.ivposter = (ImageView)view.findViewById(R.id.ivcover);
             this.release_date = (TextView)view.findViewById(R.id.release_date);
             this.cardku = (CardView) view.findViewById(R.id.cardku);
 

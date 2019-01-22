@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#0F978F</color>
+    <color name="colorPrimaryDark">#0e746e</color>
     <color name="colorAccent">#D81B60</color>
 
 
@@ -30,10 +30,17 @@
     <color name="pink">#fe104d</color>
     <color name="transparent_white">#cccccc</color>
     <color name="black_overlay">#66000000</color>
+    <color name="ungu">#b176b1</color>
 
     <color name="placeholder_bg">#dddddd</color>
     <color name="item_name">#0c0c0c</color>
     <color name="description">#1a1a1a</color>
     <color name="chef">#777</color>
     <color name="timestamp">#777777</color>
+
+    <color name="intro_1">#E6D8CF</color>
+    <color name="intro_2">#DFC6C1</color>
+    <color name="intro_3">#E6D8CF</color>
+    <color name="intro_4">#E0C4C0</color>
+    <color name="intro_5">#E6D8CE</color>
 </resources>

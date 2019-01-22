@@ -48,6 +48,7 @@ public class DetailHistory extends AppCompatActivity {
         imageViewBitmap=(ImageView)findViewById(R.id.imageViewBitmap);
         tvkodebooking=(TextView)findViewById(R.id.tvkodebooking);
         ButterKnife.bind(this);
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             HistoryBooking detailBooking = extras.getParcelable("history");

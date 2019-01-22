@@ -46,7 +46,6 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
     @Override
     public void onBindViewHolder(@NonNull TimeLineViewHolder timeLineViewHolder, int i) {
         HistoryBooking historyBooking = historyBookingList.get(i);
-        timeLineViewHolder.mTimelineView.setMarker(ContextCompat.getDrawable(mContext, R.drawable.ic_marker), ContextCompat.getColor(mContext, R.color.colorPrimary));
         if (!historyBooking.getDate().isEmpty()) {
             timeLineViewHolder.mDate.setVisibility(View.VISIBLE);
             timeLineViewHolder.mDate.setText(DateTimeUtils.parseDateTime(historyBooking.getDate(), "yyyy-MM-dd HH:mm", "hh:mm a, dd-MMM-yyyy"));
@@ -83,8 +82,6 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
         TextView mDate;
         @BindView(R.id.text_timeline_title)
         TextView mMessage;
-        @BindView(R.id.time_marker)
-        TimelineView mTimelineView;
         @BindView(R.id.tvStatus)
         TextView tvStatus;
 
@@ -92,7 +89,6 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
             super(itemView);
 
             ButterKnife.bind(this, itemView);
-            mTimelineView.initLine(viewType);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

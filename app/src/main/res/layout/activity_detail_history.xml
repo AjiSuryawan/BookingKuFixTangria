@@ -10,47 +10,47 @@
     app:contentPadding="10dp"
     app:cardElevation="5dp"
     tools:context=".Activity.Detail.DetailHistory">
-
+    
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name Product: "
-            android:textColor="@android:color/holo_red_light"
-            app:fontFamily="monospace"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name Product: "
+                android:textColor="@android:color/holo_red_light"
+                app:fontFamily="monospace"/>
         <TextView
-            android:id="@+id/tvProductName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="lorem ipsum"/>
+                android:id="@+id/tvProductName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="lorem ipsum"/>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Description :"
-            app:fontFamily="monospace"
-            android:textColor="@android:color/holo_red_light"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description :"
+                app:fontFamily="monospace"
+                android:textColor="@android:color/holo_red_light"/>
         <TextView
-            android:id="@+id/tvProductDesc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="lorem ipsum dolor sit amet. lae wa rei de visca cipto le vanto re siska"
-            android:textAlignment="viewStart"/>
+                android:id="@+id/tvProductDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="lorem ipsum dolor sit amet. lae wa rei de visca cipto le vanto re siska"
+                android:textAlignment="viewStart"/>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Status :"
-            app:fontFamily="monospace"
-            android:textColor="@android:color/holo_red_light"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status :"
+                app:fontFamily="monospace"
+                android:textColor="@android:color/holo_red_light"/>
         <TextView
-            android:id="@+id/tvStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="lorem ipsum dolor sit amet. lae wa rei de visca cipto le vanto re siska"
-            android:textAlignment="viewStart"
-            android:textStyle="bold"/>
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="lorem ipsum dolor sit amet. lae wa rei de visca cipto le vanto re siska"
+                android:textAlignment="viewStart"
+                android:textStyle="bold"/>
         
         
         <TextView
@@ -63,13 +63,13 @@
                 android:text="kode booking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-
-
+    
+    
         <ImageView
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center"
-            android:id="@+id/imageViewBitmap"
-            android:layout_width="250dp"
-            android:layout_height="250dp" />
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:id="@+id/imageViewBitmap"
+                android:layout_width="250dp"
+                android:layout_height="250dp"/>
     </LinearLayout>
 </android.support.v7.widget.CardView>

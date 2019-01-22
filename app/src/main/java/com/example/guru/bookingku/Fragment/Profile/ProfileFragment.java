@@ -75,8 +75,8 @@ public class ProfileFragment extends BaseFragment {
                     telpuser.setText(response.body().getNoHp());
 
                     RequestOptions requestOptions = new RequestOptions();
-                    requestOptions.placeholder(R.drawable.user);
-                    requestOptions.error(R.drawable.user);
+                    requestOptions.placeholder(R.drawable.avatar);
+                    requestOptions.error(R.drawable.avatar);
 
                     Glide.with(view.getContext())
                             .setDefaultRequestOptions(requestOptions)

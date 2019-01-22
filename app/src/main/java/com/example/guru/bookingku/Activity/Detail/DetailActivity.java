@@ -78,8 +78,6 @@ public class DetailActivity extends AppCompatActivity {
             product = extras.getParcelable("product");
             idbarang = product.getId();
             Price price = product.getPrice();
-            Log.e("price", "onCreate: " + price.getHarga() );
-            Log.e("price", "onCreate: " + price.getDiskon() );
             Glide.with(getApplicationContext())
                     .load(product.getImage())
                     .into(imageview_product);
@@ -110,7 +108,7 @@ public class DetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent in =new Intent(getApplicationContext(), BookingActivity.class);
                 in.putExtra("orderid",idbarang);
-                in.putExtra("order_nama", extras.getString("name"));
+                in.putExtra("order_nama", product.getName());
                 startActivity(in);
             }
         });

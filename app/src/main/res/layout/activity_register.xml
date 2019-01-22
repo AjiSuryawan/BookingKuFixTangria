@@ -3,78 +3,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/all_bg"
-    android:fillViewport="true">
+    android:background="@color/grey"
+    >
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/cardView"
-            android:layout_width="match_parent"
-            android:layout_height="125dp"
-            app:cardBackgroundColor="@android:color/transparent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/roboto_medium"
-                android:text="@string/create_new_account"
-                android:textAlignment="center"
-                android:textColor="#149092"
-                android:textSize="23sp"
-                android:textStyle="bold" />
-        </android.support.v7.widget.CardView>
-
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"/>
         <EditText
             android:id="@+id/txtemail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="60dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            android:textColor="#149092"
-            android:textColorHint="#FF1BAFB1"
-            android:textStyle="bold|italic"
-            app:backgroundTint="#149092"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+            android:textColor="@color/ungu"
+            android:textColorHint="#797979"
+            android:textStyle="bold"
+            app:backgroundTint="#797979"/>
 
         <EditText
             android:id="@+id/txtusername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="60dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
             android:hint="Username"
-            android:textColor="#149092"
-            android:textColorHint="#FF1BAFB1"
-            android:textStyle="bold|italic"
-            app:backgroundTint="#149092"
+            android:textColor="@color/ungu"
+            android:textColorHint="#797979"
+            android:textStyle="bold"
+            app:backgroundTint="#797979"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txtemail" />
 
         <EditText
-                android:inputType="number"
             android:id="@+id/txtTelp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="60dp"
-            android:hint="Phone Number"
-            android:textColor="#149092"
-            android:textColorHint="#FF1BAFB1"
-            android:textStyle="bold|italic"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
             android:drawableRight="@drawable/ic_add_circle_black_24dp"
-            app:backgroundTint="#149092"
+            android:hint="Phone Number"
+            android:inputType="phone"
+            android:textColor="@color/ungu"
+            android:textColorHint="#797979"
+            android:textStyle="bold"
+            app:backgroundTint="#797979"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txtusername" />
@@ -83,15 +66,15 @@
             android:id="@+id/txtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="60dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
             android:hint="Password"
             android:inputType="textPassword"
-            android:textColor="#149092"
-            android:textColorHint="#FF1BAFB1"
-            android:textStyle="bold|italic"
-            app:backgroundTint="#149092"
+            android:textColor="@color/ungu"
+            android:textColorHint="#797979"
+            android:textStyle="bold"
+            app:backgroundTint="#797979"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txtTelp" />
@@ -100,34 +83,27 @@
             android:id="@+id/txtCPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="60dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
             android:hint="Confirm Password"
             android:inputType="textPassword"
-            android:textColor="#149092"
-            android:textColorHint="#FF1BAFB1"
-            android:textStyle="bold|italic"
-            app:backgroundTint="#149092"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtPassword"
-          />
+            android:textColor="@color/ungu"
+            android:textColorHint="#797979"
+            android:textStyle="bold"
+            app:backgroundTint="#797979"/>
 
         <Button
             android:id="@+id/btnDaftar"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="40dp"
-            android:background="#149092"
-            android:text="REGISTER"
-            android:textColor="@android:color/white"
-            android:textStyle="italic"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtCPassword" />
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/btn_grey_state"
+            android:text="SIGN UP"
+            android:textColor="@android:color/black" />
 
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 </ScrollView>
