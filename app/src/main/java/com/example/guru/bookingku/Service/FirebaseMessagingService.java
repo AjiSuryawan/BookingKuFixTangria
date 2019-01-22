@@ -51,6 +51,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 JSONObject jsonObject = new JSONObject(remoteMessage.getData().toString());
                 sendPushNotification(jsonObject);
             } catch (Exception e) {
+                Log.e(TAG, "onMessageReceived: " + e.getMessage() );
             }
 
         }
@@ -58,13 +59,14 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
     public void sendPushNotification(JSONObject json) {
         try {
-            JSONObject data = json.getJSONObject("data");
-
-            String title = data.getString("title");
-            String message = data.getString("message");
+            String title = json.getString("title");
+            String message = json.getString("message");
 
             NotificationConfig notificationConfig = new NotificationConfig(getApplicationContext());
             notificationConfig.showNotification(title, message, NOTIFICATION_ID, NOTIFICATION_CHANNEL_ID, NOTIFICATION_CHANNEL_NAME);
-        } catch (Exception e) { }
+        } catch (Exception e) {
+            Log.e(TAG, "sendPushNotification: " + e.getMessage() );
+            e.printStackTrace();
+        }
     }
 }
