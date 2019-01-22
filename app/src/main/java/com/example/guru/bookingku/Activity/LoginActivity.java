@@ -237,7 +237,7 @@ public class LoginActivity extends AppCompatActivity {
             if (account.getPhotoUrl() != null) {
                 avatar = account.getPhotoUrl().toString();
             } else {
-                avatar = null;
+                avatar = "avatar";
             }
             Log.d("avatarku", "handleSignInResult: "+avatar);
 
