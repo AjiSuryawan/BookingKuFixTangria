@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import com.example.guru.bookingku.Activity.Notification.NotificationActivity;
 import com.example.guru.bookingku.Fragment.Base.BaseFragment;
 import com.example.guru.bookingku.R;
+import com.google.firebase.messaging.FirebaseMessagingService;
 
 import butterknife.BindColor;
 import butterknife.BindView;
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements MainView, BottomN
         presenter.onAttach(this);
         presenter.showHomeFragmentForFirstTime();
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        Log.e(TAG, "onCreate: " + getSharedPreferences("firebase_token", MODE_PRIVATE).getString("firebase_token", ""));
     }
 
     //=========== lifecycle ===========//
