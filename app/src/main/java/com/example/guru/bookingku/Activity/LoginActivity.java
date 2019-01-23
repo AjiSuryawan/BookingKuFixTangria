@@ -78,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
         googleSignButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("lala3", "onActivityResult: ");
                 Intent intent = mGoogleSignInClient.getSignInIntent();
                 startActivityForResult(intent, 997);
             }
@@ -218,6 +219,7 @@ public class LoginActivity extends AppCompatActivity {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 997) {
+            Log.d("lala1", "onActivityResult: ");
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
         }
@@ -225,6 +227,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
+            Log.d("lala2", "onActivityResult: ");
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             String realName = account.getDisplayName();
             String username = account.getGivenName() + account.getId();
@@ -234,7 +237,7 @@ public class LoginActivity extends AppCompatActivity {
             if (account.getPhotoUrl() != null) {
                 avatar = account.getPhotoUrl().toString();
             } else {
-                avatar = null;
+                avatar = "avatar";
             }
             Log.d("avatarku", "handleSignInResult: "+avatar);
 
@@ -246,6 +249,7 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<BookingResponse> call, Response<BookingResponse> response) {
                     try {
+                        Log.d("lala4", "onActivityResult: ");
                         boolean success = response.body().getSuccess();
                         boolean isPhoneNull = response.body().getPhoneStatus(); // null = true
                         int userId = response.body().getUserId();
@@ -269,17 +273,19 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         }
                     } catch (Exception e){
-
+                        Log.d("lala5", "onActivityResult: "+e.toString());
                     }
                 }
 
                 @Override
                 public void onFailure(Call<BookingResponse> call, Throwable t) {
+                    Log.d("lala6", "onActivityResult: "+t.toString());
                     t.printStackTrace();
                     Toast.makeText(LoginActivity.this, "Cannot connect to server", Toast.LENGTH_SHORT).show();
                 }
             });
         } catch (ApiException ignored) {
+            Log.d("lala7", "onActivityResult: ");
             ignored.printStackTrace();
         }
     }
