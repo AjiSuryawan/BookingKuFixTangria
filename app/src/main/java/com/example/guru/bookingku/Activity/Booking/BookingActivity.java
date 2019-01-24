@@ -94,6 +94,7 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
 //        tvSelectedDateAndTime = findViewById(R.id.selectedDateAndTime);
         txtavailable = findViewById(R.id.txtavailable);
         bookNowBtn = findViewById(R.id.bookNowBtn);
+        bookNowBtn.setEnabled(false);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycle_view_list_time);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
@@ -168,7 +169,7 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
 //        tvSelectedDateAndTime.setText("");
         availableTimeList.clear();
         adapter.notifyDataSetChanged();
-        Toast.makeText(this, "Fetching Available Time", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Fetching Available Time", Toast.LENGTH_SHORT).show();
 
         this.year = year;
         this.month = month;
@@ -199,7 +200,7 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
             e.printStackTrace();
         }
 
-        Toast.makeText(this, "Date Selected is : " + selectedDate, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Date Selected is : " + selectedDate, Toast.LENGTH_SHORT).show();
         String productName = getIntent().getExtras().getString("order_nama");
         Log.e("id", "processDatePickerResult: " + productName);
         if (productName.equalsIgnoreCase("Tradisional Treatment")) {

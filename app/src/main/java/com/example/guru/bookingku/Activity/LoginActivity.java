@@ -148,7 +148,7 @@ public class LoginActivity extends AppCompatActivity {
                             String fbId = jsonObject.getString("id");
                             String realName = jsonObject.optString("name", "");
                             //String username = jsonObject.optString("first_name", "") + jsonObject.optString("last_name", "") + jsonObject.getString("id");
-                            String email = jsonObject.optString("email", "");
+                            String email = jsonObject.optString("email", "Email doesn't exist");
                             String avatar = "https://graph.facebook.com/" + fbId + "/picture?type=large";
 
                             Log.d("gambar", "onCompleted: "+avatar);
@@ -171,6 +171,8 @@ public class LoginActivity extends AppCompatActivity {
                                                 Log.e("isPhoneNull", "onResponse: " + isPhoneNull );
                                                 if(!isPhoneNull) {
                                                     Intent in = new Intent(getApplicationContext(), MainActivity.class);
+                                                    editor.putBoolean("phone", true);
+                                                    editor.apply();
                                                     startActivity(in);
                                                     finish();
                                                 } else {

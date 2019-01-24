@@ -23,7 +23,7 @@
         android:layout_marginStart="0dp"
         app:cardBackgroundColor="#ffffff"
         app:contentPadding="10dp"
-        app:cardElevation="8dp"
+        app:cardElevation="4dp"
         android:layout_gravity="center_vertical">
 
         <LinearLayout
