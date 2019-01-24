@@ -44,6 +44,7 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
     EditText txtdateku;
     Bundle bundlee;
     int orderid;
+    String order_nama;
     private String selectedAvailableTime;
     private String selectedDate;
     private RecyclerView recyclerView;
@@ -86,11 +87,14 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
         bundlee = intent.getExtras();
         if (bundlee != null) {
             orderid = bundlee.getInt("orderid");
+            order_nama = bundlee.getString("order_nama");
+            Log.d("ordernamenya", "onClick: "+order_nama);
         }
 
 //        tvSelectedDateAndTime = findViewById(R.id.selectedDateAndTime);
         txtavailable = findViewById(R.id.txtavailable);
         bookNowBtn = findViewById(R.id.bookNowBtn);
+
         recyclerView = (RecyclerView) findViewById(R.id.recycle_view_list_time);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -110,6 +114,7 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
         bookNowBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this);
                 builder.setTitle("Confirm booking ? ");
                 builder.setMessage("Are you sure want to booking this service?");
@@ -120,6 +125,7 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
                         final String date_string = selectedDate + " " + selectedAvailableTime;
                         Log.e("date", "onClick: " + date_string);
                         Call<BookingResponse> call = service.booking(userid, orderid, date_string);
+
                         call.enqueue(new Callback<BookingResponse>() {
                             @Override
                             public void onResponse(Call<BookingResponse> call, Response<BookingResponse> response) {
@@ -150,6 +156,7 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
                 });
                 AlertDialog dialog = builder.create();
                 dialog.show();
+
             }
         });
     }
@@ -203,12 +210,14 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
             txtavailable.setVisibility(View.VISIBLE);
         } else {
             BookingService service = BookingClient.getRetrofit().create(BookingService.class);
-            Call<BookingResponse> call = service.getAvailableTimeList(selectedDate);
+            Log.d("ordernamenya", "processDatePickerResult: "+selectedDate);
+            Call<BookingResponse> call = service.getAvailableTimeList(selectedDate,order_nama);
             call.enqueue(new Callback<BookingResponse>() {
                 @Override
                 public void onResponse(Call<BookingResponse> call, Response<BookingResponse> response) {
                     try {
                         availableTimeList.addAll(response.body().getAvailableTime());
+                        Log.d("ordername", "onResponse: "+response);
                         adapter.notifyDataSetChanged();
                         txtavailable.setVisibility(View.VISIBLE);
                     } catch (Exception e) {

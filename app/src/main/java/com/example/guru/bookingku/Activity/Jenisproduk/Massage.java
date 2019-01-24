@@ -117,6 +117,8 @@ public class Massage extends AppCompatActivity {
                     mShimmerViewContainer.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.VISIBLE);
 
+                    
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

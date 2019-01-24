@@ -82,6 +82,7 @@ public class DetailActivity extends AppCompatActivity {
                     .load(product.getImage())
                     .into(imageview_product);
             name_product.setText(product.getName());
+            Log.d("ordernamenya", "onClick: "+product.getName());
             description_product.setText(product.getDescription());
             price_product.setText("Rp " + price.getHarga());
             if(product.getPrice().getDiskon() != null) {
@@ -109,6 +110,7 @@ public class DetailActivity extends AppCompatActivity {
                 Intent in =new Intent(getApplicationContext(), BookingActivity.class);
                 in.putExtra("orderid",idbarang);
                 in.putExtra("order_nama", product.getName());
+                Log.d("ordernamenya", "onClick: "+product.getName());
                 startActivity(in);
             }
         });
