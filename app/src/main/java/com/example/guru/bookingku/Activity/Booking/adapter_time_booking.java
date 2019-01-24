@@ -45,6 +45,8 @@ public class adapter_time_booking extends RecyclerView.Adapter<adapter_time_book
         if (!availableTime.getAvailable()){
             holder.tvTime.setText(availableTime.getTime());
             holder.tvTime.setEnabled(false);
+            holder.tvTime.setTextColor(context.getResources().getColor(R.color.grey));
+            holder.tvTime.setBackgroundResource(R.drawable.available_time_default_state);
         }
         else {
             holder.tvTime.setText(availableTime.getTime());

@@ -6,6 +6,7 @@ import com.example.guru.bookingku.Network.BookingClient;
 import com.example.guru.bookingku.Network.BookingService;
 import com.example.guru.bookingku.Util.NotificationConfig;
 import com.google.firebase.messaging.RemoteMessage;
+import com.google.gson.Gson;
 import org.json.JSONObject;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -48,7 +49,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         if (remoteMessage.getData().size() > 0) {
             Log.e(TAG, "onMessageReceived: message received" );
             try {
-                JSONObject jsonObject = new JSONObject(remoteMessage.getData().toString());
+                JSONObject jsonObject = new JSONObject(remoteMessage.getData());
                 sendPushNotification(jsonObject);
             } catch (Exception e) {
                 Log.e(TAG, "onMessageReceived: " + e.getMessage() );
@@ -62,11 +63,13 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             Log.e(TAG, "sendPushNotification: " + json );
             String title = json.getString("title");
             String message = json.getString("message");
-            String type = json.getString("type");
+//            String type = json.getString("type");
 
-            if(type.equalsIgnoreCase("private")){
-
-            }
+//            if(type.equalsIgnoreCase("private")){
+//
+//            }
+//            Gson gson = new Gson();
+//            FirebaseModel model = gson.fromJson(json, FirebaseModel.class);
 
 
             NotificationConfig notificationConfig = new NotificationConfig(getApplicationContext());

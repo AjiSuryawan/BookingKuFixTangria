@@ -99,8 +99,8 @@ public class DetailActivity extends AppCompatActivity {
             if(!getAvailable){
                bookNowBtn.setEnabled(false);
                 bookNowBtn.setText("NOT AVAILABLE");
-                bookNowBtn.setTextColor(getResources().getColor(android.R.color.black));
-                bookNowBtn.setBackgroundColor(getResources().getColor(R.color.not_available_color));
+                bookNowBtn.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+//                bookNowBtn.setBackgroundColor(getResources().getColor(R.color.not_available_color));
             }
         }
         bookNowBtn.setOnClickListener(new View.OnClickListener() {
