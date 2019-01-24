@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.w3c.dom.Text;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,6 +40,8 @@ public class Massage extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView tvTitleToolbar;
     private String title;
+    RelativeLayout layoutkosong;
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -59,7 +63,7 @@ public class Massage extends AppCompatActivity {
         if (extras != null) {
             data = extras.getString("category");
         }
-
+layoutkosong=(RelativeLayout)findViewById(R.id.layoutkosong);
         toolbar = findViewById(R.id.toolbar);
         tvTitleToolbar = findViewById(R.id.tv_title);
 
@@ -69,7 +73,7 @@ public class Massage extends AppCompatActivity {
 
 
         mShimmerViewContainer = (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
-        mShimmerViewContainer.startShimmerAnimation();
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -88,8 +92,9 @@ public class Massage extends AppCompatActivity {
     }
 
     private void load_data() {
-        swipeRefreshLayout.setVisibility(View.VISIBLE);
-        mShimmerViewContainer.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.GONE);
+        mShimmerViewContainer.setVisibility(View.VISIBLE);
+        mShimmerViewContainer.startShimmerAnimation();
         BookingService bookingService = BookingClient.getRetrofit().create(BookingService.class);
         Log.e("Massage", "load_data: " + data);
         if (data.equalsIgnoreCase("package_treatment")) {
@@ -101,35 +106,67 @@ public class Massage extends AppCompatActivity {
             title = "Ala Carte Treatment";
             tvTitleToolbar.setText(title);
         }
-
         call.enqueue(new Callback<List<data_item_spa>>() {
             @Override
             public void onResponse(Call<List<data_item_spa>> call, Response<List<data_item_spa>> response) {
-                swipeRefreshLayout.setRefreshing(false);
+
                 try {
                     arrayList.clear();
                     arrayList.addAll(response.body());
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    adapter = new adapter_list_item_spa(getApplicationContext(), arrayList);
-                    recyclerView.setAdapter(adapter);
-                    Log.e("hasilnya", "onResponse: " + arrayList);
-                    mShimmerViewContainer.stopShimmerAnimation();
-                    mShimmerViewContainer.setVisibility(View.GONE);
-                    recyclerView.setVisibility(View.VISIBLE);
+                    if (arrayList.size()==0 || arrayList.isEmpty() || arrayList ==null){
+                        Log.d("masuk1", "onResponse: ");
+
+                        layoutkosong.setVisibility(View.VISIBLE);
+                        layoutkosong.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                layoutkosong.setVisibility(View.GONE);
+                                Toast.makeText(getApplicationContext(),"makan",Toast.LENGTH_LONG).show();
+                                load_data();
+                            }
+                        });
+                        mShimmerViewContainer.setVisibility(View.GONE);
+                    }else{
+                        recyclerView.setVisibility(View.VISIBLE);
+                        swipeRefreshLayout.setRefreshing(false);
+                        swipeRefreshLayout.setVisibility(View.VISIBLE);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        adapter = new adapter_list_item_spa(getApplicationContext(), arrayList);
+                        recyclerView.setAdapter(adapter);
+                        Log.e("hasilnya", "onResponse: " + arrayList);
+                        mShimmerViewContainer.stopShimmerAnimation();
+                        mShimmerViewContainer.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
+                    }
+
 
                     
 
                 } catch (Exception e) {
+                    Log.d("masuk1", "onResponse: ");
+                    layoutkosong.setVisibility(View.VISIBLE);
+                    layoutkosong.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(getApplicationContext(),"makan",Toast.LENGTH_LONG).show();
+                            layoutkosong.setVisibility(View.GONE);
+                            load_data();
+                        }
+                    });
+                    mShimmerViewContainer.setVisibility(View.GONE);
+                    Log.d("masuk2", "onResponse: ");
                     e.printStackTrace();
                 }
             }
 
             @Override
             public void onFailure(Call<List<data_item_spa>> call, Throwable t) {
+                Log.d("masuk3", "onResponse: ");
                 t.printStackTrace();
                 Log.e("TAG", "onFailure: " + t.getMessage());
                 Toast.makeText(Massage.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                swipeRefreshLayout.setRefreshing(false);
+
+
             }
         });
     }

@@ -1,46 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:shimmer="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/grey"
-    android:orientation="vertical">
-
+              xmlns:shimmer="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/grey"
+              android:orientation="vertical">
+    
     <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
-
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"/>
+    
     <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmer_view_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="vertical"
-        shimmer:duration="800">
-
+            android:id="@+id/shimmer_view_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            shimmer:duration="800">
+        
         <!-- Adding 3 rows of placeholders -->
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <include layout="@layout/list_item_spa_load" />
-
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            
+            <include layout="@layout/list_item_spa_load"/>
+        
         </LinearLayout>
-
+    
     </com.facebook.shimmer.ShimmerFrameLayout>
-
+    
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefreshLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
-
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+        
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycle_view_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone" />
+                android:id="@+id/recycle_view_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"/>
     </android.support.v4.widget.SwipeRefreshLayout>
+    
+    <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/layoutkosong"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+        
+        <TextView
+                android:id="@+id/txtdatakosong"
+                android:textSize="20sp"
+                android:layout_centerInParent="true"
+                android:text="no data available. Tab to refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        
+        
+    
+    </RelativeLayout>
 
 </LinearLayout>

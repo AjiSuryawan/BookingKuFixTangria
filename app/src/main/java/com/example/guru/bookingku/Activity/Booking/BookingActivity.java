@@ -1,5 +1,6 @@
 package com.example.guru.bookingku.Activity.Booking;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -57,6 +58,8 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
     private int year, month, date, hour, minute;
     private Toolbar toolbar;
     private TextView tvTitleToolbar;
+    private ProgressDialog dialogku;
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -73,7 +76,7 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
-
+        dialogku = new ProgressDialog(BookingActivity.this);
         toolbar = findViewById(R.id.toolbar);
         tvTitleToolbar = findViewById(R.id.tv_title);
         setSupportActionBar(toolbar);
@@ -122,6 +125,8 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
                 builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
+                        dialogku.setMessage("please wait");
+                        dialogku.show();
                         BookingService service = BookingClient.getRetrofit().create(BookingService.class);
                         final String date_string = selectedDate + " " + selectedAvailableTime;
                         Log.e("date", "onClick: " + date_string);
@@ -139,6 +144,9 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
                                     Toast.makeText(BookingActivity.this, "success", Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(BookingActivity.this, "failed", Toast.LENGTH_SHORT).show();
+                                }
+                                if (dialogku.isShowing()) {
+                                    dialogku.dismiss();
                                 }
                             }
 
@@ -163,6 +171,7 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
     }
 
     public void processDatePickerResult(int year, int month, int day) {
+
         adapter.row_index = -1;
         bookNowBtn.setEnabled(false);
 //        tvSelectedDateAndTime.setEnabled(false);
@@ -203,13 +212,8 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
 //        Toast.makeText(this, "Date Selected is : " + selectedDate, Toast.LENGTH_SHORT).show();
         String productName = getIntent().getExtras().getString("order_nama");
         Log.e("id", "processDatePickerResult: " + productName);
-        if (productName.equalsIgnoreCase("Tradisional Treatment")) {
-            showTradisionalTreatmentTime();
-            txtavailable.setVisibility(View.VISIBLE);
-        } else if (productName.equalsIgnoreCase("Javanesse Treatment")) {
-            showJavanesseTreatmentTime();
-            txtavailable.setVisibility(View.VISIBLE);
-        } else {
+        dialogku.setMessage("please wait");
+        dialogku.show();
             BookingService service = BookingClient.getRetrofit().create(BookingService.class);
             Log.d("ordernamenya", "processDatePickerResult: "+selectedDate);
             Call<BookingResponse> call = service.getAvailableTimeList(selectedDate,order_nama);
@@ -221,17 +225,25 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
                         Log.d("ordername", "onResponse: "+response);
                         adapter.notifyDataSetChanged();
                         txtavailable.setVisibility(View.VISIBLE);
+                        if (dialogku.isShowing()) {
+                            dialogku.dismiss();
+                        }
                     } catch (Exception e) {
-
+                        if (dialogku.isShowing()) {
+                            dialogku.dismiss();
+                        }
                     }
                 }
 
                 @Override
                 public void onFailure(Call<BookingResponse> call, Throwable t) {
+                    if (dialogku.isShowing()) {
+                        dialogku.dismiss();
+                    }
                     Toast.makeText(BookingActivity.this, "Cannot connect to server", Toast.LENGTH_SHORT).show();
                 }
             });
-        }
+
     }
 
     @Override
@@ -244,33 +256,5 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
         bookNowBtn.setEnabled(true);
         Toast.makeText(this, selectedAvailableTime, Toast.LENGTH_SHORT).show();
 //        tvSelectedDateAndTime.setText(selectedDate + " " + selectedAvailableTime);
-    }
-
-    private void showJavanesseTreatmentTime() {
-        AvailableTime availableTime1 = new AvailableTime();
-        availableTime1.setTime("10:00:00");
-        availableTime1.setAvailable(true);
-        AvailableTime availableTime2 = new AvailableTime();
-        availableTime2.setTime("14:00:00");
-        availableTime2.setAvailable(true);
-        AvailableTime availableTime3 = new AvailableTime();
-        availableTime3.setTime("18:00:00");
-        availableTime3.setAvailable(true);
-        availableTimeList.add(availableTime1);
-        availableTimeList.add(availableTime2);
-        availableTimeList.add(availableTime3);
-        adapter.notifyDataSetChanged();
-    }
-
-    private void showTradisionalTreatmentTime() {
-        AvailableTime availableTime1 = new AvailableTime();
-        availableTime1.setTime("11:00:00");
-        availableTime1.setAvailable(true);
-        AvailableTime availableTime2 = new AvailableTime();
-        availableTime2.setTime("14:00:00");
-        availableTime2.setAvailable(true);
-        availableTimeList.add(availableTime1);
-        availableTimeList.add(availableTime2);
-        adapter.notifyDataSetChanged();
     }
 }
