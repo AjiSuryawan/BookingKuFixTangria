@@ -1,5 +1,6 @@
 package com.example.guru.bookingku.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -53,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText txtpassword;
     CallbackManager callbackManager;
     private AccessToken accessToken;
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
             }
         });
-
+        dialog = new ProgressDialog(LoginActivity.this);
         pref = getSharedPreferences("login", MODE_PRIVATE);
         callbackManager = CallbackManager.Factory.create();
         btnFacebook = findViewById(R.id.facebookSigninBtn);
@@ -94,6 +96,8 @@ public class LoginActivity extends AppCompatActivity {
                 if (username.isEmpty() || password.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "please fill my heart first to send a request :(", Toast.LENGTH_SHORT).show();
                 } else {
+                    dialog.setMessage("Login process");
+                    dialog.show();
                     String token = getSharedPreferences("firebase_token", MODE_PRIVATE).getString("firebase_token", "");
                     BookingService bookingService = BookingClient.getRetrofit().create(BookingService.class);
                     Call<BookingResponse> call = bookingService.login(username, password, token);
@@ -113,6 +117,9 @@ public class LoginActivity extends AppCompatActivity {
                                         finish();
                                     } else {
                                         Toast.makeText(LoginActivity.this, "Something wrong is happen", Toast.LENGTH_SHORT).show();
+                                    }
+                                    if (dialog.isShowing()) {
+                                        dialog.dismiss();
                                     }
                                 }
                                 Log.e("Tag", "onResponse: " + response.code());
@@ -148,7 +155,7 @@ public class LoginActivity extends AppCompatActivity {
                             String fbId = jsonObject.getString("id");
                             String realName = jsonObject.optString("name", "");
                             //String username = jsonObject.optString("first_name", "") + jsonObject.optString("last_name", "") + jsonObject.getString("id");
-                            String email = jsonObject.optString("email", "");
+                            String email = jsonObject.optString("email", "Email doesn't exist");
                             String avatar = "https://graph.facebook.com/" + fbId + "/picture?type=large";
 
                             Log.d("gambar", "onCompleted: "+avatar);
@@ -171,6 +178,8 @@ public class LoginActivity extends AppCompatActivity {
                                                 Log.e("isPhoneNull", "onResponse: " + isPhoneNull );
                                                 if(!isPhoneNull) {
                                                     Intent in = new Intent(getApplicationContext(), MainActivity.class);
+                                                    editor.putBoolean("phone", true);
+                                                    editor.apply();
                                                     startActivity(in);
                                                     finish();
                                                 } else {

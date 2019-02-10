@@ -135,11 +135,12 @@ public class InputPhone extends Activity {
         });
 
         preferences = getSharedPreferences("login", MODE_PRIVATE);
+        final SharedPreferences.Editor editor = preferences.edit();
         final int userId= preferences.getInt("userid", 0);
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phone = inputPhone.getText().toString().trim();
+                final String phone = inputPhone.getText().toString().trim();
                 if(phone.equals(null)){
                     inputPhone.setError("Tolong jangan di kosongin ya");
                 } else {
@@ -152,6 +153,8 @@ public class InputPhone extends Activity {
                                 boolean success = response.body().getSuccess();
                                 if(success){
                                     Intent intent = new Intent(InputPhone.this, MainActivity.class);
+                                    editor.putBoolean("phone", true);
+                                    editor.apply();
                                     finish();
                                     startActivity(intent);
                                 } else {

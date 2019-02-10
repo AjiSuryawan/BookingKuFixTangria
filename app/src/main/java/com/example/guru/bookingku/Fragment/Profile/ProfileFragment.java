@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +40,7 @@ public class ProfileFragment extends BaseFragment {
     TextView tvlogout;
     TextView telpuser;
     Button btnhistory;
+    CardView cardLogout;
 
     @Override
     protected int getLayout() {
@@ -51,6 +53,7 @@ public class ProfileFragment extends BaseFragment {
         sharedPreferences = view.getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
         profileimg = view.findViewById(R.id.profileimg);
         profileName = view.findViewById(R.id.profileName);
+        cardLogout = view.findViewById(R.id.card_logout);
         btnhistory = view.findViewById(R.id.btnhistory);
         btnhistory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,12 +96,10 @@ public class ProfileFragment extends BaseFragment {
             }
         });
         //
-
-        //profileName.setText(sharedPreferences.getString("name",""));
-        //profileUsername.setText(sharedPreferences.getString("email",""));
-        tvlogout.setOnClickListener(new View.OnClickListener() {
+        cardLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 new AlertDialog.Builder(getContext())
                         .setMessage("Anda yakin ingin keluar ?")
                         .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
@@ -123,6 +124,8 @@ public class ProfileFragment extends BaseFragment {
                         .show();
             }
         });
+        //profileName.setText(sharedPreferences.getString("name",""));
+        //profileUsername.setText(sharedPreferences.getString("email",""));
 
 //        Glide.with(view.getContext())
 //                .load(sharedPreferences.getString("avatar",""))

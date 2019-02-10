@@ -75,13 +75,15 @@ public interface BookingService {
             @Field("user_id") int userId,
             @Field("order") int order,
             @Field("date") String date
+
     );
 
 
     @FormUrlEncoded
     @POST("api/available-time")
     Call<BookingResponse> getAvailableTimeList(
-            @Field("date") String date
+            @Field("date") String date,
+            @Field("ordername") String ordername
     );
 
 

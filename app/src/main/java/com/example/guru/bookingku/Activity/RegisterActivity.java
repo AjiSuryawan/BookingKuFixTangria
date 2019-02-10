@@ -3,6 +3,7 @@ package com.example.guru.bookingku.Activity;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -41,6 +42,8 @@ public class RegisterActivity extends AppCompatActivity {
 //    GoogleSignInOptions signInOptions;
 //    GoogleSignInClient mGoogleSignInClient;
 //    CallbackManager callbackManager;
+
+    ProgressDialog dialogku;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     EditText inputUsername, inputEmail, inputPassword, inputConfirmPassword, noTelp;
@@ -116,6 +119,7 @@ public class RegisterActivity extends AppCompatActivity {
             requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, PERMISSIONS_REQUEST_READ_CONTACTS);
             //After this point you wait for callback in onRequestPermissionsResult(int, String[], int[]) overriden method
         }
+        dialogku = new ProgressDialog(RegisterActivity.this);
         inputUsername = findViewById(R.id.txtusername);
         inputEmail = findViewById(R.id.txtemail);
         inputPassword = findViewById(R.id.txtPassword);
@@ -177,6 +181,8 @@ public class RegisterActivity extends AppCompatActivity {
                             if (!confirmPassword.equals(password)) {
                                 inputConfirmPassword.setError("password & confirm passsword don't match");
                             } else {
+                                dialogku.setMessage("registration process");
+                                dialogku.show();
                                 String token = getSharedPreferences("firebase_token", MODE_PRIVATE).getString("firebase_token", "");
                                 BookingService bookingService = BookingClient.getRetrofit().create(BookingService.class);
                                 Call<RegisterRespon> call = bookingService.signup(email, username, password, telp, token);
@@ -185,12 +191,16 @@ public class RegisterActivity extends AppCompatActivity {
                                     public void onResponse(Call<RegisterRespon> call, Response<RegisterRespon> response) {
                                         try {
                                             if (response.isSuccessful()) {
+
                                                 editor = pref.edit();
                                                 editor.putInt("userid", response.body().getUserId());
                                                 editor.apply();
                                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 startActivity(intent);
+                                            }
+                                            if (dialogku.isShowing()) {
+                                                dialogku.dismiss();
                                             }
                                         } catch (Exception e) {
                                             e.getMessage();
