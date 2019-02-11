@@ -63,15 +63,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             Log.e(TAG, "sendPushNotification: " + json );
             String title = json.getString("title");
             String message = json.getString("message");
-//            String type = json.getString("type");
-
-//            if(type.equalsIgnoreCase("private")){
-//
-//            }
-//            Gson gson = new Gson();
-//            FirebaseModel model = gson.fromJson(json, FirebaseModel.class);
-
-
             NotificationConfig notificationConfig = new NotificationConfig(getApplicationContext());
             notificationConfig.showNotification(title, message, NOTIFICATION_ID, NOTIFICATION_CHANNEL_ID, NOTIFICATION_CHANNEL_NAME);
         } catch (Exception e) {
