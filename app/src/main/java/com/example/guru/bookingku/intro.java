@@ -69,7 +69,7 @@ public class intro extends AppCompatActivity {
     }
 
     private void indicator_dot(int position) {
-        textViews = new TextView[5];
+        textViews = new TextView[3];
         linearLayout.removeAllViews();
         for (int i = 0; i < textViews.length; i++) {
             textViews[i] = new TextView(this);
