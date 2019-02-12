@@ -125,12 +125,17 @@ public class LoginActivity extends AppCompatActivity {
                                 Log.e("Tag", "onResponse: " + response.code());
                             }
                             catch (Exception e){
-
+                                if (dialog.isShowing()) {
+                                    dialog.dismiss();
+                                }
                             }
                         }
 
                         @Override
                         public void onFailure(Call<BookingResponse> call, Throwable t) {
+                            if (dialog.isShowing()) {
+                                dialog.dismiss();
+                            }
                             t.printStackTrace();
                             Toast.makeText(LoginActivity.this, "Cannot connect to server", Toast.LENGTH_SHORT).show();
                         }
