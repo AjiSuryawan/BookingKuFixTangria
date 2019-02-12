@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:background="@color/intro_1">
 
 
     <ImageView
@@ -13,22 +14,15 @@
         android:layout_marginTop="80dp"
         android:src="@drawable/login_title" />
 
-    <ImageView
-        android:id="@+id/image_slide"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_centerInParent="true"
-        android:src="@mipmap/ic_launcher" />
-
     <TextView
         android:id="@+id/text_view_slide"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/image_slide"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:fontFamily="@font/roboto_medium"
         android:gravity="center"
-        android:text="Welcome"
+        android:text="A Touch of Home"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="22sp" />
 
@@ -38,7 +32,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/text_view_slide"
         android:gravity="center"
-        android:text="WELCOME TO SPA"
+        android:layout_margin="20dp"
+        android:text="Beristirahatlah sejenak dari segala rutinitas Anda, Tangria Beauty and Spa akan membuat Anda merasa nyaman, seperti di rumah"
         android:textSize="15sp"
         android:textColor="@color/black"
         android:fontFamily="@font/lucon"/>
