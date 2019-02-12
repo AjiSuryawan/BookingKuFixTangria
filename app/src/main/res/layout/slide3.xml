@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/relative_layout_slide"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:gravity="center_horizontal"
+              android:background="@color/intro_3">
+    
+    
+    <ImageView
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/login_title"/>
+    
+    <ImageView
+        android:id="@+id/image_slide"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        
+        android:src="@drawable/aroma"/>
+    
+    <TextView
+        android:id="@+id/text_view_slide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/image_slide"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:text="Enjoy Our Services"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="22sp"/>
+
+</LinearLayout>

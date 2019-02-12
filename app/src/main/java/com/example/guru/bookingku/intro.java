@@ -31,8 +31,6 @@ public class intro extends AppCompatActivity {
         button_back.setText("");
         button_next = (Button) findViewById(R.id.button_next);
         button_next.setText("Next");
-        //button_next.setBackgroundColor(getResources().getColor(R.color.blue));
-        //button_next.setTextColor(getResources().getColor(R.color.black));
         slide_adapter = new slide_adapter(this);
         viewPager.setAdapter(slide_adapter);
         indicator_dot(0);
@@ -96,48 +94,30 @@ public class intro extends AppCompatActivity {
             indicator_dot(i);
             state_page = i;
             if (i == 0) {
-                //linearLayout.setBackgroundColor(ContextCompat.getColor(intro.this,R.color.blue));
                 button_back.setEnabled(false);
                 button_back.setVisibility(View.INVISIBLE);
                 button_back.setText("");
                 button_next.setEnabled(true);
                 button_next.setText("Next");
-                //button_next.setBackgroundColor(getResources().getColor(R.color.blue));
-                //button_next.setTextColor(getResources().getColor(R.color.white));
             } else if (i == textViews.length - 1) {
-                //linearLayout.setBackgroundColor(ContextCompat.getColor(intro.this,R.color.blue));
                 button_back.setEnabled(true);
                 button_back.setVisibility(View.VISIBLE);
-                //button_back.setBackgroundColor(getResources().getColor(R.color.blue));
-                //button_back.setTextColor(getResources().getColor(R.color.white));
                 button_back.setText("Back");
                 button_next.setEnabled(true);
                 button_next.setText("Finish");
-                //button_next.setBackgroundColor(getResources().getColor(R.color.blue));
-                //button_next.setTextColor(getResources().getColor(R.color.white));
             } else if (i%2 == 0){
-               // linearLayout.setBackgroundColor(ContextCompat.getColor(intro.this,R.color.blue));
                 button_back.setEnabled(true);
                 button_back.setVisibility(View.VISIBLE);
-//                button_back.setBackgroundColor(getResources().getColor(R.color.blue));
-//                button_back.setTextColor(getResources().getColor(R.color.white));
                 button_back.setText("Back");
                 button_next.setEnabled(true);
                 button_next.setText("Next");
-//                button_next.setBackgroundColor(getResources().getColor(R.color.blue));
-//                button_next.setTextColor(getResources().getColor(R.color.white));
             }
             else if (i%2 == 1){
-                //linearLayout.setBackgroundColor(ContextCompat.getColor(intro.this,R.color.green));
                 button_back.setEnabled(true);
                 button_back.setVisibility(View.VISIBLE);
-//                button_back.setBackgroundColor(getResources().getColor(R.color.green));
-//                button_back.setTextColor(getResources().getColor(R.color.white));
                 button_back.setText("Back");
                 button_next.setEnabled(true);
                 button_next.setText("Next");
-//                button_next.setBackgroundColor(getResources().getColor(R.color.green));
-//                button_next.setTextColor(getResources().getColor(R.color.white));
             }
         }
 
