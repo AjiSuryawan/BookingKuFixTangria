@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.guru.bookingku">
+    package="com.tangria.spa.bookingku">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -13,15 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.Detail.DetailActivity"></activity>
-        <activity android:name=".Activity.Booking.BookingActivity"></activity>
-        <activity android:name=".Util.ControlClass">
+        <activity android:name="com.tangria.spa.bookingku.Activity.Detail.DetailActivity"></activity>
+        <activity android:name="com.tangria.spa.bookingku.Activity.Booking.BookingActivity"></activity>
+        <activity android:name="com.tangria.spa.bookingku.Util.ControlClass">
         </activity>
         <activity
-            android:name=".Activity.LoginActivity"
+            android:name="com.tangria.spa.bookingku.Activity.LoginActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
         <activity
-            android:name=".Activity.History.TimeLineActivity"
+            android:name="com.tangria.spa.bookingku.Activity.History.TimeLineActivity"
             android:launchMode="singleTask"></activity>
 
         <meta-data
@@ -48,46 +48,46 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.RegisterActivity"
+            android:name="com.tangria.spa.bookingku.Activity.RegisterActivity"
             android:theme="@style/Theme.Design.NoActionBar"></activity>
         <activity
-            android:name=".Activity.Main.MainActivity"
+            android:name="com.tangria.spa.bookingku.Activity.Main.MainActivity"
             android:launchMode="singleTask">
         </activity>
         <activity
-            android:name=".SplashScreen"
+            android:name="com.tangria.spa.bookingku.SplashScreen"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.InputPhone"></activity>
+        <activity android:name="com.tangria.spa.bookingku.Activity.InputPhone"></activity>
         <activity
-            android:name=".Activity.Detail.DetailHistory"
-            android:parentActivityName=".Activity.History.TimeLineActivity">
+            android:name="com.tangria.spa.bookingku.Activity.Detail.DetailHistory"
+            android:parentActivityName="com.tangria.spa.bookingku.Activity.History.TimeLineActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activity.History.TimeLineActivity" />
+                android:value="com.tangria.spa.bookingku.Activity.History.TimeLineActivity" />
         </activity>
         <activity
-            android:name=".Activity.Jenisproduk.Massage"
+            android:name="com.tangria.spa.bookingku.Activity.Jenisproduk.Massage"
             android:value=".Activity.History.TimeLineActivity"></activity>
         <activity
-            android:name=".Activity.Notification.NotificationActivity"
-            android:parentActivityName=".Activity.Main.MainActivity">
+            android:name="com.tangria.spa.bookingku.Activity.Notification.NotificationActivity"
+            android:parentActivityName="com.tangria.spa.bookingku.Activity.Main.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activity.Main.MainActivity" />
+                android:value="com.tangria.spa.bookingku.Activity.Main.MainActivity" />
         </activity>
 
-        <receiver android:name=".Util.AlarmReceiver" />
+        <receiver android:name="com.tangria.spa.bookingku.Util.AlarmReceiver" />
 
         <activity
-            android:name=".intro"
+            android:name="com.tangria.spa.bookingku.intro"
             android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
 
-        <service android:name=".Service.FirebaseMessagingService">
+        <service android:name="com.tangria.spa.bookingku.Service.FirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

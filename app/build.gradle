@@ -4,7 +4,7 @@ apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.guru.bookingku"
+        applicationId "com.tangria.spa.bookingku"
         minSdkVersion 17
         targetSdkVersion 28
         versionCode 1

@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1076432856819:android:4ca88148f6c16ebf",
         "android_client_info": {
-          "package_name": "com.example.guru.bookingku"
+          "package_name": "com.tangria.spa.bookingku"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "1076432856819-ed41qb3p8r1o02lh7nd80j6vqhvvgoom.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.guru.bookingku",
+            "package_name": "com.tangria.spa.bookingku",
             "certificate_hash": "6878d944d7c1b29f376e1d53d42acacaf53c0a09"
           }
         },
