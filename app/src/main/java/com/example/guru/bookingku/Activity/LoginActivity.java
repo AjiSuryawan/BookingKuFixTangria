@@ -156,12 +156,18 @@ public class LoginActivity extends AppCompatActivity {
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         String userDetil = response.getRawResponse();
                         try {
+                            Log.d("makanan", "onCompleted: "+userDetil);
                             JSONObject jsonObject = new JSONObject(userDetil);
                             String fbId = jsonObject.getString("id");
                             String realName = jsonObject.optString("name", "");
+
                             //String username = jsonObject.optString("first_name", "") + jsonObject.optString("last_name", "") + jsonObject.getString("id");
                             String email = jsonObject.optString("email", "Email doesn't exist");
-                            String avatar = "https://graph.facebook.com/" + fbId + "/picture?type=large";
+                            Log.d("makanan", "onCompleted: "+email);
+                            if (email.equalsIgnoreCase("Email doesn't exist")){
+                                email=jsonObject.optString("id", "");
+                            }
+                            String avatar = "https://graph.facebook.com/" + fbId + "/`?type=large";
 
                             Log.d("gambar", "onCompleted: "+avatar);
                             //proses input service

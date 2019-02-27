@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements MainView, BottomN
 
             case R.id.bottomnav_promo:
                 presenter.navigatetopromo();
-                tvTitle.setText("PROMO");
+                tvTitle.setText("INFO");
                 break;
         }
         return true;

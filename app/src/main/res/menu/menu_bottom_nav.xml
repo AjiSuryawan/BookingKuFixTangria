@@ -7,7 +7,7 @@
     <item
         android:id="@+id/bottomnav_promo"
         android:icon="@drawable/info"
-        android:title="Promo"/>
+        android:title="Info"/>
 
     <item
         android:id="@+id/bottomnav_profile"

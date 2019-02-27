@@ -72,7 +72,7 @@ public class ProfileFragment extends BaseFragment {
             @Override
             public void onResponse(Call<Profile> call, Response<Profile> response) {
                 try {
-                    profileName.setText(response.body().getEmail());
+                    profileName.setText("id : "+response.body().getEmail());
                     profileUsername.setText(response.body().getName());
                     Log.d("hpku", "onResponse: " + response.body().getNoHp());
                     telpuser.setText(response.body().getNoHp());
