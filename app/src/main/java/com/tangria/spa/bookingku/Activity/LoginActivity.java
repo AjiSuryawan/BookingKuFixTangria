@@ -321,14 +321,14 @@ public class LoginActivity extends AppCompatActivity {
     public void cetakhash(){
         PackageInfo info;
         try {
-            info = getPackageManager().getPackageInfo("com.example.guru.bookingku", PackageManager.GET_SIGNATURES);
+            info = getPackageManager().getPackageInfo("com.tangria.spa.bookingku", PackageManager.GET_SIGNATURES);
             for (Signature signature : info.signatures) {
                 MessageDigest md;
                 md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
                 String something = new String(Base64.encode(md.digest(), 0));
                 //String something = new String(Base64.encodeBytes(md.digest()));
-                Log.e("hash key", something);
+                Log.e("hashkey", something);
             }
         } catch (PackageManager.NameNotFoundException e1) {
             Log.e("name not found", e1.toString());
