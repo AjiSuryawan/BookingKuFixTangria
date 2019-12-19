@@ -40,6 +40,7 @@ public interface BookingService {
             @Field("name") String name,
             @Field("password") String password,
             @Field("phone") String phone,
+            @Field("job") String job,
             @Field("fcm_token") String token
     );
 

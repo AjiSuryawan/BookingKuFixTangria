@@ -38,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
     ProgressDialog dialogku;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
-    EditText inputUsername, inputEmail, inputPassword, inputConfirmPassword, noTelp;
+    EditText inputUsername, inputEmail, inputPassword, inputConfirmPassword, noTelp, inputJob;
     Button registerBtn;
     String Name;
     String phoneNo;
@@ -115,6 +115,7 @@ public class RegisterActivity extends AppCompatActivity {
         inputUsername = findViewById(R.id.txtusername);
         inputEmail = findViewById(R.id.txtemail);
         inputPassword = findViewById(R.id.txtPassword);
+        inputJob = findViewById(R.id.txtjob);
         noTelp = findViewById(R.id.txtTelp);
         noTelp.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -166,6 +167,7 @@ public class RegisterActivity extends AppCompatActivity {
                         final String telp = noTelp.getText().toString().trim();
                         final String username = inputUsername.getText().toString().trim();
                         final String password = inputPassword.getText().toString().trim();
+                        final String job = inputJob.getText().toString().trim();
                         final String confirmPassword = inputConfirmPassword.getText().toString().trim();
                         if (telp.isEmpty() || email.isEmpty() || username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                             Toast.makeText(RegisterActivity.this, "please fill my heart first to send a request :(", Toast.LENGTH_SHORT).show();
@@ -177,17 +179,17 @@ public class RegisterActivity extends AppCompatActivity {
                                 dialogku.show();
                                 String token = getSharedPreferences("firebase_token", MODE_PRIVATE).getString("firebase_token", "");
                                 BookingService bookingService = BookingClient.getRetrofit().create(BookingService.class);
-                                Call<RegisterRespon> call = bookingService.signup(email, username, password, telp, token);
+                                Call<RegisterRespon> call = bookingService.signup(email, username, password, telp, token, job);
                                 call.enqueue(new Callback<RegisterRespon>() {
                                     @Override
                                     public void onResponse(Call<RegisterRespon> call, Response<RegisterRespon> response) {
                                         try {
+                                            Log.d("response", "onResponse: " + response);
                                             if (response.isSuccessful()) {
-
                                                 editor = pref.edit();
                                                 editor.putInt("userid", response.body().getUserId());
                                                 editor.apply();
-                                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 startActivity(intent);
                                             }
