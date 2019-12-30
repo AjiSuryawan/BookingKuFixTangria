@@ -15,6 +15,9 @@ public class BookingResponse {
     @SerializedName("user_id")
     @Expose
     private Integer userId;
+    @SerializedName("role")
+    @Expose
+    private Integer role;
     @SerializedName("result_available_time")
     @Expose
     private List<AvailableTime> availableTimeList = null;
@@ -50,5 +53,9 @@ public class BookingResponse {
             return true;
         else
             return false;
+    }
+
+    public Integer getRole() {
+        return role;
     }
 }
