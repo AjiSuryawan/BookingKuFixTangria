@@ -47,14 +47,14 @@
     </style>
 
     <style name="MyRaidoButtonYes" parent="Widget.AppCompat.CompoundButton.RadioButton">
-        <item name="android:colorControlNormal" tools:targetApi="lollipop">@color/black</item>
-        <item name="android:colorControlActivated" tools:targetApi="lollipop">@color/green</item>
+        <item name="android:colorControlNormal" tools:targetApi="lollipop">#707070</item>
+        <item name="android:colorControlActivated" tools:targetApi="lollipop">#00BFA5</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
     </style>
 
     <style name="MyRaidoButtonNo" parent="Widget.AppCompat.CompoundButton.RadioButton">
-        <item name="android:colorControlNormal" tools:targetApi="lollipop">@color/black</item>
-        <item name="android:colorControlActivated" tools:targetApi="lollipop">@color/ungu</item>
+        <item name="android:colorControlNormal" tools:targetApi="lollipop">#707070</item>
+        <item name="android:colorControlActivated" tools:targetApi="lollipop">#B176B1</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
     </style>
 

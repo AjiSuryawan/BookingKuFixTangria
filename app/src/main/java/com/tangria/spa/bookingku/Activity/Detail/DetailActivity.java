@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import com.bumptech.glide.Glide;
 import com.tangria.spa.bookingku.Activity.Booking.BookingActivity;
 import com.tangria.spa.bookingku.Activity.Jenisproduk.Price;
+import com.tangria.spa.bookingku.Activity.MedicalQuestion1;
 import com.tangria.spa.bookingku.Fragment.Home.data_item_spa;
 import com.tangria.spa.bookingku.R;
 
@@ -126,7 +127,7 @@ public class DetailActivity extends AppCompatActivity {
                     mLanjut.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent in = new Intent(getApplicationContext(), BookingActivity.class);
+                            Intent in = new Intent(getApplicationContext(), MedicalQuestion1.class);
                             in.putExtra("orderid", idbarang);
                             in.putExtra("order_nama", product.getName());
                             in.putExtra("name", mNama.getText().toString());
@@ -142,7 +143,7 @@ public class DetailActivity extends AppCompatActivity {
                     AlertDialog dialog = mBuilder.create();
                     dialog.show();
                 }else {
-                    Intent in = new Intent(getApplicationContext(), BookingActivity.class);
+                    Intent in = new Intent(getApplicationContext(), MedicalQuestion1.class);
                     in.putExtra("orderid", idbarang);
                     in.putExtra("order_nama", product.getName());
                     Log.d("ordernamenya", "onClick: " + product.getName());
