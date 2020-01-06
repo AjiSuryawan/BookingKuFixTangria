@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="30dp"
+        tools:context=".MainActivity">
+
+        <TextView
+            android:id="@+id/txttitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GUEST COMMENT TANGRIA BEAUTY AND SPA"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:textSize="15sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="25dp"/>
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="330dp"
+            android:layout_height="3dp"
+            android:background="@color/ungu"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txttitle"
+            android:layout_marginTop="20dp"
+            />
+
+        <TextView
+            android:id="@+id/txtname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama Terapis :  Selvia / Faida"
+            android:textStyle="italic"
+            android:textColor="#000"
+            android:textSize="14dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="35dp"
+            app:layout_constraintTop_toBottomOf="@+id/view1"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/puas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Memuaskan"
+            android:textColor="#000"
+            android:textSize="13dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginRight="125dp"
+            app:layout_constraintTop_toBottomOf="@+id/txtname"
+            android:layout_marginTop="30dp" />
+
+
+        <TextView
+            android:id="@+id/kurangpuas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kurang"
+            android:textColor="#000"
+            android:textSize="13dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginRight="30dp"
+            app:layout_constraintTop_toBottomOf="@+id/txtname"
+            android:layout_marginTop="20dp"
+            />
+        <TextView
+            android:id="@+id/kurangpuas2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Memuaskan"
+            android:textColor="#000"
+            android:textSize="13dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginRight="15dp"
+            app:layout_constraintTop_toBottomOf="@+id/kurangpuas"
+            />
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constrain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/puas"
+            android:orientation="vertical">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingBottom="15dp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp">
+
+                <RadioGroup
+                    android:id="@+id/rbstaff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="30dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintLeft_toRightOf="@+id/staff"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <RadioButton
+                        android:id="@+id/yastaff"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:onClick="rbstaff" />
+
+                    <RadioButton
+                        android:id="@+id/tidakstaff"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="80dp"
+                        android:onClick="rbstaff"
+                        app:layout_constraintLeft_toLeftOf="@id/kurangpuas" />
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/rbsuasana"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="30dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintLeft_toRightOf="@+id/suasana"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rbstaff">
+
+                    <RadioButton
+                        android:id="@+id/yasuasana"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:onClick="rbsuasana" />
+
+                    <RadioButton
+                        android:id="@+id/tidaksuasana"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="80dp"
+                        android:onClick="rbsuasana"
+                        app:layout_constraintLeft_toLeftOf="@id/kurangpuas" />
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/rbkebersihan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="30dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="9dp"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintLeft_toRightOf="@+id/suasana"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rbsuasana">
+
+                    <RadioButton
+                        android:id="@+id/yakebersihan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:onClick="rbkebersihan" />
+
+                    <RadioButton
+                        android:id="@+id/tidakkebersihan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="80dp"
+                        android:onClick="rbkebersihan"
+                        app:layout_constraintLeft_toLeftOf="@id/kurangpuas" />
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/rbteknik"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="30dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintLeft_toRightOf="@+id/teknik"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rbkebersihan">
+
+                    <RadioButton
+                        android:id="@+id/yateknik"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:onClick="rbteknik" />
+
+                    <RadioButton
+                        android:id="@+id/tidakteknik"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="80dp"
+                        android:onClick="rbteknik"
+                        app:layout_constraintLeft_toLeftOf="@id/kurangpuas" />
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/rbpelayanan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="30dp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="7dp"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintLeft_toRightOf="@+id/pelayanan"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rbteknik">
+
+                    <RadioButton
+                        android:id="@+id/yapelayanan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:onClick="rbpelayanan" />
+
+                    <RadioButton
+                        android:id="@+id/tidakpelayanan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="80dp"
+                        android:onClick="rbpelayanan"
+                        app:layout_constraintLeft_toLeftOf="@id/kurangpuas" />
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/suasana"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="- Suasana SPA"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/staff" />
+
+                <TextView
+                    android:id="@+id/staff"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:text="- Staff pelayanan"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/kebersihan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="- Kebersihan dan Keamanan"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/suasana" />
+
+                <TextView
+                    android:id="@+id/teknik"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="- Teknik Perawatan"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/kebersihan" />
+
+                <TextView
+                    android:id="@+id/pelayanan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="20dp"
+                    android:text="- Pelayanan Terapis"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/teknik" />
+
+                <TextView
+                    android:id="@+id/text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bagaimana anda tahu tentang Tangria Beauty and Spa ?"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    android:textColor="#000"
+                    app:layout_constraintTop_toBottomOf="@+id/pelayanan"
+                    android:layout_marginTop="35dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    />
+
+                <CheckBox
+                    app:layout_constraintTop_toBottomOf="@+id/text1"
+                    android:id="@+id/cbbrosur"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginLeft="25dp"
+                    android:text="Brosur" />
+                <CheckBox
+                    app:layout_constraintTop_toBottomOf="@id/cbbrosur"
+                    android:id="@+id/cbrekomendasi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginLeft="25dp"
+                    android:text="Rekomendasi dari teman / saudara" />
+                <CheckBox
+                    app:layout_constraintTop_toBottomOf="@+id/cbrekomendasi"
+                    android:id="@+id/cbspanduk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginLeft="25dp"
+                    android:text="Lihat billboard / spanduk" />
+                <CheckBox
+                    app:layout_constraintTop_toBottomOf="@+id/cbspanduk"
+                    android:id="@+id/cbmedsos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginLeft="25dp"
+                    android:text="Media social / Instagram" />
+
+                <CheckBox
+                    app:layout_constraintTop_toBottomOf="@id/cbmedsos"
+                    android:id="@+id/cblainnya"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_marginLeft="25dp" />
+                <EditText
+                    app:layout_constraintLeft_toRightOf="@+id/cblainnya"
+                    app:layout_constraintTop_toBottomOf="@+id/cbmedsos"
+                    android:layout_width="150dp"
+                    android:layout_height="39dp"
+                    android:hint="Lainnya"
+                    android:textColor="#000"/>
+
+                <TextView
+                    android:id="@+id/yaa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ya"
+                    android:textColor="#000"
+                    android:textSize="13dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginRight="85dp"
+                    app:layout_constraintTop_toBottomOf="@+id/cblainnya"
+                    />
+
+
+                <TextView
+                    android:id="@+id/tidakk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tidak"
+                    android:textColor="#000"
+                    android:textSize="13dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginRight="20dp"
+                    app:layout_constraintTop_toBottomOf="@+id/cblainnya"
+                    />
+
+                <TextView
+                    android:id="@+id/mungkinkah"
+                    app:layout_constraintTop_toBottomOf="@+id/yaa"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mungkinkah anda ingin kembali ?"
+                    android:textColor="#000"
+                    android:layout_marginTop="5dp"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="25dp"/>
+                <RadioGroup
+                    android:id="@+id/rbmungkin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/yaa"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginRight="20dp">
+
+                    <RadioButton
+                        android:id="@+id/yamungkin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:onClick="rbmungkin" />
+
+                    <RadioButton android:id="@+id/tidakmungkin"
+                        app:layout_constraintLeft_toLeftOf="@id/kurangpuas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="23dp"
+                        android:onClick="rbmungkin"/>
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/adakah"
+                    app:layout_constraintTop_toBottomOf="@+id/mungkinkah"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Adakah yang perlu diperbaiki ?"
+                    android:textColor="#000"
+                    android:layout_marginTop="20dp"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="25dp"
+                    />
+
+                <RadioGroup
+                    android:id="@+id/rbadakah"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/rbmungkin"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="8dp">
+
+                    <RadioButton
+                        android:id="@+id/yaadakah"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="28dp"
+                        android:onClick="rbadakah" />
+
+                    <RadioButton
+                        android:id="@+id/tidakadakah"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:onClick="rbadakah"
+                        app:layout_constraintLeft_toLeftOf="@id/kurangpuas" />
+                </RadioGroup>
+
+
+                <LinearLayout
+                    android:layout_width="360dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/line"
+                    app:layout_constraintTop_toBottomOf="@+id/adakah">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:textSize="14dp"
+                        android:layout_marginTop="10dp"
+                        android:hint="Adakah yang perlu diperbaiki ?"/>
+
+                </LinearLayout>
+
+            </android.support.constraint.ConstraintLayout>
+
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>
