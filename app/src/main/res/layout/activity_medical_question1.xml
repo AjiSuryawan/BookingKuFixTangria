@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:background="@android:color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    tools:context=".Activity.MedicalQuestion1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="205dp"
+            android:layout_height="109dp"
+            android:src="@drawable/login_title"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"/>
+
+        <LinearLayout
+            android:background="@drawable/shape"
+            android:layout_marginTop="30dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="1.  "/>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rematik?"
+                    android:textSize="15dp"/>
+
+            </LinearLayout>
+
+            <RadioGroup
+                android:layout_gravity="center"
+                android:id="@+id/rgRematik"
+                android:layout_marginLeft="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:theme="@style/MyRaidoButtonYes"
+                    android:onClick="onRbRematik"
+                    android:id="@+id/rbRematikYes"
+                    android:layout_marginRight="20dp"
+                    android:text="Yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <RadioButton
+                    android:theme="@style/MyRaidoButtonNo"
+                    android:onClick="onRbRematik"
+                    android:id="@+id/rbRematikNo"
+                    android:text="No"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:background="@drawable/shape"
+            android:layout_marginTop="25dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="2.  "/>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Masalah jantung?"
+                    android:textSize="15dp"/>
+
+            </LinearLayout>
+
+            <RadioGroup
+                android:layout_gravity="center"
+                android:id="@+id/rgJantung"
+                android:layout_marginLeft="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:theme="@style/MyRaidoButtonYes"
+                    android:onClick="onRbJantung"
+                    android:id="@+id/rbJantungYes"
+                    android:layout_marginRight="20dp"
+                    android:text="Yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <RadioButton
+                    android:theme="@style/MyRaidoButtonNo"
+                    android:onClick="onRbJantung"
+                    android:id="@+id/rbJantungNo"
+                    android:text="No"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:background="@drawable/shape"
+            android:layout_marginTop="25dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="3.  "/>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tekanan darah rendah/tinngi?"
+                    android:textSize="15dp"/>
+
+            </LinearLayout>
+
+            <RadioGroup
+                android:layout_gravity="center"
+                android:id="@+id/rgDarah"
+                android:layout_marginLeft="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:theme="@style/MyRaidoButtonYes"
+                    android:onClick="onRbDarah"
+                    android:id="@+id/rbDarahYes"
+                    android:layout_marginRight="20dp"
+                    android:text="Yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <RadioButton
+                    android:theme="@style/MyRaidoButtonNo"
+                    android:onClick="onRbDarah"
+                    android:id="@+id/rbDarahNo"
+                    android:text="No"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:background="@drawable/shape"
+            android:layout_marginTop="25dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="4.  "/>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Masalah tulang belakang?"
+                    android:textSize="15dp"/>
+
+            </LinearLayout>
+
+            <RadioGroup
+                android:id="@+id/rgTulang"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:theme="@style/MyRaidoButtonYes"
+                    android:onClick="onRbTulang"
+                    android:id="@+id/rbTulangYes"
+                    android:layout_marginRight="20dp"
+                    android:text="Yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <RadioButton
+                    android:theme="@style/MyRaidoButtonNo"
+                    android:onClick="onRbTulang"
+                    android:id="@+id/rbTulangNo"
+                    android:text="No"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:background="@drawable/shape"
+            android:layout_marginTop="25dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="5.  "/>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Asamurat?"
+                    android:textSize="15dp"/>
+
+            </LinearLayout>
+
+            <RadioGroup
+                android:id="@+id/rgAsamurat"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:theme="@style/MyRaidoButtonYes"
+                    android:onClick="onRbAsamurat"
+                    android:id="@+id/rbAsamuratYes"
+                    android:layout_marginRight="20dp"
+                    android:text="Yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <RadioButton
+                    android:theme="@style/MyRaidoButtonNo"
+                    android:onClick="onRbAsamurat"
+                    android:id="@+id/rbAsamuratNo"
+                    android:text="No"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:background="@drawable/shape"
+            android:layout_marginTop="25dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="6.  "/>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Apakah anda menderita asma?"
+                    android:textSize="15dp"/>
+
+            </LinearLayout>
+
+            <RadioGroup
+                android:id="@+id/rgAsma"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:theme="@style/MyRaidoButtonYes"
+                    android:onClick="onRbAsma"
+                    android:id="@+id/rbAsmaYes"
+                    android:layout_marginRight="20dp"
+                    android:text="Yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <RadioButton
+                    android:theme="@style/MyRaidoButtonNo"
+                    android:onClick="onRbAsma"
+                    android:id="@+id/rbAsmaNo"
+                    android:text="No"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/ungu"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="20dp"
+            android:layout_marginHorizontal="10dp"
+            android:text="Next"/>
+
+    </LinearLayout>
+
+</ScrollView>
+

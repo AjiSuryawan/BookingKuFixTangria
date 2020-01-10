@@ -329,7 +329,8 @@
                     android:layout_marginTop="15dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_marginLeft="25dp"
-                    android:text="Brosur" />
+                    android:text="Brosur"
+                    android:onClick="onCheckboxClicked"/>
                 <CheckBox
                     app:layout_constraintTop_toBottomOf="@id/cbbrosur"
                     android:id="@+id/cbrekomendasi"
@@ -338,6 +339,7 @@
                     android:layout_marginTop="5dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_marginLeft="25dp"
+                    android:onClick="onCheckboxClicked"
                     android:text="Rekomendasi dari teman / saudara" />
                 <CheckBox
                     app:layout_constraintTop_toBottomOf="@+id/cbrekomendasi"
@@ -347,6 +349,7 @@
                     android:layout_marginTop="5dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_marginLeft="25dp"
+                    android:onClick="onCheckboxClicked"
                     android:text="Lihat billboard / spanduk" />
                 <CheckBox
                     app:layout_constraintTop_toBottomOf="@+id/cbspanduk"
@@ -356,6 +359,7 @@
                     android:layout_marginTop="5dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_marginLeft="25dp"
+                    android:onClick="onCheckboxClicked"
                     android:text="Media social / Instagram" />
 
                 <CheckBox
@@ -364,6 +368,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:onClick="onCheckboxClicked"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:layout_marginLeft="25dp" />
                 <EditText
@@ -475,11 +480,13 @@
 
 
                 <LinearLayout
-                    android:layout_width="360dp"
+                    android:id="@+id/ln"
+                    android:layout_width="match_parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:layout_margin="20dp"
                     android:background="@drawable/line"
                     app:layout_constraintTop_toBottomOf="@+id/adakah">
 
@@ -492,6 +499,17 @@
                         android:hint="Adakah yang perlu diperbaiki ?"/>
 
                 </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnSubmitGC"
+                    app:layout_constraintTop_toBottomOf="@+id/ln"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/color_button"
+                    android:text="SUBMIT"
+                    android:textColor="@color/white"
+                    />
 
             </android.support.constraint.ConstraintLayout>
 

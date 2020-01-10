@@ -1,6 +1,8 @@
 package com.tangria.spa.bookingku.Activity.Detail;
 
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -8,6 +10,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -16,6 +19,7 @@ import butterknife.ButterKnife;
 import com.bumptech.glide.Glide;
 import com.tangria.spa.bookingku.Activity.Booking.BookingActivity;
 import com.tangria.spa.bookingku.Activity.Jenisproduk.Price;
+import com.tangria.spa.bookingku.Activity.MedicalQuestion1;
 import com.tangria.spa.bookingku.Fragment.Home.data_item_spa;
 import com.tangria.spa.bookingku.R;
 
@@ -48,6 +52,7 @@ public class DetailActivity extends AppCompatActivity {
     private boolean getAvailable;
     int idbarang=0;
     private data_item_spa product;
+    private SharedPreferences sharedPreferences;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -70,6 +75,9 @@ public class DetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         tvTitleToolbar.setText("PRODUCT DETAIL");
+
+        sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
+        final int role = sharedPreferences.getInt("role", 0);
 
         Intent intent = getIntent();
         extras = intent.getExtras();
@@ -106,11 +114,41 @@ public class DetailActivity extends AppCompatActivity {
         bookNowBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in =new Intent(getApplicationContext(), BookingActivity.class);
-                in.putExtra("orderid",idbarang);
-                in.putExtra("order_nama", product.getName());
-                Log.d("ordernamenya", "onClick: "+product.getName());
-                startActivity(in);
+
+                if (role == 2) {
+                    AlertDialog.Builder mBuilder = new AlertDialog.Builder(DetailActivity.this);
+                    View mView = getLayoutInflater().inflate(R.layout.cs_mode, null);
+                    final EditText mNama = (EditText) mView.findViewById(R.id.etNama);
+                    final EditText mAlamat = (EditText) mView.findViewById(R.id.etAlamat);
+                    final EditText mNoTelp = (EditText) mView.findViewById(R.id.etNoTelp);
+                    final EditText mPekerjaan = (EditText) mView.findViewById(R.id.etJob);
+                    Button mLanjut = mView.findViewById(R.id.btnLanjut);
+
+                    mLanjut.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent in = new Intent(getApplicationContext(), MedicalQuestion1.class);
+                            in.putExtra("orderid", idbarang);
+                            in.putExtra("order_nama", product.getName());
+                            in.putExtra("name", mNama.getText().toString());
+                            in.putExtra("address", mAlamat.getText().toString());
+                            in.putExtra("phone", mNoTelp.getText().toString());
+                            in.putExtra("job", mPekerjaan.getText().toString());
+                            Log.d("ordernamenya", "onClick: " + product.getName());
+                            startActivity(in);
+                        }
+                    });
+
+                    mBuilder.setView(mView);
+                    AlertDialog dialog = mBuilder.create();
+                    dialog.show();
+                }else {
+                    Intent in = new Intent(getApplicationContext(), MedicalQuestion1.class);
+                    in.putExtra("orderid", idbarang);
+                    in.putExtra("order_nama", product.getName());
+                    Log.d("ordernamenya", "onClick: " + product.getName());
+                    startActivity(in);
+                }
             }
         });
     }
