@@ -63,7 +63,7 @@
                     android:onClick="onRbHamil"
                     android:id="@+id/rbHamilYes"
                     android:layout_marginRight="20dp"
-                    android:text="Yes"
+                    android:text="Ya"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -71,7 +71,7 @@
                     android:theme="@style/MyRaidoButtonNo"
                     android:onClick="onRbHamil"
                     android:id="@+id/rbHamilNo"
-                    android:text="No"
+                    android:text="Tidak"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -124,7 +124,7 @@
                     android:onClick="onRbDatangBulan"
                     android:id="@+id/rbDatangBulanYes"
                     android:layout_marginRight="20dp"
-                    android:text="Yes"
+                    android:text="Ya"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -132,7 +132,7 @@
                     android:theme="@style/MyRaidoButtonNo"
                     android:onClick="onRbDatangBulan"
                     android:id="@+id/rbDatangBulanNo"
-                    android:text="No"
+                    android:text="Tidak"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -185,7 +185,7 @@
                     android:onClick="onRbAlat"
                     android:id="@+id/rbAlatYes"
                     android:layout_marginRight="20dp"
-                    android:text="Yes"
+                    android:text="Ya"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -193,7 +193,7 @@
                     android:theme="@style/MyRaidoButtonNo"
                     android:onClick="onRbAlat"
                     android:id="@+id/rbAlatNo"
-                    android:text="No"
+                    android:text="Tidak"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -246,7 +246,7 @@
                     android:onClick="onRbOperasi"
                     android:id="@+id/rbOperasiYes"
                     android:layout_marginRight="20dp"
-                    android:text="Yes"
+                    android:text="Ya"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -254,7 +254,7 @@
                     android:theme="@style/MyRaidoButtonNo"
                     android:onClick="onRbOperasi"
                     android:id="@+id/rbOperasiNo"
-                    android:text="No"
+                    android:text="Tidak"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -307,7 +307,7 @@
                     android:onClick="onRbMakan"
                     android:id="@+id/rbMakanYes"
                     android:layout_marginRight="20dp"
-                    android:text="Yes"
+                    android:text="Ya"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -315,7 +315,7 @@
                     android:theme="@style/MyRaidoButtonNo"
                     android:onClick="onRbMakan"
                     android:id="@+id/rbMakanNo"
-                    android:text="No"
+                    android:text="Tidak"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -368,7 +368,7 @@
                     android:onClick="onRbTherapis"
                     android:id="@+id/rbTherapisYes"
                     android:layout_marginRight="20dp"
-                    android:text="Yes"
+                    android:text="Ya"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -376,7 +376,7 @@
                     android:theme="@style/MyRaidoButtonNo"
                     android:onClick="onRbTherapis"
                     android:id="@+id/rbTherapisNo"
-                    android:text="No"
+                    android:text="Tidak"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 

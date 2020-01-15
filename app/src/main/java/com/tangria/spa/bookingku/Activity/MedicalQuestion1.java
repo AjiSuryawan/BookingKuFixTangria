@@ -33,12 +33,12 @@ public class MedicalQuestion1 extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            orderid = bundle.getString("orderid");
+            orderid = String.valueOf(bundle.getInt("orderid"));
             order_nama = bundle.getString("order_nama");
-            name = bundle.getString("name");
-            address = bundle.getString("address");
-            phone = bundle.getString("phone");
-            job = bundle.getString("job");
+            name = bundle.getString("name", "");
+            address = bundle.getString("address", "");
+            phone = bundle.getString("phone", "");
+            job = bundle.getString("job", "");
         }
 
         btnNext = findViewById(R.id.btnNext);

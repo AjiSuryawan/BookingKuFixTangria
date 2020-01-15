@@ -1,11 +1,14 @@
 package com.tangria.spa.bookingku.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -19,6 +22,9 @@ import com.tangria.spa.bookingku.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 public class MedicalQuestion2 extends AppCompatActivity {
 
@@ -62,10 +68,10 @@ public class MedicalQuestion2 extends AppCompatActivity {
             asma = bundle.getString("asma");
             orderid = bundle.getString("orderid");
             order_nama = bundle.getString("order_nama");
-            name = bundle.getString("name");
-            address = bundle.getString("address");
-            phone = bundle.getString("phone");
-            job = bundle.getString("job");
+            name = bundle.getString("name", "");
+            address = bundle.getString("address", "");
+            phone = bundle.getString("phone", "");
+            job = bundle.getString("job", "");
         }
 
 
@@ -73,25 +79,30 @@ public class MedicalQuestion2 extends AppCompatActivity {
         mSubmitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final ProgressDialog progressDialog = new ProgressDialog(MedicalQuestion2.this);
+                progressDialog.setMessage("Harap tunggu...");
 
-                AndroidNetworking.post(BookingClient.BASE_URL+"api/user/update-profile")
-                        .addBodyParameter("id" ,String.valueOf(id))
-                        .addBodyParameter("mq_rematik" , rematik)
-                        .addBodyParameter("mq_jantung" , jantung)
-                        .addBodyParameter("mq_tekanan_darah" , tekananDarah)
-                        .addBodyParameter("mq_tulang_belakang" , tulangBelakang)
-                        .addBodyParameter("mq_asamurat" , asamUrat)
-                        .addBodyParameter("mq_asma" , asma)
-                        .addBodyParameter("mq_hamil" , hamil)
-                        .addBodyParameter("mq_datang_bulan" , datangBulan)
-                        .addBodyParameter("mq_alat_bantu" , alatBantu)
-                        .addBodyParameter("mq_operasi" , operasi)
-                        .addBodyParameter("mq_makan" , makan)
-                        .addBodyParameter("mq_menghindari_bagian" , menghindariBagian)
-                        .addBodyParameter("cst_name" , name)
-                        .addBodyParameter("cst_address" , address)
-                        .addBodyParameter("cst_phone" , phone)
-                        .addBodyParameter("cst_job" , job)
+//                Log.e("", String.valueOf(id) );
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+                AndroidNetworking.post(BookingClient.BASE_URL + "api/user/update-profile")
+                        .addBodyParameter("id", String.valueOf(id))
+                        .addBodyParameter("mq_rematik", rematik)
+                        .addBodyParameter("mq_jantung", jantung)
+                        .addBodyParameter("mq_tekanan_darah", tekananDarah)
+                        .addBodyParameter("mq_tulang_belakang", tulangBelakang)
+                        .addBodyParameter("mq_asamurat", asamUrat)
+                        .addBodyParameter("mq_asma", asma)
+                        .addBodyParameter("mq_hamil", hamil)
+                        .addBodyParameter("mq_datang_bulan", datangBulan)
+                        .addBodyParameter("mq_alat_bantu", alatBantu)
+                        .addBodyParameter("mq_operasi", operasi)
+                        .addBodyParameter("mq_makan", makan)
+                        .addBodyParameter("mq_menghindari_bagian", menghindariBagian)
+                        .addBodyParameter("cst_name", name)
+                        .addBodyParameter("cst_address", address)
+                        .addBodyParameter("cst_phone", phone)
+                        .addBodyParameter("cst_job", job)
                         .setTag("test")
                         .setPriority(Priority.MEDIUM)
                         .build()
@@ -99,25 +110,29 @@ public class MedicalQuestion2 extends AppCompatActivity {
                             @Override
                             public void onResponse(JSONObject response) {
                                 try {
-                                    String status =response.getString("STATUS");
-                                    if(status.equalsIgnoreCase("SUCCESS")){
-                                        String message = response.getString("MESSAGE");
-                                        Toast.makeText(MedicalQuestion2.this, message, Toast.LENGTH_SHORT).show();
+                                    String status = response.getString("STATUS");
+                                    String message = response.getString("MESSAGE");
+                                    if (status.equalsIgnoreCase("SUCCESS")) {
+                                        Toast.makeText(MedicalQuestion2.this, "Medical question berhasil dikirim", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(MedicalQuestion2.this, BookingActivity.class);
                                         intent.putExtra("orderid", orderid);
                                         intent.putExtra("order_nama", order_nama);
                                         startActivity(intent);
                                         finish();
-                                    }else {
-                                        Toast.makeText(MedicalQuestion2.this, "Ntar lah", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(MedicalQuestion2.this, message, Toast.LENGTH_SHORT).show();
                                     }
-                                }catch (JSONException e) {
+                                } catch (JSONException e) {
                                     e.printStackTrace();
+                                    e.getLocalizedMessage();
+                                } finally {
+                                    progressDialog.dismiss();
                                 }
                             }
 
                             @Override
                             public void onError(ANError anError) {
+                                progressDialog.dismiss();
                                 Toast.makeText(MedicalQuestion2.this, "eror", Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -126,21 +141,21 @@ public class MedicalQuestion2 extends AppCompatActivity {
 
     }
 
-    public void onRbHamil(View view){
+    public void onRbHamil(View view) {
 
         Boolean check = ((RadioButton) view).isChecked();
 
-        switch (view.getId()){
+        switch (view.getId()) {
 
-            case R.id.rbHamilYes :
-                if (check){
+            case R.id.rbHamilYes:
+                if (check) {
                     hamil = "true";
                 }
 
                 break;
 
-            case R.id.rbHamilNo :
-                if (check){
+            case R.id.rbHamilNo:
+                if (check) {
                     hamil = "false";
                 }
 
@@ -150,21 +165,21 @@ public class MedicalQuestion2 extends AppCompatActivity {
 
     }
 
-    public void onRbDatangBulan(View view){
+    public void onRbDatangBulan(View view) {
 
         Boolean check = ((RadioButton) view).isChecked();
 
-        switch (view.getId()){
+        switch (view.getId()) {
 
-            case R.id.rbDatangBulanYes :
-                if (check){
+            case R.id.rbDatangBulanYes:
+                if (check) {
                     datangBulan = "true";
                 }
 
                 break;
 
-            case R.id.rbDatangBulanNo :
-                if (check){
+            case R.id.rbDatangBulanNo:
+                if (check) {
                     datangBulan = "false";
                 }
 
@@ -174,21 +189,21 @@ public class MedicalQuestion2 extends AppCompatActivity {
 
     }
 
-    public void onRbAlat(View view){
+    public void onRbAlat(View view) {
 
         Boolean check = ((RadioButton) view).isChecked();
 
-        switch (view.getId()){
+        switch (view.getId()) {
 
-            case R.id.rbAlatYes :
-                if (check){
+            case R.id.rbAlatYes:
+                if (check) {
                     alatBantu = "true";
                 }
 
                 break;
 
-            case R.id.rbAlatNo :
-                if (check){
+            case R.id.rbAlatNo:
+                if (check) {
                     alatBantu = "false";
                 }
 
@@ -198,21 +213,21 @@ public class MedicalQuestion2 extends AppCompatActivity {
 
     }
 
-    public void onRbOperasi(View view){
+    public void onRbOperasi(View view) {
 
         Boolean check = ((RadioButton) view).isChecked();
 
-        switch (view.getId()){
+        switch (view.getId()) {
 
-            case R.id.rbOperasiYes :
-                if (check){
+            case R.id.rbOperasiYes:
+                if (check) {
                     operasi = "true";
                 }
 
                 break;
 
-            case R.id.rbOperasiNo :
-                if (check){
+            case R.id.rbOperasiNo:
+                if (check) {
                     operasi = "false";
                 }
 
@@ -222,21 +237,21 @@ public class MedicalQuestion2 extends AppCompatActivity {
 
     }
 
-    public void onRbMakan(View view){
+    public void onRbMakan(View view) {
 
         Boolean check = ((RadioButton) view).isChecked();
 
-        switch (view.getId()){
+        switch (view.getId()) {
 
-            case R.id.rbMakanYes :
-                if (check){
+            case R.id.rbMakanYes:
+                if (check) {
                     makan = "true";
                 }
 
                 break;
 
-            case R.id.rbMakanNo :
-                if (check){
+            case R.id.rbMakanNo:
+                if (check) {
                     makan = "false";
                 }
 
@@ -246,21 +261,21 @@ public class MedicalQuestion2 extends AppCompatActivity {
 
     }
 
-    public void onRbTherapis(View view){
+    public void onRbTherapis(View view) {
 
         Boolean check = ((RadioButton) view).isChecked();
 
-        switch (view.getId()){
+        switch (view.getId()) {
 
-            case R.id.rbTherapisYes :
-                if (check){
+            case R.id.rbTherapisYes:
+                if (check) {
                     menghindariBagian = "true";
                 }
 
                 break;
 
-            case R.id.rbTherapisNo :
-                if (check){
+            case R.id.rbTherapisNo:
+                if (check) {
                     menghindariBagian = "false";
                 }
 
