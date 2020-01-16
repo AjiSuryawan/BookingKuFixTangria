@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/app_logo2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:name=".TangriaApp"
         android:usesCleartextTraffic="true">
         <activity android:name=".Activity.Guest_Comment"></activity>
         <activity android:name=".Activity.Detail.DetailActivity" />

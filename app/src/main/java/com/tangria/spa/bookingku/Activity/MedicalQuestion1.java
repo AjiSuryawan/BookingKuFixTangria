@@ -35,10 +35,10 @@ public class MedicalQuestion1 extends AppCompatActivity {
         if (bundle != null) {
             orderid = bundle.getInt("orderid");
             order_nama = bundle.getString("order_nama");
-            name = bundle.getString("name");
-            address = bundle.getString("address");
-            phone = bundle.getString("phone");
-            job = bundle.getString("job");
+            name = bundle.getString("name", "");
+            address = bundle.getString("address", "");
+            phone = bundle.getString("phone", "");
+            job = bundle.getString("job", "");
         }
 
         btnNext = findViewById(R.id.btnNext);
