@@ -114,7 +114,6 @@ public class DetailActivity extends AppCompatActivity {
         bookNowBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (role == 2) {
                     AlertDialog.Builder mBuilder = new AlertDialog.Builder(DetailActivity.this);
                     View mView = getLayoutInflater().inflate(R.layout.cs_mode, null);

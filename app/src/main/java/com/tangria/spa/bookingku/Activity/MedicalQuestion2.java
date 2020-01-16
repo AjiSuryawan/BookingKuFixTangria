@@ -36,7 +36,7 @@ public class MedicalQuestion2 extends AppCompatActivity {
     String operasi;
     String makan;
     String menghindariBagian;
-    String orderid;
+    int orderid;
     String order_nama;
     String name;
     String address;
@@ -60,7 +60,7 @@ public class MedicalQuestion2 extends AppCompatActivity {
             tulangBelakang = bundle.getString("tulangBelakang");
             asamUrat = bundle.getString("asamUrat");
             asma = bundle.getString("asma");
-            orderid = bundle.getString("orderid");
+            orderid = bundle.getInt("orderid");
             order_nama = bundle.getString("order_nama");
             name = bundle.getString("name");
             address = bundle.getString("address");

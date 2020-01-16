@@ -19,7 +19,7 @@ public class MedicalQuestion1 extends AppCompatActivity {
     String tulangBelakang;
     String asamUrat;
     String asma;
-    String orderid;
+    int orderid;
     String order_nama;
     String name;
     String address;
@@ -33,7 +33,7 @@ public class MedicalQuestion1 extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            orderid = bundle.getString("orderid");
+            orderid = bundle.getInt("orderid");
             order_nama = bundle.getString("order_nama");
             name = bundle.getString("name");
             address = bundle.getString("address");
