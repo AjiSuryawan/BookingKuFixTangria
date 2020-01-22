@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.tangria.spa.bookingku.Activity.History.TimeLineActivity;
+import com.tangria.spa.bookingku.Activity.MedicalQuestion1;
 import com.tangria.spa.bookingku.Fragment.Base.BaseFragment;
 import com.tangria.spa.bookingku.Model.Profile;
 import com.tangria.spa.bookingku.Network.BookingClient;
@@ -39,7 +40,7 @@ public class ProfileFragment extends BaseFragment {
     TextView profileUsername;
     TextView tvlogout;
     TextView telpuser;
-    Button btnhistory;
+    Button btnEditMedq;
     CardView cardLogout;
 
     @Override
@@ -48,17 +49,19 @@ public class ProfileFragment extends BaseFragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         sharedPreferences = view.getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
         profileimg = view.findViewById(R.id.profileimg);
         profileName = view.findViewById(R.id.profileName);
         cardLogout = view.findViewById(R.id.card_logout);
-        btnhistory = view.findViewById(R.id.btnhistory);
-        btnhistory.setOnClickListener(new View.OnClickListener() {
+        btnEditMedq = view.findViewById(R.id.btn_edit_medq);
+        btnEditMedq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(view.getContext(), TimeLineActivity.class));
+                Intent i = new Intent(getActivity(), MedicalQuestion1.class);
+                i.putExtra("isEdit", true);
+                startActivity(i);
             }
         });
         tvlogout = view.findViewById(R.id.tvlogout);

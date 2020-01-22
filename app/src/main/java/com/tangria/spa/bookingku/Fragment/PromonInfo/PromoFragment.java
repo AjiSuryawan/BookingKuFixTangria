@@ -81,6 +81,7 @@ public class PromoFragment extends BaseFragment {
             @Override
             public void onResponse(Call<ResonWaktuFalse> call, Response<ResonWaktuFalse> response) {
                 try{
+                    listFilm.clear();
                     listFilm.addAll(response.body().getTime());
                     Toast.makeText(getActivity(), "fetch data success "+listFilm.size(), Toast.LENGTH_SHORT).show();
 

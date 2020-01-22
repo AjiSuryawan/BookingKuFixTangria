@@ -17,6 +17,7 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.tangria.spa.bookingku.Activity.Detail.DetailHistory;
 import com.tangria.spa.bookingku.Activity.Guest_Comment;
 import com.tangria.spa.bookingku.Model.BookingResponse;
@@ -25,17 +26,16 @@ import com.tangria.spa.bookingku.Network.BookingClient;
 import com.tangria.spa.bookingku.Network.BookingService;
 import com.tangria.spa.bookingku.R;
 import com.tangria.spa.bookingku.Util.onItemClickListener;
-import com.facebook.shimmer.ShimmerFrameLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TimeLineActivity extends AppCompatActivity implements onItemClickListener {
     private ShimmerFrameLayout mShimmerViewContainer;
@@ -116,9 +116,8 @@ public class TimeLineActivity extends AppCompatActivity implements onItemClickLi
 
     @Override
     public void onItemClick(final int position) {
-
         int userId = preferences.getInt("userid", 0);
-        AndroidNetworking.post(BookingClient.BASE_URL+"api/booking/history")
+        AndroidNetworking.post(BookingClient.BASE_URL + "api/booking/history")
                 .addBodyParameter("user_id", String.valueOf(userId))
                 .setTag("test")
                 .setPriority(Priority.MEDIUM)
@@ -129,24 +128,18 @@ public class TimeLineActivity extends AppCompatActivity implements onItemClickLi
                         try {
                             String guestComment = response.getString("guest_comment");
                             Log.d("trial", "onResponse: " + guestComment);
-                            if (guestComment.contains("exist")){
+                            if (guestComment.contains("exist")) {
                                 HistoryBooking data = mDataList.get(position);
-                                String product = data.getOrder();
-                                String productImg = data.getOrderImg();
-                                String productDesc = data.getOrderDesc();
-                                String date = data.getDate();
-                                String status = data.getStatus();
-                                String code = data.getCode();
-                                Log.d("halo_kang", "onItemClick: " + code);
-                                HistoryBooking historyBooking = new HistoryBooking(product, productImg, productDesc, date, status, code);
                                 Intent intent = new Intent(TimeLineActivity.this, DetailHistory.class);
-                                intent.putExtra("history", historyBooking);
+                                intent.putExtra("history", data);
                                 startActivity(intent);
-                            }else if (guestComment.contains("none")){
+                            } else if (guestComment.contains("none")) {
                                 Intent intent = new Intent(TimeLineActivity.this, Guest_Comment.class);
+                                intent.putExtra("booking_id", mDataList.get(position).getCode());
                                 startActivity(intent);
-                            }else {
+                            } else {
                                 Intent intent = new Intent(TimeLineActivity.this, Guest_Comment.class);
+                                intent.putExtra("booking_id", mDataList.get(position).getCode());
                                 startActivity(intent);
                             }
                         } catch (JSONException e) {

@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements MainView, BottomN
     Toolbar toolbar;
     @BindView(R.id.tv_title)
     TextView tvTitle;
+
     //
     @Override
     public void onBackPressed() {
@@ -95,61 +96,16 @@ public class MainActivity extends AppCompatActivity implements MainView, BottomN
                 presenter.navigatetopromo();
                 tvTitle.setText("INFO");
                 break;
+
+            case R.id.bottomnav_history:
+                presenter.navigateToHistory();
+                tvTitle.setText("HISTORY");
+                break;
+
         }
         return true;
     }
 
-    //=========== implement main view ===========//
-    @Override
-    public void attachHomeFragment(BaseFragment currentFragment, BaseFragment fragment) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        if (!fragment.isAdded()) {
-            transaction
-                    .hide(currentFragment)
-                    .add(R.id.container, fragment)
-                    .show(fragment)
-                    .commit();
-        } else {
-            transaction
-                    .hide(currentFragment)
-                    .show(fragment)
-                    .commit();
-        }
-    }
-
-    @Override
-    public void attachProfileFragment(BaseFragment currentFragment, BaseFragment fragment) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        if (!fragment.isAdded()) {
-            transaction
-                    .hide(currentFragment)
-                    .add(R.id.container, fragment)
-                    .show(fragment)
-                    .commit();
-        } else {
-            transaction
-                    .hide(currentFragment)
-                    .show(fragment)
-                    .commit();
-        }
-    }
-
-    @Override
-    public void attachPromoFragment(BaseFragment currentFragment, BaseFragment fragment) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        if (!fragment.isAdded()) {
-            transaction
-                    .hide(currentFragment)
-                    .add(R.id.container, fragment)
-                    .show(fragment)
-                    .commit();
-        } else {
-            transaction
-                    .hide(currentFragment)
-                    .show(fragment)
-                    .commit();
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -165,5 +121,13 @@ public class MainActivity extends AppCompatActivity implements MainView, BottomN
             startActivity(intent);
         }
         return true;
+    }
+
+    @Override
+    public void goToFragment(BaseFragment currentFragment, BaseFragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

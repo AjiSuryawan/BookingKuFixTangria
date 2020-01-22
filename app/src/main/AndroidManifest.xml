@@ -86,6 +86,8 @@
 
         <receiver android:name=".Util.AlarmReceiver" />
 
+        <receiver android:name=".Util.ReminderUpdateReceiver" />
+
         <activity
             android:name=".intro"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
