@@ -64,40 +64,44 @@ public class Guest_Comment extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                AndroidNetworking.post(BookingClient.BASE_URL+"api/guest-comment")
-                        .addBodyParameter("id" ,String.valueOf(id))
-                        .addBodyParameter("gc_staff_pelayanan" , staff)
-                        .addBodyParameter("gc_suasana_spa" , suasana)
-                        .addBodyParameter("gc_kebersihan_kenyamanan" , kebersihan)
-                        .addBodyParameter("gc_teknik_perawatan" , teknik)
-                        .addBodyParameter("gc_pelayanan_terapis" , pelayanan)
-                        .addBodyParameter("gc_at_brosur" , brosur)
-                        .addBodyParameter("gc_at_rekomendasi" , rekomendasi)
-                        .addBodyParameter("gc_at_spanduk" , spanduk)
-                        .addBodyParameter("gc_at_media_sosial" , medsos)
-                        .addBodyParameter("gc_at_lain" , lainnya)
-                        .addBodyParameter("gc_mungkinkah_kembali" , mungkin)
-                        .addBodyParameter("gc_ada_perlu_diperbaiki" , adakah)
-                        .addBodyParameter("gc_komen_lain" , komen)
-                        .setTag("test")
-                        .setPriority(Priority.MEDIUM)
-                        .build()
-                        .getAsJSONObject(new JSONObjectRequestListener() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                try {
-                                    String status =response.getString("STATUS");
-                                    finish();
-                                }catch (JSONException e) {
-                                    e.printStackTrace();
+                if (staff.isEmpty() || suasana.isEmpty() || kebersihan.isEmpty() || teknik.isEmpty() || pelayanan.isEmpty() || mungkin.isEmpty() || adakah.isEmpty()){
+                    Toast.makeText(Guest_Comment.this, "Silahkan isi semua form", Toast.LENGTH_SHORT).show();
+                }else {
+                    AndroidNetworking.post(BookingClient.BASE_URL + "api/guest-comment")
+                            .addBodyParameter("id", String.valueOf(id))
+                            .addBodyParameter("gc_staff_pelayanan", staff)
+                            .addBodyParameter("gc_suasana_spa", suasana)
+                            .addBodyParameter("gc_kebersihan_kenyamanan", kebersihan)
+                            .addBodyParameter("gc_teknik_perawatan", teknik)
+                            .addBodyParameter("gc_pelayanan_terapis", pelayanan)
+                            .addBodyParameter("gc_at_brosur", brosur)
+                            .addBodyParameter("gc_at_rekomendasi", rekomendasi)
+                            .addBodyParameter("gc_at_spanduk", spanduk)
+                            .addBodyParameter("gc_at_media_sosial", medsos)
+                            .addBodyParameter("gc_at_lain", lainnya)
+                            .addBodyParameter("gc_mungkinkah_kembali", mungkin)
+                            .addBodyParameter("gc_ada_perlu_diperbaiki", adakah)
+                            .addBodyParameter("gc_komen_lain", komen)
+                            .setTag("test")
+                            .setPriority(Priority.MEDIUM)
+                            .build()
+                            .getAsJSONObject(new JSONObjectRequestListener() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    try {
+                                        String status = response.getString("STATUS");
+                                        finish();
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
-                            }
 
-                            @Override
-                            public void onError(ANError anError) {
-                                Toast.makeText(Guest_Comment.this, "eror", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                                @Override
+                                public void onError(ANError anError) {
+                                    Toast.makeText(Guest_Comment.this, "eror", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
             }
         });
 
