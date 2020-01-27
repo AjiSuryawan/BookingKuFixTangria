@@ -68,6 +68,10 @@ public class Guest_Comment extends AppCompatActivity {
         btnSubmitGC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (staff.isEmpty() || suasana.isEmpty() || kebersihan.isEmpty() || teknik.isEmpty() || pelayanan.isEmpty() || mungkin.isEmpty() || adakah.isEmpty()){
+                    Toast.makeText(Guest_Comment.this, "Silahkan isi semua form", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 final ProgressDialog loading = new ProgressDialog(Guest_Comment.this);
                 loading.setMessage("Harap tunggu...");
                 loading.show();
