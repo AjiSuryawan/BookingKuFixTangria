@@ -20,6 +20,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.tangria.spa.bookingku.Activity.Main.MainActivity;
 import com.tangria.spa.bookingku.Model.AvailableTime;
 import com.tangria.spa.bookingku.Model.BookingResponse;
@@ -28,6 +32,8 @@ import com.tangria.spa.bookingku.Network.BookingService;
 import com.tangria.spa.bookingku.R;
 import com.tangria.spa.bookingku.Util.AlarmConfig;
 import com.tangria.spa.bookingku.Util.onItemClickListener;
+
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -91,7 +97,7 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
         if (bundlee != null) {
             orderid = bundlee.getInt("orderid");
             order_nama = bundlee.getString("order_nama");
-            Log.d("ordernamenya", "onClick: "+order_nama);
+            Log.d("ordernamenya", "onClick: " + order_nama);
         }
 
 //        tvSelectedDateAndTime = findViewById(R.id.selectedDateAndTime);
@@ -118,43 +124,90 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
         bookNowBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(BookingActivity.this);
                 builder.setTitle("Confirm booking ? ");
                 builder.setMessage("Are you sure want to booking this service?");
                 builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int id) {
+                    public void onClick(final DialogInterface dialog, int id) {
                         dialogku.setMessage("please wait");
                         dialogku.show();
-                        BookingService service = BookingClient.getRetrofit().create(BookingService.class);
                         final String date_string = selectedDate + " " + selectedAvailableTime;
-                        Log.e("date", "onClick: " + date_string);
-                        Call<BookingResponse> call = service.booking(userid, orderid, date_string);
+                        AndroidNetworking.post(BookingClient.BASE_URL + "api/booking")
+                                .addBodyParameter("user_id", String.valueOf(userid))
+                                .addBodyParameter("order", String.valueOf(orderid))
+                                .addBodyParameter("date", date_string)
+                                .addBodyParameter("mq_rematik", bundlee.getString("mq_rematik", ""))
+                                .addBodyParameter("mq_jantung", bundlee.getString("mq_jantung", ""))
+                                .addBodyParameter("mq_tekanan_darah", bundlee.getString("mq_tekanan_darah", ""))
+                                .addBodyParameter("mq_tulang_belakang", bundlee.getString("mq_tulang_belakang", ""))
+                                .addBodyParameter("mq_asamurat", bundlee.getString("mq_asamurat", ""))
+                                .addBodyParameter("mq_asma", bundlee.getString("mq_asma", ""))
+                                .addBodyParameter("mq_hamil", bundlee.getString("mq_hamil", ""))
+                                .addBodyParameter("mq_datang_bulan", bundlee.getString("mq_datang_bulan", ""))
+                                .addBodyParameter("mq_alat_bantu", bundlee.getString("mq_alat_bantu", ""))
+                                .addBodyParameter("mq_operasi", bundlee.getString("mq_operasi", ""))
+                                .addBodyParameter("mq_makan", bundlee.getString("mq_makan", ""))
+                                .addBodyParameter("mq_menghindari_bagian", bundlee.getString("mq_menghindari_bagian", ""))
+                                .addBodyParameter("cst_name", bundlee.getString("cst_name", ""))
+                                .addBodyParameter("cst_address", bundlee.getString("cst_address", ""))
+                                .addBodyParameter("cst_phone", bundlee.getString("cst_phone", ""))
+                                .addBodyParameter("cst_job", bundlee.getString("cst_job", ""))
+                                .setPriority(Priority.MEDIUM)
+                                .build()
+                                .getAsJSONObject(new JSONObjectRequestListener() {
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+                                        String status = response.optString("STATUS", "");
+                                        String message = response.optString("MESSAGE", "");
+                                        if (status.equalsIgnoreCase("SUCCESS")) {
+                                            alarmConfig.setAlarm(year, month, date, hour, minute);
+                                            Intent intent = new Intent(BookingActivity.this, MainActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                            Toast.makeText(BookingActivity.this, message, Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(BookingActivity.this, message, Toast.LENGTH_SHORT).show();
+                                        }
+                                        if (dialogku.isShowing()) {
+                                            dialogku.dismiss();
+                                        }
+                                    }
 
-                        call.enqueue(new Callback<BookingResponse>() {
-                            @Override
-                            public void onResponse(Call<BookingResponse> call, Response<BookingResponse> response) {
-                                boolean success = response.body().getSuccess();
-                                if (success) {
-                                    alarmConfig.setAlarm(year, month, date, hour, minute);
-                                    Intent intent = new Intent(BookingActivity.this, MainActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                    Toast.makeText(BookingActivity.this, "success", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(BookingActivity.this, "failed", Toast.LENGTH_SHORT).show();
-                                }
-                                if (dialogku.isShowing()) {
-                                    dialogku.dismiss();
-                                }
-                            }
+                                    @Override
+                                    public void onError(ANError anError) {
+                                        dialogku.dismiss();
+                                        Toast.makeText(BookingActivity.this, anError.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
 
-                            @Override
-                            public void onFailure(Call<BookingResponse> call, Throwable t) {
-                                Toast.makeText(BookingActivity.this, "Can't Connect to Server", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+//                        BookingService service = BookingClient.getRetrofit().create(BookingService.class);
+//                        Log.e("date", "onClick: " + date_string);
+//                        Call<BookingResponse> call = service.booking(userid, orderid, date_string);
+//
+//                        call.enqueue(new Callback<BookingResponse>() {
+//                            @Override
+//                            public void onResponse(Call<BookingResponse> call, Response<BookingResponse> response) {
+//                                boolean success = response.body().getSuccess();
+//                                if (success) {
+//                                    alarmConfig.setAlarm(year, month, date, hour, minute);
+//                                    Intent intent = new Intent(BookingActivity.this, MainActivity.class);
+//                                    startActivity(intent);
+//                                    finish();
+//                                    Toast.makeText(BookingActivity.this, "success", Toast.LENGTH_SHORT).show();
+//                                } else {
+//                                    Toast.makeText(BookingActivity.this, "failed", Toast.LENGTH_SHORT).show();
+//                                }
+//                                if (dialogku.isShowing()) {
+//                                    dialogku.dismiss();
+//                                }
+//                            }
+//
+//                            @Override
+//                            public void onFailure(Call<BookingResponse> call, Throwable t) {
+//                                Toast.makeText(BookingActivity.this, "Can't Connect to Server", Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
                     }
                 });
                 builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
@@ -214,35 +267,35 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
         Log.e("id", "processDatePickerResult: " + productName);
         dialogku.setMessage("please wait");
         dialogku.show();
-            BookingService service = BookingClient.getRetrofit().create(BookingService.class);
-            Log.d("ordernamenya", "processDatePickerResult: "+selectedDate);
-            Call<BookingResponse> call = service.getAvailableTimeList(selectedDate,order_nama);
-            call.enqueue(new Callback<BookingResponse>() {
-                @Override
-                public void onResponse(Call<BookingResponse> call, Response<BookingResponse> response) {
-                    try {
-                        availableTimeList.addAll(response.body().getAvailableTime());
-                        Log.d("ordername", "onResponse: "+response);
-                        adapter.notifyDataSetChanged();
-                        txtavailable.setVisibility(View.VISIBLE);
-                        if (dialogku.isShowing()) {
-                            dialogku.dismiss();
-                        }
-                    } catch (Exception e) {
-                        if (dialogku.isShowing()) {
-                            dialogku.dismiss();
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<BookingResponse> call, Throwable t) {
+        BookingService service = BookingClient.getRetrofit().create(BookingService.class);
+        Log.d("ordernamenya", "processDatePickerResult: " + selectedDate);
+        Call<BookingResponse> call = service.getAvailableTimeList(selectedDate, order_nama);
+        call.enqueue(new Callback<BookingResponse>() {
+            @Override
+            public void onResponse(Call<BookingResponse> call, Response<BookingResponse> response) {
+                try {
+                    availableTimeList.addAll(response.body().getAvailableTime());
+                    Log.d("ordername", "onResponse: " + response);
+                    adapter.notifyDataSetChanged();
+                    txtavailable.setVisibility(View.VISIBLE);
                     if (dialogku.isShowing()) {
                         dialogku.dismiss();
                     }
-                    Toast.makeText(BookingActivity.this, "Cannot connect to server", Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    if (dialogku.isShowing()) {
+                        dialogku.dismiss();
+                    }
                 }
-            });
+            }
+
+            @Override
+            public void onFailure(Call<BookingResponse> call, Throwable t) {
+                if (dialogku.isShowing()) {
+                    dialogku.dismiss();
+                }
+                Toast.makeText(BookingActivity.this, "Cannot connect to server", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 

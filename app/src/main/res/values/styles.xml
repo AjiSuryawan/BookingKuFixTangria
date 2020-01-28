@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -44,6 +44,18 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="MyRaidoButtonYes" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:colorControlNormal" tools:targetApi="lollipop">#707070</item>
+        <item name="android:colorControlActivated" tools:targetApi="lollipop">#00BFA5</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
+    </style>
+
+    <style name="MyRaidoButtonNo" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:colorControlNormal" tools:targetApi="lollipop">#707070</item>
+        <item name="android:colorControlActivated" tools:targetApi="lollipop">#B176B1</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat</item>
     </style>
 
 </resources>

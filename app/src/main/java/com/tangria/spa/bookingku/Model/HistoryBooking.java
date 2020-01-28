@@ -2,11 +2,15 @@ package com.tangria.spa.bookingku.Model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class HistoryBooking implements Parcelable {
 
+    @SerializedName("order_id")
+    @Expose
+    private String orderId;
     @SerializedName("order")
     @Expose
     private String order;
@@ -22,29 +26,86 @@ public class HistoryBooking implements Parcelable {
     @SerializedName("status")
     @Expose
     private String status;
+    @SerializedName("guest_comment")
+    @Expose
+    private String guestComment;
+    @SerializedName("user_type")
+    @Expose
+    private String userType;
     @Expose
     private String code;
 
-    public HistoryBooking(String order, String orderImg, String orderDesc, String date, String status, String code) {
+    public HistoryBooking(String orderId, String order, String orderImg, String orderDesc, String date, String status, String guestComment, String userType, String code) {
+        this.orderId = orderId;
         this.order = order;
         this.orderImg = orderImg;
         this.orderDesc = orderDesc;
         this.date = date;
         this.status = status;
+        this.guestComment = guestComment;
+        this.userType = userType;
         this.code = code;
     }
 
-    public String getOrder() { return order; }
+    protected HistoryBooking(Parcel in) {
+        orderId = in.readString();
+        order = in.readString();
+        orderImg = in.readString();
+        orderDesc = in.readString();
+        date = in.readString();
+        status = in.readString();
+        guestComment = in.readString();
+        userType = in.readString();
+        code = in.readString();
+    }
 
-    public String getOrderImg() { return orderImg; }
+    public static final Creator<HistoryBooking> CREATOR = new Creator<HistoryBooking>() {
+        @Override
+        public HistoryBooking createFromParcel(Parcel in) {
+            return new HistoryBooking(in);
+        }
 
-    public String getOrderDesc() { return orderDesc; }
+        @Override
+        public HistoryBooking[] newArray(int size) {
+            return new HistoryBooking[size];
+        }
+    };
 
-    public String getDate() { return date; }
+    public String getOrderId() {
+        return orderId;
+    }
 
-    public String getStatus() { return status; }
+    public String getOrder() {
+        return order;
+    }
 
-    public String getCode() { return code; }
+    public String getOrderImg() {
+        return orderImg;
+    }
+
+    public String getOrderDesc() {
+        return orderDesc;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getGuestComment() {
+        return guestComment;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public String getCode() {
+        return code;
+    }
 
     @Override
     public int describeContents() {
@@ -53,35 +114,14 @@ public class HistoryBooking implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.order);
-        dest.writeString(this.orderImg);
-        dest.writeString(this.orderDesc);
-        dest.writeString(this.date);
-        dest.writeString(this.status);
-        dest.writeString(this.code);
+        dest.writeString(orderId);
+        dest.writeString(order);
+        dest.writeString(orderImg);
+        dest.writeString(orderDesc);
+        dest.writeString(date);
+        dest.writeString(status);
+        dest.writeString(guestComment);
+        dest.writeString(userType);
+        dest.writeString(code);
     }
-
-    public HistoryBooking() {
-    }
-
-    protected HistoryBooking(Parcel in) {
-        this.order = in.readString();
-        this.orderImg = in.readString();
-        this.orderDesc = in.readString();
-        this.date = in.readString();
-        this.status = in.readString();
-        this.code = in.readString();
-    }
-
-    public static final Creator<HistoryBooking> CREATOR = new Creator<HistoryBooking>() {
-        @Override
-        public HistoryBooking createFromParcel(Parcel source) {
-            return new HistoryBooking(source);
-        }
-
-        @Override
-        public HistoryBooking[] newArray(int size) {
-            return new HistoryBooking[size];
-        }
-    };
 }

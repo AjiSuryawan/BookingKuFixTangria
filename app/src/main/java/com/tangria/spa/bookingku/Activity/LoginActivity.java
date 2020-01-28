@@ -107,8 +107,10 @@ public class LoginActivity extends AppCompatActivity {
                                     if (success) {
                                         editor = pref.edit();
                                         editor.putInt("userid", response.body().getUserId());
+                                        editor.putInt("role", response.body().getRole());
                                         editor.apply();
                                         Log.d("iduser", "onResponse: " + response.body().getUserId());
+                                        Log.d("iduser", "onResponse: " + response.body().getRole());
                                         Intent in = new Intent(getApplicationContext(), MainActivity.class);
                                         startActivity(in);
                                         finish();
