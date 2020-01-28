@@ -53,7 +53,7 @@ public class Guest_Comment extends AppCompatActivity {
         cbmedsos = findViewById(R.id.cbmedsos);
         cblainnya = findViewById(R.id.cblainnya);
 
-        String isBerulang = getIntent().getExtras().getString("isBerulang", "");
+        final String isBerulang = getIntent().getExtras().getString("isBerulang", "");
 
         if(isBerulang.equalsIgnoreCase("baru")){
             findViewById(R.id.divBaru).setVisibility(View.VISIBLE);
@@ -68,7 +68,12 @@ public class Guest_Comment extends AppCompatActivity {
         btnSubmitGC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (staff.isEmpty() || suasana.isEmpty() || kebersihan.isEmpty() || teknik.isEmpty() || pelayanan.isEmpty() || mungkin.isEmpty() || adakah.isEmpty()){
+                if (isBerulang.equalsIgnoreCase("berulang") && (staff.isEmpty() || suasana.isEmpty() || kebersihan.isEmpty() || teknik.isEmpty() || pelayanan.isEmpty())){
+                    Toast.makeText(Guest_Comment.this, "Silahkan isi semua form", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(isBerulang.equalsIgnoreCase("baru") && (staff.isEmpty() || suasana.isEmpty() || kebersihan.isEmpty() || teknik.isEmpty() || pelayanan.isEmpty() || mungkin.isEmpty() || adakah.isEmpty() ||
+                brosur.isEmpty() || rekomendasi.isEmpty() || spanduk.isEmpty() || medsos.isEmpty())) {
                     Toast.makeText(Guest_Comment.this, "Silahkan isi semua form", Toast.LENGTH_SHORT).show();
                     return;
                 }

@@ -69,12 +69,13 @@ public class HistoryFragment extends BaseFragment implements onItemClickListener
         int userId = preferences.getInt("userid", 0);
         Log.e("userID", "onCreate: " + userId);
         BookingService service = BookingClient.getRetrofit().create(BookingService.class);
+        mDataList.clear();
         Call<BookingResponse> call = service.getHistoryBookingList(userId);
         call.enqueue(new Callback<BookingResponse>() {
             @Override
             public void onResponse(Call<BookingResponse> call, Response<BookingResponse> response) {
                 try {
-                    mDataList.clear();
+
                     mDataList.addAll(response.body().getHistoryBookingList());
                     mTimeLineAdapter.notifyDataSetChanged();
 

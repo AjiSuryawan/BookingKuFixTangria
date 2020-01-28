@@ -198,11 +198,6 @@ public class DetailActivity extends AppCompatActivity {
                                     Toast.makeText(DetailActivity.this, anError.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
-                    Intent in = new Intent(getApplicationContext(), MedicalQuestion1.class);
-                    in.putExtra("orderid", idbarang);
-                    in.putExtra("order_nama", product.getName());
-                    Log.d("ordernamenya", "onClick: " + product.getName());
-                    startActivity(in);
                 }
             }
         });
