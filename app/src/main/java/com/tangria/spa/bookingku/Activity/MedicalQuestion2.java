@@ -148,6 +148,7 @@ public class MedicalQuestion2 extends AppCompatActivity {
                             .putExtra("cst_job", job)
                             .putExtra("orderid", orderid)
                             .putExtra("order_nama", order_nama);
+                    bookingIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(bookingIntent);
                 } else {
                     progressDialog.show();
@@ -184,12 +185,13 @@ public class MedicalQuestion2 extends AppCompatActivity {
                                             Toast.makeText(MedicalQuestion2.this, "Medical question berhasil dikirim", Toast.LENGTH_SHORT).show();
                                             if (isEdit) {
                                                 Intent intent = new Intent(MedicalQuestion2.this, MainActivity.class);
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                                 startActivity(intent);
-                                                finish();
                                             } else {
                                                 Intent intent = new Intent(MedicalQuestion2.this, BookingActivity.class);
                                                 intent.putExtra("orderid", orderid);
                                                 intent.putExtra("order_nama", order_nama);
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                                 startActivity(intent);
                                                 finish();
                                             }
