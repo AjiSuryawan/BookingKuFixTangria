@@ -69,7 +69,7 @@ public class MedicalQuestion2 extends AppCompatActivity {
             hamil = bundle.getString("hamil", "");
             if (hamil.equalsIgnoreCase("true")) {
                 ((RadioButton) findViewById(R.id.rbHamilYes)).setChecked(true);
-            } else if (rematik.equalsIgnoreCase("false")) {
+            } else if (hamil.equalsIgnoreCase("false")) {
                 ((RadioButton) findViewById(R.id.rbHamilNo)).setChecked(true);
             }
             datangBulan = bundle.getString("datangBulan", "");

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -25,22 +26,21 @@ import org.json.JSONObject;
 
 public class Guest_Comment extends AppCompatActivity {
 
-    String staff = "";
-    String suasana = "";
-    String kebersihan = "";
-    String teknik = "";
-    String pelayanan = "";
-    String mungkin = "";
-    String adakah = "";
-    String komen = "";
+    String staff = "Y";
+    String suasana = "Y";
+    String kebersihan = "Y";
+    String teknik = "Y";
+    String pelayanan = "Y";
+    String mungkin = "Y";
+    String adakah = "Y";
     Button btnSubmitGC;
     private SharedPreferences sharedPreferences;
     CheckBox cbbrosur, cbrekomendasi, cbspanduk, cbmedsos, cblainnya;
-    String brosur = "";
-    String rekomendasi = "";
-    String spanduk = "";
-    String medsos = "";
-    String lainnya = "";
+    String brosur = "N";
+    String rekomendasi = "N";
+    String spanduk = "N";
+    String medsos = "N";
+    String lainnya = "N";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,31 +52,33 @@ public class Guest_Comment extends AppCompatActivity {
         cbspanduk = findViewById(R.id.cbspanduk);
         cbmedsos = findViewById(R.id.cbmedsos);
         cblainnya = findViewById(R.id.cblainnya);
-
+        sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
         final String isBerulang = getIntent().getExtras().getString("isBerulang", "");
+        final int role = sharedPreferences.getInt("role", 0);
 
-        if(isBerulang.equalsIgnoreCase("baru")){
+        if (isBerulang.equalsIgnoreCase("baru")) {
             findViewById(R.id.divBaru).setVisibility(View.VISIBLE);
-        } else if (isBerulang.equalsIgnoreCase("berulang")) {
+        }
+        if (isBerulang.equalsIgnoreCase("berulang")) {
             findViewById(R.id.divBaru).setVisibility(View.GONE);
         }
-
-        sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
+        if (role == 2) {
+            findViewById(R.id.divBaru).setVisibility(View.VISIBLE);
+        }
         final int id = sharedPreferences.getInt("userid", 0);
+
+        ((RadioButton) findViewById(R.id.yastaff)).setChecked(true);
+        ((RadioButton) findViewById(R.id.yasuasana)).setChecked(true);
+        ((RadioButton) findViewById(R.id.yaadakah)).setChecked(true);
+        ((RadioButton) findViewById(R.id.yateknik)).setChecked(true);
+        ((RadioButton) findViewById(R.id.yakebersihan)).setChecked(true);
+        ((RadioButton) findViewById(R.id.yamungkin)).setChecked(true);
+        ((RadioButton) findViewById(R.id.yapelayanan)).setChecked(true);
 
         btnSubmitGC = findViewById(R.id.btnSubmitGC);
         btnSubmitGC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isBerulang.equalsIgnoreCase("berulang") && (staff.isEmpty() || suasana.isEmpty() || kebersihan.isEmpty() || teknik.isEmpty() || pelayanan.isEmpty())){
-                    Toast.makeText(Guest_Comment.this, "Silahkan isi semua form", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if(isBerulang.equalsIgnoreCase("baru") && (staff.isEmpty() || suasana.isEmpty() || kebersihan.isEmpty() || teknik.isEmpty() || pelayanan.isEmpty() || mungkin.isEmpty() || adakah.isEmpty() ||
-                brosur.isEmpty() || rekomendasi.isEmpty() || spanduk.isEmpty() || medsos.isEmpty())) {
-                    Toast.makeText(Guest_Comment.this, "Silahkan isi semua form", Toast.LENGTH_SHORT).show();
-                    return;
-                }
                 final ProgressDialog loading = new ProgressDialog(Guest_Comment.this);
                 loading.setMessage("Harap tunggu...");
                 loading.show();
@@ -95,7 +97,7 @@ public class Guest_Comment extends AppCompatActivity {
                         .addBodyParameter("gc_at_lain", lainnya)
                         .addBodyParameter("gc_mungkinkah_kembali", mungkin)
                         .addBodyParameter("gc_ada_perlu_diperbaiki", adakah)
-                        .addBodyParameter("gc_komen_lain", komen)
+                        .addBodyParameter("gc_komen_lain", ((EditText) findViewById(R.id.et_komen)).getText().toString())
                         .setTag("test")
                         .setPriority(Priority.MEDIUM)
                         .build()
@@ -265,33 +267,39 @@ public class Guest_Comment extends AppCompatActivity {
             case R.id.cbbrosur:
                 if (checked) {
                     brosur = "Y";
-                } else
-
-                    break;
+                } else {
+                    brosur = "N";
+                }
+                break;
             case R.id.cbrekomendasi:
                 if (checked) {
                     rekomendasi = "Y";
-                } else
-
-                    break;
+                } else {
+                    rekomendasi = "N";
+                }
+                break;
 
             case R.id.cbspanduk:
                 if (checked) {
                     spanduk = "Y";
-                } else
-
-                    break;
+                } else {
+                    spanduk = "N";
+                }
+                break;
             case R.id.cbmedsos:
                 if (checked) {
                     medsos = "Y";
-                } else
-
-                    break;
+                } else {
+                    medsos = "N";
+                }
+                break;
             case R.id.cblainnya:
                 if (checked) {
                     lainnya = "Y";
-                } else
-                    break;
+                } else {
+                    lainnya = "N";
+                }
+                break;
         }
     }
 }

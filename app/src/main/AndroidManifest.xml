@@ -54,8 +54,7 @@
             android:name=".Activity.RegisterActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
         <activity
-            android:name=".Activity.Main.MainActivity"
-            android:launchMode="singleTask"></activity>
+            android:name=".Activity.Main.MainActivity"></activity>
         <activity
             android:name=".SplashScreen"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">

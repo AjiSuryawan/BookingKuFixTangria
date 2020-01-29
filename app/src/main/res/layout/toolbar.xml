@@ -9,7 +9,7 @@
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="TITLE"
+        android:text="Tangria Spa"
         android:textSize="18sp"
         android:fontFamily="@font/futuramd"
         android:textColor="@android:color/white"
