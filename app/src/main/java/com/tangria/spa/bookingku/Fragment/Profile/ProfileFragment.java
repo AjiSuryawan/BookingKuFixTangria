@@ -55,7 +55,13 @@ public class ProfileFragment extends BaseFragment {
         profileimg = view.findViewById(R.id.profileimg);
         profileName = view.findViewById(R.id.profileName);
         cardLogout = view.findViewById(R.id.card_logout);
+        final int id = sharedPreferences.getInt("userid", 0);
+
+        final int role = sharedPreferences.getInt("role", 0);
         btnEditMedq = view.findViewById(R.id.btn_edit_medq);
+        if(role == 2){
+            view.findViewById(R.id.card_edit_medq).setVisibility(View.GONE);
+        }
         btnEditMedq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
