@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -45,6 +46,11 @@ public class MedicalQuestion1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medical_question1);
+
+        Toolbar toolbar = findViewById(R.id.toolbarMQ1);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Medical Questioner Tangria");
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
