@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+
 import com.tangria.spa.bookingku.Activity.Main.MainActivity;
 import com.tangria.spa.bookingku.R;
 
@@ -22,20 +23,22 @@ public class NotificationConfig {
         this.context = context;
     }
 
-    public void showNotification(String title, String desc, int NOTIFICATION_ID, String NOTIFICATION_CHANNEL_ID, String NOTIFICATION_CHANNEL_NAME){
+    public void showNotification(String title, String desc, int NOTIFICATION_ID, String NOTIFICATION_CHANNEL_ID, String NOTIFICATION_CHANNEL_NAME) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("login", Context.MODE_PRIVATE);
-        int userId = sharedPreferences.getInt("userid",0);
-        if(userId == 0){
+        int userId = sharedPreferences.getInt("userid", 0);
+        if (userId == 0) {
             startActivityIntent = new Intent(context, ControlClass.class);
-            Log.e("startactivity", "onReceive:  Control" );
+            startActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            Log.e("startactivity", "onReceive:  Control");
         } else {
             startActivityIntent = new Intent(context, MainActivity.class);
-            Log.e("startactivity", "onReceive:  MainActivity" );
+            startActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            Log.e("startactivity", "onReceive:  MainActivity");
         }
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, startActivityIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, NOTIFICATION_CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT);
             notificationManager.createNotificationChannel(notificationChannel);
         }
