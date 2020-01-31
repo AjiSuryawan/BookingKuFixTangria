@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,7 @@ public class HistoryFragment extends BaseFragment implements onItemClickListener
     private SharedPreferences preferences;
     private Toolbar toolbar;
     private TextView tvTitleToolbar;
+    RelativeLayout relativeLayout;
 
     @Override
     protected int getLayout() {
@@ -66,6 +68,9 @@ public class HistoryFragment extends BaseFragment implements onItemClickListener
         mTimeLineAdapter.setOnItemClickListener(this);
         mRecyclerView.setAdapter(mTimeLineAdapter);
 
+        relativeLayout = view.findViewById(R.id.relativeLayout1);
+
+
         int userId = preferences.getInt("userid", 0);
         Log.e("userID", "onCreate: " + userId);
         BookingService service = BookingClient.getRetrofit().create(BookingService.class);
@@ -76,11 +81,26 @@ public class HistoryFragment extends BaseFragment implements onItemClickListener
             public void onResponse(Call<BookingResponse> call, Response<BookingResponse> response) {
                 try {
 
-                    mDataList.addAll(response.body().getHistoryBookingList());
-                    mTimeLineAdapter.notifyDataSetChanged();
+                    List<HistoryBooking> result_booking_history = response.body().getHistoryBookingList();
+                    Log.d("historysystem", "onResponse: " + result_booking_history);
 
-                    mShimmerViewContainer.stopShimmerAnimation();
-                    mShimmerViewContainer.setVisibility(View.GONE);
+                    if (result_booking_history == null || result_booking_history.equals("") || result_booking_history.isEmpty()){
+                        mRecyclerView.setVisibility(View.GONE);
+                        relativeLayout.setVisibility(View.VISIBLE);
+                        mShimmerViewContainer.stopShimmerAnimation();
+                        mShimmerViewContainer.setVisibility(View.GONE);
+                        Log.d("historysystem", "onResponse: masuk");
+                    }else {
+
+                        relativeLayout.setVisibility(View.GONE);
+                        mRecyclerView.setVisibility(View.VISIBLE);
+
+                        mDataList.addAll(response.body().getHistoryBookingList());
+                        mTimeLineAdapter.notifyDataSetChanged();
+
+                        mShimmerViewContainer.stopShimmerAnimation();
+                        mShimmerViewContainer.setVisibility(View.GONE);
+                    }
                 } catch (Exception e) {
 
                 }

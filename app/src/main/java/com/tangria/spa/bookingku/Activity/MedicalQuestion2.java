@@ -58,6 +58,8 @@ public class MedicalQuestion2 extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Medical Questioner Tangria");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
         final int id = sharedPreferences.getInt("userid", 0);
@@ -368,4 +370,11 @@ public class MedicalQuestion2 extends AppCompatActivity {
         }
 
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
 }
