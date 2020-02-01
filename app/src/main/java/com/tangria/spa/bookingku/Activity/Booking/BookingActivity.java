@@ -163,6 +163,7 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
                                         if (status.equalsIgnoreCase("SUCCESS")) {
                                             alarmConfig.setAlarm(year, month, date, hour, minute);
                                             Intent intent = new Intent(BookingActivity.this, MainActivity.class);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                             startActivity(intent);
                                             finish();
                                             Toast.makeText(BookingActivity.this, message, Toast.LENGTH_SHORT).show();
