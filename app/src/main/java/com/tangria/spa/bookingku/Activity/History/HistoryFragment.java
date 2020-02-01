@@ -84,14 +84,13 @@ public class HistoryFragment extends BaseFragment implements onItemClickListener
                     List<HistoryBooking> result_booking_history = response.body().getHistoryBookingList();
                     Log.d("historysystem", "onResponse: " + result_booking_history);
 
-                    if (result_booking_history == null || result_booking_history.equals("") || result_booking_history.isEmpty()){
+                    if (result_booking_history == null || result_booking_history.equals("") || result_booking_history.isEmpty()) {
                         mRecyclerView.setVisibility(View.GONE);
                         relativeLayout.setVisibility(View.VISIBLE);
                         mShimmerViewContainer.stopShimmerAnimation();
                         mShimmerViewContainer.setVisibility(View.GONE);
                         Log.d("historysystem", "onResponse: masuk");
-                    }else {
-
+                    } else {
                         relativeLayout.setVisibility(View.GONE);
                         mRecyclerView.setVisibility(View.VISIBLE);
 
@@ -128,6 +127,12 @@ public class HistoryFragment extends BaseFragment implements onItemClickListener
                 intent.putExtra("history", mDataList.get(position));
                 startActivity(intent);
             } else if (guestComment.contains("none")) {
+                if (mDataList.get(position).getExpiredDate() == null || mDataList.get(position).getExpiredDate().equalsIgnoreCase("0000-00-00 00:00:00")) {
+                    Intent intent = new Intent(getActivity(), DetailHistory.class);
+                    intent.putExtra("history", mDataList.get(position));
+                    startActivity(intent);
+                    return;
+                }
                 Intent intent = new Intent(getActivity(), Guest_Comment.class);
                 intent.putExtra("history", mDataList.get(position));
                 intent.putExtra("booking_id", mDataList.get(position).getOrderId());
