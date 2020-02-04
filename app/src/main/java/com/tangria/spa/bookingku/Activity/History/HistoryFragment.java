@@ -26,6 +26,7 @@ import com.tangria.spa.bookingku.R;
 import com.tangria.spa.bookingku.Util.onItemClickListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -128,6 +129,15 @@ public class HistoryFragment extends BaseFragment implements onItemClickListener
                 startActivity(intent);
             } else if (guestComment.contains("none")) {
                 if (mDataList.get(position).getExpiredDate() == null || mDataList.get(position).getExpiredDate().equalsIgnoreCase("0000-00-00 00:00:00")) {
+                    Intent intent = new Intent(getActivity(), DetailHistory.class);
+                    intent.putExtra("history", mDataList.get(position));
+                    startActivity(intent);
+                    return;
+                }
+                Date expiredDate = new Date(Long.parseLong(mDataList.get(position).getExpiredDate()));
+                Log.e("", "onItemClick: " + expiredDate);
+                Date currentDate = new Date(System.currentTimeMillis());
+                if(currentDate.compareTo(expiredDate) > 0) {
                     Intent intent = new Intent(getActivity(), DetailHistory.class);
                     intent.putExtra("history", mDataList.get(position));
                     startActivity(intent);
