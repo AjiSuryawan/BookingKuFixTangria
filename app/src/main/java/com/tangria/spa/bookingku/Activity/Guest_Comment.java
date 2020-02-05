@@ -111,8 +111,8 @@ public class Guest_Comment extends AppCompatActivity {
                                     if (status.equalsIgnoreCase("SUCCESS")) {
                                         Toast.makeText(Guest_Comment.this, message, Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(Guest_Comment.this, MainActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intent);
-                                        finish();
                                     } else {
                                         Toast.makeText(Guest_Comment.this, message, Toast.LENGTH_SHORT).show();
                                     }
