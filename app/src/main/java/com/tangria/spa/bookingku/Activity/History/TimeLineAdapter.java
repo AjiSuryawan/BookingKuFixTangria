@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -55,15 +56,24 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
         //change text color tvStatus
         if(historyBooking.getStatus().equals("pending")){
             timeLineViewHolder.tvStatus.setTextColor(mContext.getResources().getColor(android.R.color.holo_orange_light));
+            timeLineViewHolder.ivGc.setVisibility(View.GONE);
         }
         if(historyBooking.getStatus().equals("cancel")){
             timeLineViewHolder.tvStatus.setTextColor(mContext.getResources().getColor(android.R.color.holo_red_light));
+            timeLineViewHolder.ivGc.setVisibility(View.GONE);
         }
         if (historyBooking.getStatus().equals("diterima")){
             timeLineViewHolder.tvStatus.setTextColor(mContext.getResources().getColor(android.R.color.holo_green_light));
+            timeLineViewHolder.ivGc.setVisibility(View.GONE);
         }
         if (historyBooking.getStatus().equals("selesai")){
             timeLineViewHolder.tvStatus.setTextColor(mContext.getResources().getColor(android.R.color.holo_green_light));
+            timeLineViewHolder.ivGc.setVisibility(View.GONE);
+        }
+        if (historyBooking.getGuestComment().equals("none")){
+            timeLineViewHolder.tvStatus.setText("Give feedback");
+            timeLineViewHolder.tvStatus.setTextColor(mContext.getResources().getColor(R.color.chef));
+            timeLineViewHolder.ivGc.setVisibility(View.VISIBLE);
         }
     }
 
@@ -86,6 +96,8 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
         TextView mMessage;
         @BindView(R.id.tvStatus)
         TextView tvStatus;
+        @BindView(R.id.ivGc)
+        ImageView ivGc;
 
         public TimeLineViewHolder(View itemView, int viewType) {
             super(itemView);
