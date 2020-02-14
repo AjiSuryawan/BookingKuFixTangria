@@ -92,7 +92,8 @@ public class data_item_spa implements Parcelable {
     }
 
     public String getImage() {
-        return BookingClient.BASE_URL + image;
+        //return BookingClient.BASE_URL + image;
+        return "http://admin.tangriaspa.com/" + image;
     }
 
     public void setImage(String image) {
