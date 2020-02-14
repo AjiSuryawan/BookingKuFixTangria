@@ -41,12 +41,13 @@ public class Guest_Comment extends AppCompatActivity {
     String spanduk = "N";
     String medsos = "N";
     String lainnya = "N";
+    EditText komenjikaya;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guest__comment);
-
+        komenjikaya = (EditText) findViewById(R.id.et_komen);
         cbbrosur = findViewById(R.id.cbbrosur);
         cbrekomendasi = findViewById(R.id.cbrekomendasi);
         cbspanduk = findViewById(R.id.cbspanduk);
@@ -97,7 +98,7 @@ public class Guest_Comment extends AppCompatActivity {
                         .addBodyParameter("gc_at_lain", lainnya)
                         .addBodyParameter("gc_mungkinkah_kembali", mungkin)
                         .addBodyParameter("gc_ada_perlu_diperbaiki", adakah)
-                        .addBodyParameter("gc_komen_lain", ((EditText) findViewById(R.id.et_komen)).getText().toString())
+                        .addBodyParameter("gc_komen_lain", ((EditText) findViewById(R.id.et_komenlain)).getText().toString())
                         .setTag("test")
                         .setPriority(Priority.MEDIUM)
                         .build()
@@ -249,12 +250,14 @@ public class Guest_Comment extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.yaadakah:
                 if (checked) {
-                    adakah = "Y";
+                    komenjikaya.setEnabled(true);
+                    adakah = komenjikaya.getText().toString();
                 }
                 break;
             case R.id.tidakadakah:
                 if (checked) {
-                    adakah = "N";
+                    komenjikaya.setEnabled(false);
+                    adakah = "_N_";
                 }
                 break;
         }

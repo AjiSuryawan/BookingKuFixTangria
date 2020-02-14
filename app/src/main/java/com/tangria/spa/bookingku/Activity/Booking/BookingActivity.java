@@ -113,6 +113,7 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
         recyclerView.setAdapter(adapter);
         sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
         final int userid = sharedPreferences.getInt("userid", 0);
+        Log.d("idsaya ", "onCreate: "+userid);
         txtdateku = (EditText) findViewById(R.id.txtdateku);
         txtdateku.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -487,6 +487,7 @@
 
 
                     <LinearLayout
+                        android:orientation="vertical"
                         android:id="@+id/ln"
                         android:layout_width="match_parent"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -505,6 +506,15 @@
                             android:textSize="14dp"
                             android:layout_marginTop="10dp"
                             android:hint="Adakah yang perlu diperbaiki ?"/>
+
+                        <EditText
+                            android:id="@+id/et_komenlain"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="20dp"
+                            android:textSize="14dp"
+                            android:layout_marginTop="10dp"
+                            android:hint="Saran dan masukan anda (opsional)"/>
 
                     </LinearLayout>
                 </android.support.constraint.ConstraintLayout>
