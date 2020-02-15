@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.BindView;
@@ -33,6 +34,7 @@ public class DetailHistory extends AppCompatActivity {
     @BindView(R.id.tvStatus)
     TextView tvStatus;
     TextView tvkodebooking;
+    TextView tvSelesai;
     private ImageView imageViewBitmap;
     private String productName;
     private String productDesc;
@@ -45,6 +47,7 @@ public class DetailHistory extends AppCompatActivity {
         setContentView(R.layout.activity_detail_history);
         imageViewBitmap=(ImageView)findViewById(R.id.imageViewBitmap);
         tvkodebooking=(TextView)findViewById(R.id.tvkodebooking);
+        tvSelesai=(TextView)findViewById(R.id.tvSelesai);
         ButterKnife.bind(this);
 
         Bundle extras = getIntent().getExtras();
@@ -59,12 +62,18 @@ public class DetailHistory extends AppCompatActivity {
             tvStatus.setText(status.toUpperCase());
 
             if(status.equals("pending")){
+                imageViewBitmap.setVisibility(View.VISIBLE);
+                tvSelesai.setVisibility(View.GONE);
                 tvStatus.setTextColor(getResources().getColor(android.R.color.holo_orange_light));
             }
             if(status.equals("cancel")){
+                imageViewBitmap.setVisibility(View.VISIBLE);
+                tvSelesai.setVisibility(View.GONE);
                 tvStatus.setTextColor(getResources().getColor(android.R.color.holo_red_light));
             }
             if (status.equals("diterima")) {
+                imageViewBitmap.setVisibility(View.VISIBLE);
+                tvSelesai.setVisibility(View.GONE);
                 tvStatus.setTextColor(getResources().getColor(android.R.color.holo_green_light));
                 code = detailBooking.getCode();
                 tvkodebooking.setText("kode booking : "+code);
@@ -77,6 +86,10 @@ public class DetailHistory extends AppCompatActivity {
                 Map<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<>();
                 hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
                 CreateQRCode(qrCodeData, charset, hintMap, smallestDimension, smallestDimension);
+            }
+            if (status.equals("selesai")){
+                imageViewBitmap.setVisibility(View.GONE);
+                tvSelesai.setVisibility(View.VISIBLE);
             }
         }
     }
