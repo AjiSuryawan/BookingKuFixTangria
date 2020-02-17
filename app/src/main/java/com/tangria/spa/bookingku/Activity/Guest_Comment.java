@@ -83,6 +83,7 @@ public class Guest_Comment extends AppCompatActivity {
                 final ProgressDialog loading = new ProgressDialog(Guest_Comment.this);
                 loading.setMessage("Harap tunggu...");
                 loading.show();
+                adakah = komenjikaya.getText().toString();
                 AndroidNetworking.post(BookingClient.BASE_URL + "api/guest-comment")
                         .addBodyParameter("booking_id", getIntent().getExtras().getString("booking_id", ""))
                         .addBodyParameter("user_id", String.valueOf(id))
@@ -251,7 +252,6 @@ public class Guest_Comment extends AppCompatActivity {
             case R.id.yaadakah:
                 if (checked) {
                     komenjikaya.setEnabled(true);
-                    adakah = komenjikaya.getText().toString();
                 }
                 break;
             case R.id.tidakadakah:
