@@ -14,6 +14,7 @@ public class BookingClient {
     private static final HttpLoggingInterceptor logging = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
     private static OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder();
 
+
     public static Retrofit getRetrofit(){
         if(retrofit == null){
             if(BuildConfig.DEBUG){
