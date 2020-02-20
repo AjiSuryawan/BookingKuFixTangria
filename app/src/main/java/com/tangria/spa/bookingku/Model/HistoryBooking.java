@@ -36,8 +36,10 @@ public class HistoryBooking implements Parcelable {
     private String code;
     @SerializedName("expired_date")
     private String expiredDate;
+    @SerializedName("theraphist")
+    private String theraphist;
 
-    public HistoryBooking(String orderId, String order, String orderImg, String orderDesc, String date, String status, String guestComment, String userType, String code, String expiredDate) {
+    public HistoryBooking(String orderId, String order, String orderImg, String orderDesc, String date, String status, String guestComment, String userType, String code, String expiredDate, String theraphist) {
         this.orderId = orderId;
         this.order = order;
         this.orderImg = orderImg;
@@ -48,6 +50,7 @@ public class HistoryBooking implements Parcelable {
         this.userType = userType;
         this.code = code;
         this.expiredDate = expiredDate;
+        this.theraphist = theraphist;
     }
 
     protected HistoryBooking(Parcel in) {
@@ -74,6 +77,10 @@ public class HistoryBooking implements Parcelable {
             return new HistoryBooking[size];
         }
     };
+
+    public String getTheraphist() {
+        return theraphist;
+    }
 
     public String getOrderId() {
         return orderId;

@@ -121,7 +121,9 @@ public class HistoryFragment extends BaseFragment implements onItemClickListener
     @Override
     public void onItemClick(final int position) {
         String guestComment = mDataList.get(position).getGuestComment();
+        String theraphist = mDataList.get(position).getTheraphist();
         Log.d("trial", "onResponse: " + guestComment);
+        Log.d("trial1", "onResponse: " + theraphist);
         if (mDataList.get(position).getStatus().equalsIgnoreCase("selesai")) {
             if (guestComment.contains("exist")) {
                 Intent intent = new Intent(getActivity(), DetailHistory.class);
@@ -146,6 +148,7 @@ public class HistoryFragment extends BaseFragment implements onItemClickListener
                 Intent intent = new Intent(getActivity(), Guest_Comment.class);
                 intent.putExtra("history", mDataList.get(position));
                 intent.putExtra("booking_id", mDataList.get(position).getOrderId());
+                intent.putExtra("theraphist", theraphist);
                 intent.putExtra("isBerulang", mDataList.get(position).getUserType());
                 startActivity(intent);
             }

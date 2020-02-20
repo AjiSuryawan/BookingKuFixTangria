@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
@@ -42,6 +43,7 @@ public class Guest_Comment extends AppCompatActivity {
     String medsos = "N";
     String lainnya = "N";
     EditText komenjikaya;
+    TextView txtname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +55,14 @@ public class Guest_Comment extends AppCompatActivity {
         cbspanduk = findViewById(R.id.cbspanduk);
         cbmedsos = findViewById(R.id.cbmedsos);
         cblainnya = findViewById(R.id.cblainnya);
+        txtname = findViewById(R.id.txtname);
+
         sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
         final String isBerulang = getIntent().getExtras().getString("isBerulang", "");
+        String theraphist = getIntent().getExtras().getString("theraphist", "");
         final int role = sharedPreferences.getInt("role", 0);
+
+        txtname.setText("Nama Terapis :  " + theraphist);
 
         if (isBerulang.equalsIgnoreCase("baru")) {
             findViewById(R.id.divBaru).setVisibility(View.VISIBLE);
