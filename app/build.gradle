@@ -7,7 +7,7 @@ android {
         applicationId "com.tangria.spa.bookingku"
         minSdkVersion 17
         targetSdkVersion 30
-        versionCode 5
+        versionCode 6
         versionName "2.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
