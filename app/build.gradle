@@ -6,8 +6,8 @@ android {
     defaultConfig {
         applicationId "com.tangria.spa.bookingku"
         minSdkVersion 17
-        targetSdkVersion 28
-        versionCode 4
+        targetSdkVersion 30
+        versionCode 5
         versionName "2.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
