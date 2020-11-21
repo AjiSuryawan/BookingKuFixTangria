@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Promo.PromoDetailActivity"
+    android:orientation="vertical">
+    <include        android:id="@+id/toolbar"
+        layout="@layout/toolbar_promo" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_10sdp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true">
+                    <ImageView
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:src="@drawable/ic_coupon"/>
+                    <TextView
+                        android:layout_alignParentStart="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimary"
+                        android:text="Info Promo"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="@dimen/_7sdp"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text_timeline_date"
+                    android:textSize="12sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:text="2020-10-09 23:20:59"/>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:background="@color/timestamp"
+                android:layout_marginHorizontal="@dimen/_10sdp"/>
+
+            <RelativeLayout
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_11sdp"
+                android:id="@+id/item_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:paddingBottom="0sp"
+                android:layout_marginHorizontal="@dimen/_10sdp">
+
+                <ImageView
+                    android:layout_width="@dimen/_250sdp"
+                    android:layout_height="@dimen/_250sdp"
+                    android:src="@drawable/dummypromo"
+                    android:scaleType="centerCrop"
+                    android:layout_marginBottom="0dp"
+                    android:id="@+id/divPromo"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvTitlePromo"
+                    style="@android:style/TextAppearance.Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/futuramd"
+                    android:maxLines="3"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:text="Nama produk" />
+
+                <TextView
+                    android:id="@+id/tvDescPromo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/roboto_light"
+                    android:maxLines="3"
+                    android:text="Deskripsi Produk"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

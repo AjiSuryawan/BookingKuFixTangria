@@ -19,6 +19,15 @@ public class Profile {
     @SerializedName("no_hp")
     @Expose
     private String no_hp;
+    @SerializedName("member_point")
+    @Expose
+    private String member_point;
+    @SerializedName("member_status")
+    @Expose
+    private String member_status;
+    @SerializedName("member_expired")
+    @Expose
+    private String member_expired;
 
     public Integer getUserId() {
         return userId;
@@ -58,5 +67,29 @@ public class Profile {
 
     public void setNoHp(String no_hp) {
         this.no_hp = no_hp;
+    }
+
+    public String getMember_point() {
+        return member_point;
+    }
+
+    public void setMember_point(String member_point) {
+        this.member_point = member_point;
+    }
+
+    public String getMember_status() {
+        return member_status;
+    }
+
+    public void setMember_status(String member_status) {
+        this.member_status = member_status;
+    }
+
+    public String getMember_expired() {
+        return member_expired;
+    }
+
+    public void setMember_expired(String member_expired) {
+        this.member_expired = member_expired;
     }
 }

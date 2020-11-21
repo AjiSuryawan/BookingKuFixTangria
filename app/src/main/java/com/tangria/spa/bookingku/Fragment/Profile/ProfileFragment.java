@@ -42,6 +42,7 @@ public class ProfileFragment extends BaseFragment {
     TextView telpuser;
     Button btnEditMedq;
     CardView cardLogout;
+    TextView tvMember, tvPointMember, tvExpiredMember;
 
     @Override
     protected int getLayout() {
@@ -55,6 +56,9 @@ public class ProfileFragment extends BaseFragment {
         profileimg = view.findViewById(R.id.profileimg);
         profileName = view.findViewById(R.id.profileName);
         cardLogout = view.findViewById(R.id.card_logout);
+        tvMember = view.findViewById(R.id.tvMember);
+        tvPointMember = view.findViewById(R.id.tvPointMember);
+        tvExpiredMember = view.findViewById(R.id.tvExpiredMember);
         final int id = sharedPreferences.getInt("userid", 0);
 
         final int role = sharedPreferences.getInt("role", 0);
@@ -85,6 +89,9 @@ public class ProfileFragment extends BaseFragment {
                     profileUsername.setText(response.body().getName());
                     Log.d("hpku", "onResponse: " + response.body().getNoHp());
                     telpuser.setText(response.body().getNoHp());
+                    tvMember.setText("Member " + response.body().getMember_status());
+                    tvPointMember.setText("Point : " + response.body().getMember_point());
+                    tvExpiredMember.setText("Expired Member : " + response.body().getMember_expired());
 
                     RequestOptions requestOptions = new RequestOptions();
                     requestOptions.placeholder(R.drawable.avatar);

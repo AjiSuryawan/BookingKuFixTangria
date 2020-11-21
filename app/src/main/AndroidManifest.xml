@@ -6,19 +6,27 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
+        android:name=".TangriaApp"
         android:allowBackup="true"
         android:icon="@mipmap/app_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/app_logo2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".TangriaApp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.Guest_Comment"></activity>
+        <activity android:name=".Activity.Promo.PromoDetailActivity"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activity.Guest_Comment" />
         <activity android:name=".Activity.Detail.DetailActivity" />
         <activity android:name=".Activity.Booking.BookingActivity" />
-        <activity android:name=".Util.ControlClass"></activity>
-        <activity android:name=".Activity.MedicalQuestion2"></activity>
+        <activity android:name=".Util.ControlClass" />
+        <activity android:name=".Activity.MedicalQuestion2" />
         <activity android:name=".Activity.MedicalQuestion1" />
         <activity
             android:name=".Activity.LoginActivity"
@@ -53,8 +61,7 @@
         <activity
             android:name=".Activity.RegisterActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
-        <activity
-            android:name=".Activity.Main.MainActivity"></activity>
+        <activity android:name=".Activity.Main.MainActivity" />
         <activity
             android:name=".SplashScreen"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
@@ -84,7 +91,6 @@
         </activity>
 
         <receiver android:name=".Util.AlarmReceiver" />
-
         <receiver android:name=".Util.ReminderUpdateReceiver" />
 
         <activity
