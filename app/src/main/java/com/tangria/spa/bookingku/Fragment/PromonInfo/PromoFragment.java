@@ -83,7 +83,6 @@ public class PromoFragment extends BaseFragment {
                 try{
                     listFilm.clear();
                     listFilm.addAll(response.body().getTime());
-                    Toast.makeText(getActivity(), "fetch data success "+listFilm.size(), Toast.LENGTH_SHORT).show();
 
                     recycler_view_list_film.setHasFixedSize(true);
                     adapterAllTipe = new SectionListDataAdapter(getActivity(), listFilm);

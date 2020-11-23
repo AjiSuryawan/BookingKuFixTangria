@@ -309,7 +309,6 @@ public class BookingActivity extends AppCompatActivity implements onItemClickLis
         hour = Integer.parseInt(splitTime[0]);
         minute = Integer.parseInt(splitTime[1]);
         bookNowBtn.setEnabled(true);
-        Toast.makeText(this, selectedAvailableTime, Toast.LENGTH_SHORT).show();
 //        tvSelectedDateAndTime.setText(selectedDate + " " + selectedAvailableTime);
     }
 }

@@ -55,7 +55,6 @@ public class HistoryFragment extends BaseFragment implements onItemClickListener
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Toast.makeText(getContext(), "fetching data", Toast.LENGTH_SHORT).show();
         preferences = getActivity().getSharedPreferences("login", MODE_PRIVATE);
 
 
