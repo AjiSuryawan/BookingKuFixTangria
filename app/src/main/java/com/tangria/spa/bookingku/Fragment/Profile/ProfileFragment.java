@@ -13,6 +13,7 @@ import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -42,7 +43,9 @@ public class ProfileFragment extends BaseFragment {
     TextView telpuser;
     Button btnEditMedq;
     CardView cardLogout;
-    TextView tvMember, tvPointMember, tvExpiredMember;
+    TextView tvMember, tvPointMember, tvExpiredMember, tvDisclaimer;
+    ImageView ivRankMember;
+    String sMemberStatus;
 
     @Override
     protected int getLayout() {
@@ -59,6 +62,8 @@ public class ProfileFragment extends BaseFragment {
         tvMember = view.findViewById(R.id.tvMember);
         tvPointMember = view.findViewById(R.id.tvPointMember);
         tvExpiredMember = view.findViewById(R.id.tvExpiredMember);
+        ivRankMember = view.findViewById(R.id.ivRankMember);
+        tvDisclaimer = view.findViewById(R.id.tvDisclaimer);
         final int id = sharedPreferences.getInt("userid", 0);
 
         final int role = sharedPreferences.getInt("role", 0);
@@ -89,7 +94,31 @@ public class ProfileFragment extends BaseFragment {
                     profileUsername.setText(response.body().getName());
                     Log.d("hpku", "onResponse: " + response.body().getNoHp());
                     telpuser.setText(response.body().getNoHp());
-                    tvMember.setText("Member " + response.body().getMember_status());
+
+                    sMemberStatus = response.body().getMember_status();
+                    if (sMemberStatus.equalsIgnoreCase("SILVER")){
+                        tvDisclaimer.setText(getResources().getString(R.string.member_start) + getResources().getString(R.string.member_5) + getResources().getString(R.string.member_master));
+                        Glide.with(view.getContext())
+                                .load(getContext().getResources().getDrawable(R.drawable.ic_medal_silver))
+                                .into(ivRankMember);
+                    }else if (sMemberStatus.equalsIgnoreCase("GOLD")){
+                        tvDisclaimer.setText(getResources().getString(R.string.member_start) + getResources().getString(R.string.member_10) + getResources().getString(R.string.member_master));
+                        Glide.with(view.getContext())
+                                .load(getContext().getResources().getDrawable(R.drawable.ic_medal_gold))
+                                .into(ivRankMember);
+                    }else if (sMemberStatus.equalsIgnoreCase("PLATINUM")){
+                        tvDisclaimer.setText(getResources().getString(R.string.member_start) + getResources().getString(R.string.member_10) + getResources().getString(R.string.member_master));
+                        Glide.with(view.getContext())
+                                .load(getContext().getResources().getDrawable(R.drawable.ic_medal_platinum))
+                                .into(ivRankMember);
+                    }else if (sMemberStatus.equalsIgnoreCase("-")){
+                        tvDisclaimer.setText(getResources().getString(R.string.member_master));
+                        ivRankMember.setVisibility(View.GONE);
+                    }else {
+                        tvDisclaimer.setText(getResources().getString(R.string.member_master));
+                        ivRankMember.setVisibility(View.GONE);
+                    }
+                    tvMember.setText("Member " + sMemberStatus);
                     tvPointMember.setText("Point : " + response.body().getMember_point());
                     tvExpiredMember.setText("Expired Member : " + response.body().getMember_expired());
 

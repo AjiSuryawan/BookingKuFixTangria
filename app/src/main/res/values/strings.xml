@@ -20,4 +20,11 @@
 
     <string name="empty"></string>
     <string name="create_new_account">CREATE NEW\nACCOUNT</string>
+
+    //Member
+    <string name="member_master">Tingkatkan point anda untuk lanjut ke tingkat member selanjutnya, dengan aktif pelayanan di Tangria Spa</string>
+    <string name="member_start">Anda mendapatkan diskon sebesar </string>
+    <string name="member_5">" 5% atas member SILVER, "</string>
+    <string name="member_10">" 10% atas member GOLD, "</string>
+    <string name="member_15">" 15% atas member PLATINNUM, "</string>
 </resources>

@@ -3,7 +3,10 @@ package com.tangria.spa.bookingku.Activity.Promo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.tangria.spa.bookingku.R;
 
 import butterknife.BindView;
@@ -12,6 +15,18 @@ import butterknife.ButterKnife;
 public class PromoDetailActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
+    @BindView(R.id.tvCreartAt)
+    TextView tvCreartAt;
+
+    @BindView(R.id.tvTitlePromo)
+    TextView tvTitlePromo;
+
+    @BindView(R.id.tvDescPromo)
+    TextView tvDescPromo;
+
+    @BindView(R.id.ivPromo)
+    ImageView ivPromo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +38,11 @@ public class PromoDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+//        Glide.with(this)
+//                .load(this.getResources().getDrawable(R.drawable.ic_medal_platinum))
+//                .into(ivPromo);
+
         //detailPromo
+//        tvDescPromo.setText(getResources().getString(R.string.member_start) + getResources().getString(R.string.member_5) + getResources().getString(R.string.member_master));
     }
 }

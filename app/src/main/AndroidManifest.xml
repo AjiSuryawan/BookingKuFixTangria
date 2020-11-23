@@ -16,11 +16,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".Activity.Promo.PromoDetailActivity"
             >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Activity.Guest_Comment" />
         <activity android:name=".Activity.Detail.DetailActivity" />
