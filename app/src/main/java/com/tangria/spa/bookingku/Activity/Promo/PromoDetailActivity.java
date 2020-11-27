@@ -7,6 +7,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.tangria.spa.bookingku.Activity.Notification.Promo.PromoModel;
+import com.tangria.spa.bookingku.Network.BookingClient;
 import com.tangria.spa.bookingku.R;
 
 import butterknife.BindView;
@@ -37,6 +39,14 @@ public class PromoDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        final PromoModel dataCatatan = getIntent().getExtras().getParcelable("EXTRA_PROMO");
+        if(dataCatatan != null){
+            tvTitlePromo.setText(dataCatatan.getTitle());
+            tvDescPromo.setText(dataCatatan.getContent());
+            tvCreartAt.setText(""+dataCatatan.getCreated_at());
+            Glide.with(PromoDetailActivity.this).load(BookingClient.BASE_URL +dataCatatan.getImage()).into(ivPromo);
+        }
 
 //        Glide.with(this)
 //                .load(this.getResources().getDrawable(R.drawable.ic_medal_platinum))

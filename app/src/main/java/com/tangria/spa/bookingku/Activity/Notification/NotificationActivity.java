@@ -1,6 +1,9 @@
 package com.tangria.spa.bookingku.Activity.Notification;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tangria.spa.bookingku.Activity.Notification.Notifikasi.NotifikasiFragment;
+import com.tangria.spa.bookingku.Activity.Notification.Promo.PromoFragment;
 import com.tangria.spa.bookingku.Network.BookingClient;
 import com.tangria.spa.bookingku.Network.BookingService;
 import com.tangria.spa.bookingku.R;
@@ -33,6 +38,9 @@ public class NotificationActivity extends AppCompatActivity {
     TextView tvTitleToolbar;
 
     private SharedPreferences preferences;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,5 +79,18 @@ public class NotificationActivity extends AppCompatActivity {
                 Toast.makeText(NotificationActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.viewpager_id);
+
+        NotificationVewPagerAdapter adapter = new NotificationVewPagerAdapter(getSupportFragmentManager());
+        adapter.AddFragment(new PromoFragment(), "Promo");
+        adapter.AddFragment(new NotifikasiFragment(), "Notifikasi");
+
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#FFFFFFFF"));
+        tabLayout.setSelectedTabIndicatorHeight((int) (5 * getResources().getDisplayMetrics().density));
+        tabLayout.setTabTextColors(Color.parseColor("#BEF4F4F4"), Color.parseColor("#ffffff"));
     }
 }
