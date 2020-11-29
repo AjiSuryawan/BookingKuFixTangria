@@ -95,6 +95,7 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     dialog.setMessage("Login process");
                     dialog.show();
+                    dialog.setCancelable(false);
                     String token = getSharedPreferences("firebase_token", MODE_PRIVATE).getString("firebase_token", "");
                     BookingService bookingService = BookingClient.getRetrofit().create(BookingService.class);
                     Call<BookingResponse> call = bookingService.login(username, password, token);
@@ -127,6 +128,7 @@ public class LoginActivity extends AppCompatActivity {
                                 if (dialog.isShowing()) {
                                     dialog.dismiss();
                                 }
+                                Toast.makeText(LoginActivity.this, "Something wrong is happen", Toast.LENGTH_SHORT).show();
                             }
                         }
 
