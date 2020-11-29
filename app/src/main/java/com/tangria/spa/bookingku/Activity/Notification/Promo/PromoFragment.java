@@ -1,6 +1,8 @@
 package com.tangria.spa.bookingku.Activity.Notification.Promo;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
@@ -15,6 +18,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.tangria.spa.bookingku.Activity.Notification.NotificationAdapter;
 import com.tangria.spa.bookingku.Network.BookingClient;
 import com.tangria.spa.bookingku.R;
@@ -34,7 +38,10 @@ public class PromoFragment extends Fragment {
     View view;
     private ArrayList<PromoModel> mList = new ArrayList<>();
     private PromoAdapter mAdapter;
-    private RecyclerView recycler_view_promo;
+    private RecyclerView recyclerView;
+
+    private ShimmerFrameLayout mShimmerViewContainer;
+    RelativeLayout relativeLayout;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -81,13 +88,20 @@ public class PromoFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view =inflater.inflate(R.layout.fragment_promo, container, false);
-        recycler_view_promo=(RecyclerView)view.findViewById(R.id.recycler_view_promo);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        recyclerView=(RecyclerView)view.findViewById(R.id.recyclerView);
+        mShimmerViewContainer = (ShimmerFrameLayout) view.findViewById(R.id.shimmer_view_container);
+        mShimmerViewContainer.startShimmerAnimation();
+        relativeLayout = view.findViewById(R.id.relativeLayout1);
 
         getPromoList();
-        recycler_view_promo.setHasFixedSize(true);
-        recycler_view_promo.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        return view;
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     private void getPromoList (){
@@ -104,6 +118,8 @@ public class PromoFragment extends Fragment {
                         }
                         if (mList != null)  mList.clear();
 
+
+
                         for (int i = 0; i < response.length(); i++) {
                             JSONObject dataPromo = response.optJSONObject(i);
                             PromoModel item = new PromoModel();
@@ -116,10 +132,23 @@ public class PromoFragment extends Fragment {
                             mList.add(item);
                         }
                         show();
+                        if (mList == null | mList.equals("") | mList.isEmpty()){
+                            recyclerView.setVisibility(View.GONE);
+                            relativeLayout.setVisibility(View.VISIBLE);
+                            mShimmerViewContainer.stopShimmerAnimation();
+                            mShimmerViewContainer.setVisibility(View.GONE);
+                        }else{
+                            relativeLayout.setVisibility(View.GONE);
+                            recyclerView.setVisibility(View.VISIBLE);
+
+                            mShimmerViewContainer.stopShimmerAnimation();
+                            mShimmerViewContainer.setVisibility(View.GONE);
+                        }
                     }
                     @Override
                     public void onError(ANError error) {
                         // handle error
+                        Toast.makeText(getContext(), "Mohon maaf, terjadi kendala jaringan / server", Toast.LENGTH_SHORT).show();
                         Log.d("RBA", "onError: " + error.getErrorBody());
                         Log.d("RBA", "onError: " + error.getLocalizedMessage());
                         Log.d("RBA", "onError: " + error.getErrorDetail());
@@ -130,9 +159,7 @@ public class PromoFragment extends Fragment {
     }
 
     public void show(){
-//        mAdapter = new CatatanAdapter(CatatanActivity.this, mList);
-//        rv.setAdapter(mAdapter);
         mAdapter = new PromoAdapter(getContext(), mList);
-        recycler_view_promo.setAdapter(mAdapter);
+        recyclerView.setAdapter(mAdapter);
     }
 }

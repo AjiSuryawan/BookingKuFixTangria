@@ -15,8 +15,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".Activity.Promo.PromoDetailActivity"
+            android:parentActivityName=".Activity.Notification.NotificationActivity"
             >
-
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.tangria.spa.bookingku.Activity.Notification.NotificationActivity" />
         </activity>
         <activity android:name=".Activity.Guest_Comment" />
         <activity android:name=".Activity.Detail.DetailActivity" />

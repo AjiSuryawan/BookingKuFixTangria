@@ -12,6 +12,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.tangria.spa.bookingku.Activity.Main.MainActivity;
+import com.tangria.spa.bookingku.Activity.Promo.PromoDetailActivity;
 import com.tangria.spa.bookingku.R;
 
 public class NotificationConfig {
@@ -30,7 +31,7 @@ public class NotificationConfig {
             startActivityIntent = new Intent(context, ControlClass.class);
             startActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             Log.e("startactivity", "onReceive:  Control");
-        } else {
+        }else {
             startActivityIntent = new Intent(context, MainActivity.class);
             startActivityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             Log.e("startactivity", "onReceive:  MainActivity");

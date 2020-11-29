@@ -8,6 +8,7 @@ import android.os.Bundle;
 import com.tangria.spa.bookingku.Activity.InputPhone;
 import com.tangria.spa.bookingku.Activity.LoginActivity;
 import com.tangria.spa.bookingku.Activity.Main.MainActivity;
+import com.tangria.spa.bookingku.Activity.Notification.NotificationActivity;
 import com.tangria.spa.bookingku.intro;
 
 public class ControlClass extends Activity {
@@ -31,7 +32,7 @@ public class ControlClass extends Activity {
             finish();
         }
         else{
-            Intent in=new Intent(getApplicationContext(),MainActivity.class);
+            Intent in = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(in);
             finish();
         }
