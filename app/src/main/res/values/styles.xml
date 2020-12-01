@@ -70,4 +70,12 @@
         <item name="colorControlHighlight">#3fff</item>
     </style>
 
+    <style name="ToolbarNotifTheme" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="android:fontFamily">@font/futuramd</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarNotif"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Tangria Spa"
+            android:textSize="18sp"
+            android:fontFamily="@font/futuramd"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:layout_gravity="center"
+            />
+        <FrameLayout
+            android:layout_width="@dimen/_17sdp"
+            android:layout_height="@dimen/_17sdp"
+            android:gravity="center"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/_12sdp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/ivToNotification"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center|center_horizontal"
+                    android:src="@drawable/ic_notifications" />
+            </FrameLayout>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivBadge"
+                android:layout_width="@dimen/_9sdp"
+                android:layout_height="@dimen/_9sdp"
+                android:layout_gravity="right|top"
+                android:src="@color/colorAccent"
+                android:visibility="visible" />
+
+        </FrameLayout>
+    </android.support.v7.widget.Toolbar>
+
+
+</LinearLayout>
