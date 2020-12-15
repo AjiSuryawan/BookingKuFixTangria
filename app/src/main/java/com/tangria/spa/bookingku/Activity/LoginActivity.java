@@ -104,6 +104,8 @@ public class LoginActivity extends AppCompatActivity {
                         public void onResponse(Call<BookingResponse> call, Response<BookingResponse> response) {
                             try {
                                 boolean success = response.body().getSuccess();
+                                boolean isPhoneNull = response.body().getPhoneStatus(); // null = true
+                                Log.d("RBA", "isPhoneNull: " + response.body().getPhoneStatus());
                                 if (response.isSuccessful()) {
                                     if (success) {
                                         editor = pref.edit();
@@ -112,9 +114,20 @@ public class LoginActivity extends AppCompatActivity {
                                         editor.apply();
                                         Log.d("iduser", "onResponse: " + response.body().getUserId());
                                         Log.d("iduser", "onResponse: " + response.body().getRole());
-                                        Intent in = new Intent(getApplicationContext(), MainActivity.class);
-                                        startActivity(in);
-                                        finish();
+//                                        Intent in = new Intent(getApplicationContext(), MainActivity.class);
+//                                        startActivity(in);
+//                                        finish();
+                                        if(!isPhoneNull) {
+                                            Intent in = new Intent(getApplicationContext(), MainActivity.class);
+                                            editor.putBoolean("phone", true);
+                                            editor.apply();
+                                            startActivity(in);
+                                            finish();
+                                        } else {
+                                            Intent intent = new Intent(LoginActivity.this, InputPhone.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
                                     } else {
                                         Toast.makeText(LoginActivity.this, "Something wrong is happen", Toast.LENGTH_SHORT).show();
                                     }
